@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="meu-container">
+    <div class="form-geral">
+        <h1>Login</h1>
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <form method="post">
+            <div>
+                <label class="form-label fw-bold fs-4">E-mail</label>
+                <input name="email" class="form-control" />
+            </div>
+            <div>
+                <label for="password" class="form-label fw-bold fs-4">Senha</label>
+                <input type="password" name="password" class="form-control" />
+            </div><br />
+            <div class="btn-container">
+                <button class="btn-meu" type="submit">Enviar</button>
+            </div>
+        </form>
+        <p>
+            Não tem conta? <a asp-area="" asp-controller="User" asp-action="Create">Clique aqui!</a>
+        </p>
+    </div>
+</section>
