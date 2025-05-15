@@ -12,7 +12,16 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SmartProd</a>
+                @{
+                    if (User?.Identity?.IsAuthenticated ?? false)
+					{
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Dashboard">SmartProd</a>
+					}
+					else
+					{
+						<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SmartProd</a>
+					}
+                }               
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -102,10 +111,10 @@
                             else
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Usuarios" asp-action="Create">Criar Conta</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Empresa" asp-action="Cadastrar">Sign up</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Entrar</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Sign in</a>
                                 </li>
 
                             }
@@ -128,7 +137,6 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="~/js/viacep.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

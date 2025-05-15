@@ -9,6 +9,6 @@
         public int QuantidadeEstoque { get; set; }
         public string? Imagem { get; set; }
         public string? IdUsuario { get; set; }
-        public Usuario? Usuario { get; set; }
+        public Empresa? Usuario { get; set; }
     }
 }

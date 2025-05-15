@@ -35,11 +35,11 @@ namespace SmartProd.Models
             
         }
 
-        public IMongoCollection<Usuario> Usuario
+        public IMongoCollection<Empresa> Emrpesa
         {
             get 
             {
-                return _database.GetCollection<Usuario>("Usuario");
+                return _database.GetCollection<Empresa>("Empresa");
             }
         }
         public IMongoCollection<Produto> Produto

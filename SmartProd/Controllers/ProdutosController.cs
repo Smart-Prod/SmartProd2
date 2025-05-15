@@ -12,9 +12,9 @@ namespace SmartProd.Controllers
     public class ProdutosController : Controller
     {
         private readonly ContextMongodb _context = new ContextMongodb();
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationEmpresa> _userManager;
 
-        public ProdutosController(UserManager<ApplicationUser> userManager)
+        public ProdutosController(UserManager<ApplicationEmpresa> userManager)
         {
             this._userManager = userManager;
         }

@@ -17,8 +17,4 @@
     <PackageReference Include="MongoDB.Driver" Version="2.29.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Sevices\" />
-  </ItemGroup>
-
 </Project>

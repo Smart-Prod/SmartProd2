@@ -8,11 +8,11 @@ namespace SmartProd.Controllers
 {
     public class AccountController : Controller
     {
-        private UserManager<ApplicationUser>? _userManager;
-        private SignInManager<ApplicationUser>? _signInManager;
+        private UserManager<ApplicationEmpresa>? _userManager;
+        private SignInManager<ApplicationEmpresa>? _signInManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager,
-                                 SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationEmpresa> userManager,
+                                 SignInManager<ApplicationEmpresa> signInManager)
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
@@ -27,7 +27,8 @@ namespace SmartProd.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = await _userManager.FindByEmailAsync(email);
+                
+                ApplicationEmpresa? user = await _userManager.FindByEmailAsync(email);
                 if (user != null)
                 {
                     Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(user, password, false, false);

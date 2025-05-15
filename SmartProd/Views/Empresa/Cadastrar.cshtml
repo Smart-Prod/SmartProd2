@@ -1,0 +1,52 @@
+﻿@model SmartProd.Models.Empresa
+
+@{
+    ViewData["Title"] = "Cadastro";
+}
+
+<h2>Cadastro</h2>
+
+<form asp-action="Cadastrar" method="post" id="formEmpresa">
+    <div class="form-group">
+        <label asp-for="Cnpj"></label>
+        <input asp-for="Cnpj" class="form-control" id="Cnpj" />
+        <span asp-validation-for="Cnpj" class="text-danger"></span>
+        <button type="button" onclick="buscarCnpj()" class="btn btn-sm btn-primary mt-2">Buscar CNPJ</button>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="RazaoSocial"></label>
+        <input asp-for="RazaoSocial" class="form-control" id="RazaoSocial" />
+        <span asp-validation-for="RazaoSocial" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NomeFantasia"></label>
+        <input asp-for="NomeFantasia" class="form-control" id="NomeFantasia" />
+        <span asp-validation-for="NomeFantasia" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" id="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Telefone"></label>
+        <input asp-for="Telefone" class="form-control" id="Telefone" />
+        <span asp-validation-for="Telefone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Cadastrar</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

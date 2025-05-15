@@ -4,20 +4,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SmartProd.Models
 {
    
-    public class Usuario
+    public class Empresa
     {
         public Guid Id { get; set; }
-
         [Required]
-        [Display(Name = "Nome Completo")]
-        public string? NomeCompleto { get; set; }
-
+        public string? Cnpj { get; set; }
         [Required]
-        [EmailAddress(ErrorMessage = "E-mail inválido")]
-        public string? Email { get; set; }
+        public string? NomeFantasia { get; set; }
         [Required]
+        public string? RazaoSocial { get; set; }
         public string? Telefone { get; set; }
-
+        [Required, EmailAddress]
+        public string? Email { get; set; }
         [Required]
         public string? Password { get; set; }
 

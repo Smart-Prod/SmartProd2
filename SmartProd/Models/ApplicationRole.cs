@@ -3,8 +3,8 @@ using MongoDbGenericRepository.Attributes;
 
 namespace SmartProd.Models
 {
-    [CollectionName ("Roles")]
-    public class ApplicationRole:MongoIdentityRole
+    [CollectionName("Roles")]
+    public class ApplicationRole : MongoIdentityRole
     {
     }
 }
