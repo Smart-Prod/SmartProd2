@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SmartProd.Models.Produto>
+
+@{
+    ViewData["Title"] = "Index";
+    var produtosPorCategoria = Model.GroupBy(p => p.Categoria);
+    var formId = "deleteForm";
+}
+
+<h1>Produtos</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Criar Novo</a>
+</p>
+<form id="deleteForm" asp-action="DeleteMultiple" method="post">
+    <button type="button" class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" disabled id="deleteSelectedBtn">
+        Excluir Selecionados
+    </button>
+
+@foreach (var categoriaGrupo in produtosPorCategoria)
+{
+    <h2>@categoriaGrupo.Key</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+        @foreach (var item in categoriaGrupo)
+        {
+            <div class="col">
+                <div class="card h-100">
+                    @if (!string.IsNullOrEmpty(item.Imagem))
+                    {
+                            <img src="@("/" + item.Imagem)" alt="@item.Nome" class="img-fluid" style="width:90px;height:90px;" />
+                        //<img src="@item.Imagem" class="card-img-top" alt="@item.Nome" />
+                    }
+                    <div class="card-body">
+                            <h5 class="card-title"><a asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none">@item.Nome</a></h5>
+                        <p class="card-text">Categoria: @item.Categoria</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="form-check">
+                            <input class="form-check-input delete-checkbox" type="checkbox" name="selectedIds" value="@item.Id" id="check_@item.Id">
+                            <label class="form-check-label" for="check_@item.Id">Selecionar</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+</form>

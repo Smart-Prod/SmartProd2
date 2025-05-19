@@ -86,7 +86,7 @@ namespace SmartProd.Controllers
                     if (result.Succeeded)
                     {
                         ViewBag.Message = "Empresa cadastrada com sucesso";
-                        return RedirectToAction("Login", "Empresa");
+                        return RedirectToAction("Login", "Account");
                     }
                     else
                     {

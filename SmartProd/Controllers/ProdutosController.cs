@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using SmartProd.Models;
 
@@ -57,14 +58,26 @@ namespace SmartProd.Controllers
 
                 if (Imagem != null && Imagem.Length > 0)
                 {
-                    var fileName = Path.GetFileName(Imagem.FileName);
+                    // Garante um nome de arquivo seguro e único para evitar conflitos
+                    var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(Imagem.FileName)}";
+
+                    // Caminho relativo para a imagem (armazenado no banco)
                     var imgPath = Path.Combine("img", fileName);
                     produto.Imagem = imgPath;
 
+                    // Caminho físico absoluto no servidor
                     var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", imgPath);
+
+                    // Cria diretório se não existir
+                    var directory = Path.GetDirectoryName(fullPath);
+                    if (!Directory.Exists(directory))
+                        Directory.CreateDirectory(directory);
+
+                    // Salva o arquivo
                     using var stream = new FileStream(fullPath, FileMode.Create);
                     await Imagem.CopyToAsync(stream);
                 }
+
 
                 await _context.Produto.InsertOneAsync(produto);
                 return RedirectToAction(nameof(Index));
@@ -127,35 +140,38 @@ namespace SmartProd.Controllers
 
             return View(produto);
         }
+       
 
-        // GET: Produtos/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null) return NotFound();
-            
-            var produto = await _context.Produto.Find(p => p.Id == id).FirstOrDefaultAsync();
-            if (produto == null) return NotFound();
-
-            return View(produto);
-        }
-
-        // POST: Produtos/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id, string? Imagem)
+        public async Task<IActionResult> DeleteMultiple(List<Guid> selectedIds)
         {
-            await _context.Produto.DeleteOneAsync(p => p.Id == id);
-            
-            if (!string.IsNullOrEmpty(Imagem))
+            if (selectedIds == null || !selectedIds.Any())
+                return RedirectToAction(nameof(Index));
+
+            // Buscar produtos para deletar imagens associadas
+            var filter = Builders<Produto>.Filter.In(p => p.Id, selectedIds);
+            var produtos = await _context.Produto.Find(filter).ToListAsync();
+
+            // Deletar imagens (se existirem)
+            foreach (var produto in produtos)
             {
-                var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", Imagem);
-                if (System.IO.File.Exists(imagePath))
+                if (!string.IsNullOrEmpty(produto.Imagem))
                 {
-                    System.IO.File.Delete(imagePath);
+                    var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", produto.Imagem);
+                    if (System.IO.File.Exists(imagePath))
+                    {
+                        System.IO.File.Delete(imagePath);
+                    }
                 }
             }
 
+            // Deletar os produtos
+            await _context.Produto.DeleteManyAsync(filter);
+
             return RedirectToAction(nameof(Index));
         }
+
+
     }
 }

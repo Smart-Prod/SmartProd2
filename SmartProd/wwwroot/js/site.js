@@ -19,3 +19,39 @@
         })
         .catch(err => alert("Erro ao buscar CNPJ: " + err.message));
 }
+
+function previewImage(event) {
+    var reader = new FileReader();
+    reader.onload = function () {
+        var output = document.getElementById('imagePreview');
+        output.src = reader.result;
+        output.style.display = 'block';
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const checkboxes = document.querySelectorAll(".delete-checkbox");
+    const deleteBtn = document.getElementById("deleteSelectedBtn");
+
+    function updateButtonState() {
+        const anyChecked = Array.from(checkboxes).some(c => c.checked);
+        deleteBtn.disabled = !anyChecked;
+    }
+
+    checkboxes.forEach(cb => {
+        cb.addEventListener("change", updateButtonState);
+    });
+
+    updateButtonState(); // initial state
+});
+
+// Função global para o modal chamar
+window.submitForm = function (formId) {
+    const form = document.getElementById(formId);
+    if (form) {
+        form.submit();
+    } else {
+        console.warn("Formulário não encontrado:", formId);
+    }
+};
