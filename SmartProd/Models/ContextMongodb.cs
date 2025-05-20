@@ -50,6 +50,30 @@ namespace SmartProd.Models
             }
         }
 
-       
+        public IMongoCollection<Estoque> Estoque
+        {
+            get
+            {
+                return _database.GetCollection<Estoque>("Estoque");
+            }
+        }
+
+        public IMongoCollection<NotaEntrega> NotaEntrega
+        {
+            get
+            {
+                return _database.GetCollection<NotaEntrega>("NotaEntrega");
+            }
+        }
+
+        public IMongoCollection<NotaSaida> NotaSaida
+        {
+            get
+            {
+                return _database.GetCollection<NotaSaida>("NotaSaida");
+            }
+        }
+
+
     }
 }
