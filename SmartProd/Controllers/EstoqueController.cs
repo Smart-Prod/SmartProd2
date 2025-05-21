@@ -22,12 +22,22 @@ namespace SmartProd.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = _userManager.GetUserId(User);
-            
+            var produtosCriticos = await _context.Estoque
+                .Find(e => e.IdUsuario == userId && e.EstoqueAtual < e.EstoqueMinima)
+                .ToListAsync();
+
+            ViewBag.ProdutosCriticos = produtosCriticos;
             return View(await _context.Estoque.Find(e => e.IdUsuario == userId).ToListAsync());
+        }
+        public IActionResult RegistrarNotaEntrega()
+        {
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> RegistrarNotaEntrega(NotaEntrega nota)
         {
+            nota.Id = Guid.NewGuid();
+            var userId = _userManager.GetUserId(User);
             nota.DataEntrega = DateTime.UtcNow;
             await _context.NotaEntrega.InsertOneAsync(nota);
 
@@ -43,7 +53,8 @@ namespace SmartProd.Controllers
                         IdProduto = item.IdProduto,
                         EstoqueAtual = item.Quantidade,
                         Localizacao = "Depósito Principal",
-                        DataUltimaAtualizacao = DateTime.UtcNow
+                        DataUltimaAtualizacao = DateTime.UtcNow,
+                        IdUsuario = userId
                     };
                     await _context.Estoque.InsertOneAsync(estoque);
                 }
@@ -59,11 +70,17 @@ namespace SmartProd.Controllers
 
             return RedirectToAction("Index");
         }
+        public IActionResult RegistrarNotaSaida()
+        {
+            return View();
+        }
 
         // POST: /Estoque/RegistrarNotaSaida
         [HttpPost]
         public async Task<IActionResult> RegistrarNotaSaida(NotaSaida nota)
         {
+            nota.Id = Guid.NewGuid();
+            var userId = _userManager.GetUserId(User);
             nota.DataSaida = DateTime.UtcNow;
             await _context.NotaSaida.InsertOneAsync(nota);
 
@@ -77,6 +94,8 @@ namespace SmartProd.Controllers
                     var update = Builders<Estoque>.Update
                         .Inc(e => e.EstoqueAtual, -item.Quantidade)
                         .Set(e => e.DataUltimaAtualizacao, DateTime.UtcNow);
+                        item.IdUsuario = userId;
+
 
                     await _context.Estoque.UpdateOneAsync(filtro, update);
                 }

@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
+﻿
 
 namespace SmartProd.Models
 {
@@ -10,5 +9,7 @@ namespace SmartProd.Models
         public DateTime DataEntrega { get; set; }
         public string? Fornecedor { get; set; }
         public List<ItemNotaEntrega> Itens { get; set; } = new();
+        public string? IdUsuario { get; set; }
+        public Empresa? Usuario { get; set; }
     }
 }

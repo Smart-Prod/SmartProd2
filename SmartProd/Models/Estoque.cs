@@ -12,5 +12,10 @@
         public DateTime DataUltimaAtualizacao { get; set; } = DateTime.UtcNow;
         public string? IdUsuario { get; set; }
         public Empresa? Usuario { get; set; }
+
+        internal static object Where(Func<object, bool> value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

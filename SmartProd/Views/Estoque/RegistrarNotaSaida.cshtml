@@ -10,31 +10,35 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="RegistrarNotaSaida">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NumeroNota" class="control-label"></label>
+        <form asp-action="RegistrarNotaSaida" method="post">
+            <div>
+                <label>Número da Nota:</label>
                 <input asp-for="NumeroNota" class="form-control" />
-                <span asp-validation-for="NumeroNota" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="DataSaida" class="control-label"></label>
-                <input asp-for="DataSaida" class="form-control" />
-                <span asp-validation-for="DataSaida" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Destino" class="control-label"></label>
+            <div>
+                <label>Destino:</label>
                 <input asp-for="Destino" class="form-control" />
-                <span asp-validation-for="Destino" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
+
+            <h4>Itens da Saída</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Produto (Id)</th>
+                        <th>Quantidade</th>
+                    </tr>
+                </thead>
+                <tbody id="itens-saida">
+                    <tr>
+                        <td><input name="Itens[0].IdProduto" class="form-control" /></td>
+                        <td><input name="Itens[0].Quantidade" type="number" class="form-control" /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" onclick="adicionarItemSaida()">Adicionar Item</button>
+
+            <br /><br />
+            <button type="submit" class="btn btn-danger">Salvar Nota de Saída</button>
         </form>
     </div>
 </div>

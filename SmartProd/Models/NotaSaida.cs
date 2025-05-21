@@ -9,5 +9,7 @@ namespace SmartProd.Models
         public DateTime DataSaida { get; set; }        
         public string? Destino { get; set; }        
         public List<ItemNotaSaida> Itens { get; set; } = new();
+        public string? IdUsuario { get; set; }
+        public Empresa? Usuario { get; set; }
     }
 }
