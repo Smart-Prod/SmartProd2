@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "X1JZMN2E88Q=",
+  "dgSpecHash": "SFivPPmU09M=",
   "success": true,
   "projectFilePath": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\SmartProd\\SmartProd.csproj",
   "expectedPackageFiles": [
@@ -138,6 +138,7 @@
     "C:\\Users\\0201392411044.INTRALAB\\.nuget\\packages\\nuget.projectmodel\\6.11.0\\nuget.projectmodel.6.11.0.nupkg.sha512",
     "C:\\Users\\0201392411044.INTRALAB\\.nuget\\packages\\nuget.protocol\\6.11.0\\nuget.protocol.6.11.0.nupkg.sha512",
     "C:\\Users\\0201392411044.INTRALAB\\.nuget\\packages\\nuget.versioning\\6.11.0\\nuget.versioning.6.11.0.nupkg.sha512",
+    "C:\\Users\\0201392411044.INTRALAB\\.nuget\\packages\\questpdf\\2025.5.0\\questpdf.2025.5.0.nupkg.sha512",
     "C:\\Users\\0201392411044.INTRALAB\\.nuget\\packages\\sharpcompress\\0.30.1\\sharpcompress.0.30.1.nupkg.sha512",
     "C:\\Users\\0201392411044.INTRALAB\\.nuget\\packages\\snappier\\1.0.0\\snappier.1.0.0.nupkg.sha512",
     "C:\\Users\\0201392411044.INTRALAB\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",

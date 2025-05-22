@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SmartProd")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+449b83259db52db6ad0201ab460776dc3460063e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a11fdd51ae30be13f178abe9500d5e193d77e89e")]
 [assembly: System.Reflection.AssemblyProductAttribute("SmartProd")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SmartProd")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

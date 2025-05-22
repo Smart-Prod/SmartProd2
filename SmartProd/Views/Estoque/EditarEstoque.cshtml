@@ -1,0 +1,31 @@
+﻿@model Estoque
+@{
+    ViewData["Title"] = "Editar Estoque";
+}
+
+<h2>Editar Estoque de @Model.Produto?.Nome (@Model.IdProduto)</h2>
+
+<form asp-action="EditarEstoque" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="EstoqueMinima" class="form-label">Estoque Mínimo</label>
+        <input asp-for="EstoqueMinima" class="form-control" type="number" min="0" />
+        <span asp-validation-for="EstoqueMinima" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="EstoqueMaxima" class="form-label">Estoque Máximo</label>
+        <input asp-for="EstoqueMaxima" class="form-control" type="number" min="0" />
+        <span asp-validation-for="EstoqueMaxima" class="text-danger"></span>
+    </div>
+   
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

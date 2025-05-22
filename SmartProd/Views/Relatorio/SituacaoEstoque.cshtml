@@ -1,0 +1,26 @@
+﻿@model IEnumerable<dynamic>
+<h2>Situação Atual do Estoque</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Estoque Atual</th>
+            <th>Mínimo</th>
+            <th>Máximo</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr class="@(item.Status == "Abaixo do Mínimo" ? "table-danger" : item.Status == "Acima do Máximo" ? "table-warning" : "table-success")">
+                    <td>@item.Produto</td>
+                    <td>@item.Atual</td>
+                    <td>@item.Minimo</td>
+                    <td>@item.Maximo</td>
+                    <td>@item.Status</td>
+                </tr>
+        }
+    </tbody>
+</table>

@@ -15,10 +15,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
     <PackageReference Include="MongoDB.Driver" Version="2.29.0" />
+    <PackageReference Include="QuestPDF" Version="2025.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Img\NovaPasta\" />
+    <Folder Include="wwwroot\img\" />
   </ItemGroup>
 
 </Project>

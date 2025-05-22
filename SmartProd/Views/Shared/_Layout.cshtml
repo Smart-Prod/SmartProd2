@@ -33,54 +33,40 @@
                         @{
                             if (User?.Identity?.IsAuthenticated ?? false)
                             {
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        +Novo
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a class="nav-link" asp-area="" asp-controller="Produtos" asp-action="Index">Produto</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" asp-area="" asp-controller="Clientes" asp-action="Index">Cliente</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" asp-area="" asp-controller="Fornecedores" asp-action="Index">Fornecedor</a>
-                                        </li>
-                                    </ul>
-								</li>
                                 
+                                <li class="nav-item">
+                                            <a class="nav-link" asp-area="" asp-controller="Produtos" asp-action="Index">Produto</a>
+                                </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Estoque
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a class="nav-link" asp-area="" asp-controller="Estoque" asp-action="Index">Entrada</a>
+                                            <a class="nav-link" asp-area="" asp-controller="Estoque" asp-action="Index">Estoque</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" asp-area="" asp-controller="Estoque" asp-action="RegistrarNotaEntrega">Entrada</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" asp-area="" asp-controller="Estoque" asp-action="RegistrarNotaSaida">Saida</a>
+                                            <a class="nav-link" asp-area="" asp-controller="Estoque" asp-action="RegistrarNotaSaida">Saída</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Relatorios
+                                       Relatório
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a class="nav-link" asp-area="" asp-controller="Produtos" asp-action="Index">Produto</a>
+                                            <a class="nav-link" asp-area="" asp-controller="Relatorio" asp-action="Index">Situação do Estoque</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" asp-area="" asp-controller="Clientes" asp-action="All">Cliente</a>
+                                            <a class="nav-link" asp-area="" asp-controller="Relatorio" asp-action="Movimentacoes">Movimentação</a>
                                         </li>
+                                        
                                     </ul>
                                 </li>
-
-                                        
                             }
                         }
                     </ul>
@@ -123,11 +109,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - SmartProd - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

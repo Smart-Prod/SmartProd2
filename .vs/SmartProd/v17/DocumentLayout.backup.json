@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044.intralab\\desktop\\smartprod2\\smartprod\\views\\estoque\\registrarnotaentrega.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\views\\estoque\\registrarnotaentrega.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044.intralab\\desktop\\smartprod2\\smartprod\\controllers\\produtoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\controllers\\produtoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044.intralab\\desktop\\smartprod2\\smartprod\\views\\estoque\\registrarnotasaida.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\views\\estoque\\registrarnotasaida.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044.intralab\\desktop\\smartprod2\\smartprod\\views\\produtos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\views\\produtos\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044.intralab\\desktop\\smartprod2\\smartprod\\controllers\\estoquecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\controllers\\estoquecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044.intralab\\desktop\\smartprod2\\smartprod\\views\\shared\\_confirmdeletemodal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\views\\shared\\_confirmdeletemodal.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044.intralab\\desktop\\smartprod2\\smartprod\\views\\produtos\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\views\\produtos\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,45 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "RegistrarNotaSaida.cshtml",
-              "DocumentMoniker": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\SmartProd\\Views\\Estoque\\RegistrarNotaSaida.cshtml",
-              "RelativeDocumentMoniker": "SmartProd\\Views\\Estoque\\RegistrarNotaSaida.cshtml",
-              "ToolTip": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\SmartProd\\Views\\Estoque\\RegistrarNotaSaida.cshtml",
-              "RelativeToolTip": "SmartProd\\Views\\Estoque\\RegistrarNotaSaida.cshtml",
-              "ViewState": "AgIAADEAAAAAAAAAAAAYwDQAAAAAAAAAAAAAAA==",
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\SmartProd\\Views\\Produtos\\Create.cshtml",
+              "RelativeDocumentMoniker": "SmartProd\\Views\\Produtos\\Create.cshtml",
+              "ToolTip": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\SmartProd\\Views\\Produtos\\Create.cshtml",
+              "RelativeToolTip": "SmartProd\\Views\\Produtos\\Create.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T12:02:36.935Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RegistrarNotaEntrega.cshtml",
-              "DocumentMoniker": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
-              "RelativeDocumentMoniker": "SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
-              "ToolTip": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
-              "RelativeToolTip": "SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
-              "ViewState": "AgIAADEAAAAAAAAAAAAYwDUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-21T12:01:07.761Z",
+              "WhenOpened": "2025-05-22T15:22:11.458Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "EstoqueController.cs",
-              "DocumentMoniker": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\SmartProd\\Controllers\\EstoqueController.cs",
-              "RelativeDocumentMoniker": "SmartProd\\Controllers\\EstoqueController.cs",
-              "ToolTip": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\SmartProd\\Controllers\\EstoqueController.cs",
-              "RelativeToolTip": "SmartProd\\Controllers\\EstoqueController.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAgwBwAAAA4AAAAAAAAAA==",
+              "Title": "_ConfirmDeleteModal.cshtml",
+              "DocumentMoniker": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\SmartProd\\Views\\Shared\\_ConfirmDeleteModal.cshtml",
+              "RelativeDocumentMoniker": "SmartProd\\Views\\Shared\\_ConfirmDeleteModal.cshtml",
+              "ToolTip": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\SmartProd\\Views\\Shared\\_ConfirmDeleteModal.cshtml",
+              "RelativeToolTip": "SmartProd\\Views\\Shared\\_ConfirmDeleteModal.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-22T15:04:01.445Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\SmartProd\\Views\\Produtos\\Details.cshtml",
+              "RelativeDocumentMoniker": "SmartProd\\Views\\Produtos\\Details.cshtml",
+              "ToolTip": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\SmartProd\\Views\\Produtos\\Details.cshtml",
+              "RelativeToolTip": "SmartProd\\Views\\Produtos\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-22T15:02:55.419Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProdutosController.cs",
+              "DocumentMoniker": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\SmartProd\\Controllers\\ProdutosController.cs",
+              "RelativeDocumentMoniker": "SmartProd\\Controllers\\ProdutosController.cs",
+              "ToolTip": "C:\\Users\\0201392411044.INTRALAB\\Desktop\\SmartProd2\\SmartProd\\Controllers\\ProdutosController.cs",
+              "RelativeToolTip": "SmartProd\\Controllers\\ProdutosController.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAAA0wEgAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-21T11:28:05.296Z",
+              "WhenOpened": "2025-05-22T15:02:29.795Z",
               "EditorCaption": ""
             }
           ]

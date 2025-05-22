@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System.Drawing;
+using System.Security.Claims;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +12,7 @@ using SmartProd.Models;
 namespace SmartProd.Controllers
 {
     [Authorize]
-    public class ProdutosController : Controller
+    public partial class ProdutosController : Controller
     {
         private readonly ContextMongodb _context = new ContextMongodb();
         private readonly UserManager<ApplicationEmpresa> _userManager;
@@ -25,7 +27,7 @@ namespace SmartProd.Controllers
         {
             var userId = _userManager.GetUserId(User);
             return View(await _context.Produto.Find(p => p.IdUsuario == userId).ToListAsync());
-            
+
         }
 
         // GET: Produtos/Details/5
@@ -58,28 +60,21 @@ namespace SmartProd.Controllers
 
                 if (Imagem != null && Imagem.Length > 0)
                 {
-                    // Garante um nome de arquivo seguro e único para evitar conflitos
-                    var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(Imagem.FileName)}";
 
-                    // Caminho relativo para a imagem (armazenado no banco)
-                    var imgPath = Path.Combine("img", fileName);
-                    produto.Imagem = imgPath;
 
-                    // Caminho físico absoluto no servidor
-                    var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", imgPath);
+                    // Atribui o caminho relativo da imagem no campo 'Imagem'
+                    produto.Imagem = Path.Combine("img/", Imagem.FileName);
+                }
 
-                    // Cria diretório se não existir
-                    var directory = Path.GetDirectoryName(fullPath);
-                    if (!Directory.Exists(directory))
-                        Directory.CreateDirectory(directory);
+                await _context.Produto.InsertOneAsync(produto);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(),
+                        "wwwroot", "img", Imagem.FileName);
 
-                    // Salva o arquivo
-                    using var stream = new FileStream(fullPath, FileMode.Create);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
                     await Imagem.CopyToAsync(stream);
                 }
 
-
-                await _context.Produto.InsertOneAsync(produto);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -90,7 +85,7 @@ namespace SmartProd.Controllers
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null) return NotFound();
-            
+
             var produto = await _context.Produto.Find(p => p.Id == id).FirstOrDefaultAsync();
             if (produto == null) return NotFound();
 
@@ -140,7 +135,7 @@ namespace SmartProd.Controllers
 
             return View(produto);
         }
-       
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -171,7 +166,6 @@ namespace SmartProd.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
 
     }
 }

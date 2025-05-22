@@ -55,3 +55,34 @@ window.submitForm = function (formId) {
         console.warn("Formulário não encontrado:", formId);
     }
 };
+const produtosHtml = `@Html.Raw(string.Join("", ((List<Produto>)ViewBag.Produtos).Select(p => $"<option value='{p.Id}'>{p.Nome}</option>"))`;
+// Função para adicionar um novo item de saída
+let indexSaida = 1;
+function adicionarItemSaida() {
+    const tbody = document.getElementById('itens-saida');
+    const row = document.createElement('tr');
+    row.innerHTML = `
+                <td><select name="Itens[${indexEntrada}].IdProduto" class="form-control">
+                        <option value="">-- Selecione --</option>
+                        ${produtosHtml}
+                    </select></td>
+                <td><input name="Itens[${indexSaida}].Quantidade" type="number" class="form-control" /></td>
+            `;
+    tbody.appendChild(row);
+    indexSaida++;
+}
+// Função para adicionar um novo item de entrada
+let indexEntrada = 1;
+function adicionarItemEntrada() {
+    const tbody = document.getElementById('itens-entrada');
+    const row = document.createElement('tr');
+    row.innerHTML = `
+                <td><select name="Itens[${indexEntrada}].IdProduto" class="form-control">
+                        <option value="">-- Selecione --</option>
+                        ${produtosHtml}
+                    </select></td>
+                <td><input name="Itens[${indexEntrada}].Quantidade" type="number" class="form-control" /></td>
+            `;
+    tbody.appendChild(row);
+    indexEntrada++;
+}

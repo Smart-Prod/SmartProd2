@@ -30,7 +30,15 @@
                 </thead>
                 <tbody id="itens-entrada">
                     <tr>
-                        <td><input name="Itens[0].IdProduto" class="form-control" /></td>
+                        <td>
+                            <select name="Itens[0].IdProduto" class="form-control">
+                                <option value="">-- Selecione --</option>
+                                @foreach (var produto in ViewBag.Produtos)
+                                {
+                                    <option value="@produto.Id">@produto.Nome</option>
+                                }
+                            </select>
+                        </td>
                         <td><input name="Itens[0].Quantidade" type="number" class="form-control" /></td>
                     </tr>
                 </tbody>
@@ -51,4 +59,3 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-

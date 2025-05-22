@@ -1,0 +1,85 @@
+﻿@model Relatorio
+
+
+<h2>Relatório de Movimentações</h2>
+
+<div class="mb-3">
+    <strong>Atalhos de Período:</strong>
+    <a asp-action="Movimentacoes" asp-route-periodo="3meses" class="btn btn-outline-secondary btn-sm">Últimos 3 meses</a>
+    <a asp-action="Movimentacoes" asp-route-periodo="6meses" class="btn btn-outline-secondary btn-sm">Últimos 6 meses</a>
+    <a asp-action="Movimentacoes" asp-route-periodo="12meses" class="btn btn-outline-secondary btn-sm">Último ano</a>
+</div>
+
+<form method="get">
+    <div class="row mb-3">
+        <div class="col">
+            <label>Data Início</label>
+            <input type="date" name="inicio" class="form-control" value="@Model.DataInicio.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="col">
+            <label>Data Fim</label>
+            <input type="date" name="fim" class="form-control" value="@Model.DataFim.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="col d-flex align-items-end">
+            <button type="submit" class="btn btn-primary">Filtrar Manual</button>
+        </div>
+    </div>
+</form>
+<div class="mb-3">
+    <a class="btn btn-danger btn-sm" asp-action="ExportarPdf" asp-route-inicio="@Model.DataInicio.ToString("yyyy-MM-dd")" asp-route-fim="@Model.DataFim.ToString("yyyy-MM-dd")">
+        Exportar PDF
+    </a>    
+</div>
+
+<p>
+    Período consultado:
+    <strong>@Model.DataInicio.ToLocalTime().ToString("dd/MM/yyyy")</strong>
+    até
+    <strong>@Model.DataFim.ToLocalTime().ToString("dd/MM/yyyy")</strong>
+</p>
+
+<h4>Entradas</h4>
+<table class="table table-sm table-bordered">
+    <thead>
+        <tr>
+            <th>Nº Nota</th>
+            <th>Data</th>
+            <th>Fornecedor</th>
+            <th>Itens</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entrada in Model.Entradas)
+        {
+            <tr>
+                <td>@entrada.NumeroNota</td>
+                <td>@entrada.DataEntrega.ToLocalTime().ToString("dd/MM/yyyy")</td>
+                <td>@entrada.Fornecedor</td>
+                <td>@(entrada.Itens?.Count ?? 0)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Saídas</h4>
+<table class="table table-sm table-bordered">
+    <thead>
+        <tr>
+            <th>Nº Nota</th>
+            <th>Data</th>
+            <th>Destino</th>
+            <th>Itens</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var saida in Model.Saidas)
+        {
+            <tr>
+                <td>@saida.NumeroNota</td>
+                <td>@saida.DataSaida.ToLocalTime().ToString("dd/MM/yyyy")</td>
+                <td>@saida.Destino</td>
+                <td>@(saida.Itens?.Count ?? 0)</td>
+            </tr>
+        }
+    </tbody>
+</table>

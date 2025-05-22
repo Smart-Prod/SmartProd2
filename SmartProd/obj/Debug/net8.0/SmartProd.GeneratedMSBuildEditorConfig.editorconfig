@@ -36,6 +36,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wcmVzYVxDYWRhc3RyYXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/0201392411044.INTRALAB/Desktop/SmartProd2/SmartProd/Views/Estoque/EditarEstoque.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0b3F1ZVxFZGl0YXJFc3RvcXVlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/0201392411044.INTRALAB/Desktop/SmartProd2/SmartProd/Views/Estoque/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0b3F1ZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -70,6 +74,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/0201392411044.INTRALAB/Desktop/SmartProd2/SmartProd/Views/Produtos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/0201392411044.INTRALAB/Desktop/SmartProd2/SmartProd/Views/Relatorio/Movimentacoes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVsYXRvcmlvXE1vdmltZW50YWNvZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/0201392411044.INTRALAB/Desktop/SmartProd2/SmartProd/Views/Relatorio/SituacaoEstoque.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVsYXRvcmlvXFNpdHVhY2FvRXN0b3F1ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/0201392411044.INTRALAB/Desktop/SmartProd2/SmartProd/Views/Shared/Error.cshtml]

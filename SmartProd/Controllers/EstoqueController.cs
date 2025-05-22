@@ -29,8 +29,11 @@ namespace SmartProd.Controllers
             ViewBag.ProdutosCriticos = produtosCriticos;
             return View(await _context.Estoque.Find(e => e.IdUsuario == userId).ToListAsync());
         }
-        public IActionResult RegistrarNotaEntrega()
+        public async Task<IActionResult> RegistrarNotaEntrega()
         {
+            var userId = _userManager.GetUserId(User);
+            var produtos = await _context.Produto.Find(p => p.IdUsuario == userId).ToListAsync();
+            ViewBag.Produtos = produtos;
             return View();
         }
         [HttpPost]
@@ -70,8 +73,11 @@ namespace SmartProd.Controllers
 
             return RedirectToAction("Index");
         }
-        public IActionResult RegistrarNotaSaida()
+        public async Task<IActionResult> RegistrarNotaSaida()
         {
+            var userId = _userManager.GetUserId(User);
+            var produtos = await _context.Produto.Find(p => p.IdUsuario == userId).ToListAsync();
+            ViewBag.Produtos = produtos;
             return View();
         }
 
@@ -108,5 +114,38 @@ namespace SmartProd.Controllers
 
             return RedirectToAction("Index");
         }
+
+        // GET: /Estoque/EditarEstoque/{id}
+        public async Task<IActionResult> EditarEstoque(Guid id)
+        {
+            var userId = _userManager.GetUserId(User);
+            var estoque = await _context.Estoque.Find(e => e.Id == id && e.IdUsuario == userId).FirstOrDefaultAsync();
+
+            if (estoque == null)
+            {
+                return NotFound();
+            }
+
+            return View(estoque);
+        }
+
+        // POST: /Estoque/EditarEstoque
+        [HttpPost]
+        public async Task<IActionResult> EditarEstoque(Estoque estoqueEditado)
+        {
+            var userId = _userManager.GetUserId(User);
+
+            var filtro = Builders<Estoque>.Filter.Where(e => e.Id == estoqueEditado.Id && e.IdUsuario == userId);
+
+            var update = Builders<Estoque>.Update
+                .Set(e => e.EstoqueMinima, estoqueEditado.EstoqueMinima)
+                .Set(e => e.EstoqueMaxima, estoqueEditado.EstoqueMaxima)                
+                .Set(e => e.DataUltimaAtualizacao, DateTime.UtcNow);
+
+            await _context.Estoque.UpdateOneAsync(filtro, update);
+
+            return RedirectToAction("Index");
+        }
+
     }
 }

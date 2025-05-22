@@ -1,75 +1,44 @@
-﻿@model IEnumerable<SmartProd.Models.Estoque>
-
+﻿@model List<Estoque>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Estoque";
+    var produtosCriticos = ViewBag.ProdutosCriticos as List<Estoque>;
 }
 
-<h1>Index</h1>
+<h2>Estoque</h2>
 
-<p>
-    <a asp-action="RegistrarNotaEntrega">Create New</a>
-</p>
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdProduto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstoqueAtual)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstoqueMinima)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EstoqueMaxima)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Localizacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataUltimaAtualizacao)
-            </th>
-            
-            <th></th>
+            <th>Produto</th>
+            <th>Atual</th>
+            <th>Mínimo</th>
+            <th>Máximo</th>
+            <th>Localização</th>
+			<th>Editar Max./Min.</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdProduto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstoqueAtual)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstoqueMinima)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstoqueMaxima)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Localizacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataUltimaAtualizacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdUsuario)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            var isCritico = item.EstoqueAtual < item.EstoqueMinima;
+            <tr class="@(isCritico ? "table-danger" : "")">
+                <td>@item.Produto?.Nome (@item.IdProduto)</td>
+                <td>@item.EstoqueAtual</td>
+                <td>@item.EstoqueMinima</td>
+                <td>@item.EstoqueMaxima</td>
+                <td>@item.Localizacao</td>
+                <td>
+                    <a asp-action="EditarEstoque" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">Editar</a>
+                </td>
+
+            </tr>
+        }
     </tbody>
 </table>
+
+@if (produtosCriticos != null && produtosCriticos.Any())
+{
+    <div class="alert alert-danger">
+        <strong>Atenção:</strong> Existem produtos com estoque abaixo do mínimo!
+    </div>
+}
