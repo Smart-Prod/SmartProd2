@@ -1,6 +1,7 @@
 ﻿@model Relatorio
 
 
+
 <h2>Relatório de Movimentações</h2>
 
 <div class="mb-3">
@@ -49,7 +50,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var entrada in Model.Entradas)
+        @foreach (var entrada in Model.Entradas.OrderByDescending(e => e.DataEntrega))
         {
             <tr>
                 <td>@entrada.NumeroNota</td>
@@ -72,7 +73,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var saida in Model.Saidas)
+        @foreach (var saida in Model.Saidas.OrderByDescending(e => e.DataSaida))
         {
             <tr>
                 <td>@saida.NumeroNota</td>

@@ -1,0 +1,78 @@
+﻿@model DashboardViewModel
+
+<h2>📊 Dashboard</h2>
+
+<!-- Produtos com Estoque -->
+<h3>📦 Produtos em Estoque</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Estoque Atual</th>
+            <th>Mínimo</th>
+            <th>Máximo</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ProdutosEstoque)
+        {
+            <tr class="@(item.EstoqueBaixo ? "table-danger" : "")">
+                <td>@item.Nome</td>
+                <td>@item.EstoqueAtual</td>
+                <td>@item.EstoqueMinima</td>
+                <td>@item.EstoqueMaxima</td>
+                <td>
+                    @if (item.EstoqueBaixo)
+                    {
+                        <span class="text-danger">Abaixo do mínimo</span>
+                    }
+                    else
+                    {
+                        <span class="text-success">OK</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Entradas por Produto -->
+<h3>⬆️ Entradas por Produto</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Total de Entradas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.EntradasPorProduto)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.TotalEntrada</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Saídas por Produto -->
+<h3>⬇️ Saídas por Produto</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Total de Saídas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SaidasPorProduto)
+        {
+            <tr>
+                <td>@item.Nome</td>
+                <td>@item.TotalSaida</td>
+            </tr>
+        }
+    </tbody>
+</table>

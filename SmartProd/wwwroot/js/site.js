@@ -1,4 +1,5 @@
-﻿function buscarCnpj() {
+﻿/// busca de cnpj
+function buscarCnpj() {
     const cnpj = document.getElementById("Cnpj").value;
 
     if (!cnpj || cnpj.length < 14) {
@@ -19,7 +20,7 @@
         })
         .catch(err => alert("Erro ao buscar CNPJ: " + err.message));
 }
-
+// previa da imagem
 function previewImage(event) {
     var reader = new FileReader();
     reader.onload = function () {
@@ -29,7 +30,7 @@ function previewImage(event) {
     }
     reader.readAsDataURL(event.target.files[0]);
 }
-
+// selecionar checkbox
 document.addEventListener("DOMContentLoaded", function () {
     const checkboxes = document.querySelectorAll(".delete-checkbox");
     const deleteBtn = document.getElementById("deleteSelectedBtn");
@@ -47,14 +48,15 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Função global para o modal chamar
-window.submitForm = function (formId) {
+function submitForm(formId) {
     const form = document.getElementById(formId);
     if (form) {
         form.submit();
     } else {
-        console.warn("Formulário não encontrado:", formId);
+        console.error("Formulário não encontrado: " + formId);
     }
 };
+
 const produtosHtml = `@Html.Raw(string.Join("", ((List<Produto>)ViewBag.Produtos).Select(p => $"<option value='{p.Id}'>{p.Nome}</option>"))`;
 // Função para adicionar um novo item de saída
 let indexSaida = 1;

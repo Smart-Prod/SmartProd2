@@ -2,8 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
-    var produtosPorCategoria = Model.GroupBy(p => p.Categoria);
-    var formId = "deleteForm";
+    var produtosPorCategoria = Model.GroupBy(p => p.Categoria);    
 }
 
 <h1>Produtos</h1>
@@ -12,7 +11,7 @@
     <a asp-action="Create" class="btn btn-primary">Criar Novo</a>
 </p>
 <form id="deleteForm" asp-action="DeleteMultiple" method="post">
-    <button type="button" class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" disabled id="deleteSelectedBtn">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" disabled id="deleteSelectedBtn">
         Excluir Selecionados
     </button>
 
@@ -45,3 +44,6 @@
     </div>
 }
 </form>
+
+
+@await Html.PartialAsync("_ConfirmDeleteModal", "deleteForm")

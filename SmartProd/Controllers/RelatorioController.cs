@@ -16,35 +16,11 @@ namespace SmartProd.Controllers
         public RelatorioController(UserManager<ApplicationEmpresa> userManager)
         {
             _userManager = userManager;
-        }
-
-        
-
+        }       
 
         public IActionResult Movimentacoes()
         {
             return View();
-        }
-
-        // Relatório da situação atual do estoque
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SituacaoEstoque()
-        {
-            var userId = _userManager.GetUserId(User);
-            var estoques = await _context.Estoque.Find(e => e.IdUsuario == userId).ToListAsync();
-
-            var situacao = estoques.Select(e => new
-            {
-                Produto = e.Produto?.Nome ?? "(Sem nome)",
-                Atual = e.EstoqueAtual,
-                Minimo = e.EstoqueMinima,
-                Maximo = e.EstoqueMaxima,
-                Status = e.EstoqueAtual < e.EstoqueMinima ? "Abaixo do Mínimo" :
-                         e.EstoqueAtual > e.EstoqueMaxima ? "Acima do Máximo" : "Normal"
-            });
-
-            return View(situacao);
         }
 
         // Relatório de movimentações por período

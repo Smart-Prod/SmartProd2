@@ -35,7 +35,7 @@ namespace SmartProd.Controllers
 
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Dashboard", "Home");
+                        return RedirectToAction("Index", "Dashboard");
                     }
                     ModelState.AddModelError(nameof(email), "Verifique suas credenciais");
                 }

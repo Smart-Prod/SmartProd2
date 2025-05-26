@@ -60,23 +60,24 @@ namespace SmartProd.Controllers
 
                 if (Imagem != null && Imagem.Length > 0)
                 {
+                    var fileName = Path.GetFileName(Imagem.FileName);
+                    produto.Imagem = Path.Combine("img", fileName);
 
+                    var imgDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "img");
+                    if (!Directory.Exists(imgDir))
+                        Directory.CreateDirectory(imgDir);
 
-                    // Atribui o caminho relativo da imagem no campo 'Imagem'
-                    produto.Imagem = Path.Combine("img/", Imagem.FileName);
+                    var filePath = Path.Combine(imgDir, fileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await Imagem.CopyToAsync(stream);
+                    }
                 }
 
                 await _context.Produto.InsertOneAsync(produto);
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(),
-                        "wwwroot", "img", Imagem.FileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await Imagem.CopyToAsync(stream);
-                }
-
                 return RedirectToAction(nameof(Index));
             }
+
 
             return View(produto);
         }
