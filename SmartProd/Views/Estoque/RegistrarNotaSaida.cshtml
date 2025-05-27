@@ -58,3 +58,29 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script>
+    // Gera o HTML das opções dos produtos com segurança de encoding
+    const produtosHtml = `@Html.Raw(
+        string.Join("",
+            (ViewBag.Produtos as IEnumerable<dynamic>)
+            .Select(p => $"<option value='{p.Id}'>{System.Net.WebUtility.HtmlEncode(p.Nome)}</option>")
+        ))`;
+        let indexSaida = 1;
+    function adicionarItemSaida() {
+        const tbody = document.getElementById('itens-saida');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>
+                <select name="Itens[${indexSaida}].IdProduto" class="form-control" required>
+                    <option value="">-- Selecione --</option>
+                    ${produtosHtml}
+                </select>
+            </td>
+            <td>
+                <input name="Itens[${indexSaida}].Quantidade" type="number" class="form-control" required min="1" />
+            </td>
+        `;
+        tbody.appendChild(row);
+        indexSaida++;
+    }
+</script>

@@ -32,15 +32,19 @@ namespace SmartProd.Controllers
 
             if (!inicio.HasValue || !fim.HasValue)
             {
-                fim = DateTime.UtcNow;
-
+                fim = DateTime.UtcNow.Date.AddDays(1).AddTicks(-1); // Fim do dia de hoje
                 inicio = periodo switch
                 {
                     "3meses" => fim.Value.AddMonths(-3),
                     "6meses" => fim.Value.AddMonths(-6),
                     "12meses" => fim.Value.AddYears(-1),
-                    _ => fim.Value.AddDays(-7) // padrão: últimos 7 dias
+                    _ => fim.Value.AddDays(-7)
                 };
+            }
+            else
+            {
+                // Ajusta fim para considerar o dia inteiro
+                fim = fim.Value.Date.AddDays(1).AddTicks(-1);
             }
 
             var entradas = await _context.NotaEntrega.Find(n =>

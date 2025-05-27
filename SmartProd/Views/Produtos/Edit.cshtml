@@ -24,6 +24,16 @@
                 <span asp-validation-for="Categoria" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="EstoqueMaxima" class="control-label"></label>
+                <input asp-for="EstoqueMaxima" class="form-control" />
+                <span asp-validation-for="EstoqueMaxima" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstoqueMinima" class="control-label"></label>
+                <input asp-for="EstoqueMinima" class="form-control" />
+                <span asp-validation-for="EstoqueMinima" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Imagem" class="control-label fw-bold fs-5"></label>
                 <input asp-for="Imagem" class="form-control" type="file" onchange="previewImage(event)" />
                 <span asp-validation-for="Imagem" class="text-danger"></span>

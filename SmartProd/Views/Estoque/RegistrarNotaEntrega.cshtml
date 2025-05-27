@@ -40,6 +40,7 @@
                             </select>
                         </td>
                         <td><input name="Itens[0].Quantidade" type="number" class="form-control" /></td>
+                        <td><input name="Itens[0].Preco" type="number" class="form-control" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -59,3 +60,29 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+<script>
+    // Gera o HTML das opções dos produtos com segurança de encoding
+    const produtosHtml = `@Html.Raw(
+        string.Join("",
+            (ViewBag.Produtos as IEnumerable<dynamic>)
+            .Select(p => $"<option value='{p.Id}'>{System.Net.WebUtility.HtmlEncode(p.Nome)}</option>")
+        ))`;
+    let indexEntrada = 1;
+    function adicionarItemEntrada() {
+        const tbody = document.getElementById('itens-entrada');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>
+                <select name="Itens[${indexEntrada}].IdProduto" class="form-control" required>
+                    <option value="">-- Selecione --</option>
+                    ${produtosHtml}
+                </select>
+            </td>
+            <td>
+                <input name="Itens[${indexEntrada}].Quantidade" type="number" class="form-control" required min="1" />
+            </td>
+        `;
+        tbody.appendChild(row);
+        indexEntrada++;
+    }
+</script>

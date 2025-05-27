@@ -50,7 +50,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var entrada in Model.Entradas.OrderByDescending(e => e.DataEntrega))
+        @foreach (var entrada in Model.Entradas)
         {
             <tr>
                 <td>@entrada.NumeroNota</td>
@@ -73,7 +73,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var saida in Model.Saidas.OrderByDescending(e => e.DataSaida))
+        @foreach (var saida in Model.Saidas)
         {
             <tr>
                 <td>@saida.NumeroNota</td>

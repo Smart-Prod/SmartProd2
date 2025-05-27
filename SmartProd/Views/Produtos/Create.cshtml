@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             
             <div class="form-group">
@@ -22,6 +22,16 @@
                 <label asp-for="Categoria" class="control-label"></label>
                 <input asp-for="Categoria" class="form-control" />
                 <span asp-validation-for="Categoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstoqueMaxima" class="control-label"></label>
+                <input asp-for="EstoqueMaxima" class="form-control" />
+                <span asp-validation-for="EstoqueMaxima" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EstoqueMinima" class="control-label"></label>
+                <input asp-for="EstoqueMinima" class="form-control" />
+                <span asp-validation-for="EstoqueMinima" class="text-danger"></span>
             </div>
             <div class="form-group">
 

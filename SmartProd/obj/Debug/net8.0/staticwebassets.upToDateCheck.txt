@@ -1,5 +1,13 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\img\15064-NQ14F6.jpg
+wwwroot\img\9448.jpg
+wwwroot\img\9704568.jpg
+wwwroot\img\Nova pasta (2)\15064-NQ14F6.jpg
+wwwroot\img\Nova pasta (2)\9448.jpg
+wwwroot\img\Nova pasta (2)\9704568.jpg
+wwwroot\img\Nova pasta (2)\R.jfif
+wwwroot\img\Nova pasta (2)\renderizacao-3d-da-caneta-ai-gerada.jpg
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map

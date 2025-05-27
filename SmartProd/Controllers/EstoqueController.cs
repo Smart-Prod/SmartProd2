@@ -22,12 +22,38 @@ namespace SmartProd.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = _userManager.GetUserId(User);
-            var produtosCriticos = await _context.Estoque
-                .Find(e => e.IdUsuario == userId && e.EstoqueAtual < e.EstoqueMinima)
+            var estoques = await _context.Estoque
+                .Find(e => e.IdUsuario == userId)
                 .ToListAsync();
 
+            // Buscar todos os Ids de produtos únicos
+            var produtoIds = estoques
+                .Where(e => !string.IsNullOrEmpty(e.IdProduto))
+                .Select(e => Guid.Parse(e.IdProduto))
+                .ToList();
+
+            // Buscar todos os produtos correspondentes
+            var produtos = await _context.Produto
+                .Find(p => produtoIds.Contains(p.Id))
+                .ToListAsync();
+
+            // Associar produtos aos estoques
+            foreach (var estoque in estoques)
+            {
+                if (!string.IsNullOrEmpty(estoque.IdProduto))
+                {
+                    var guidProduto = Guid.Parse(estoque.IdProduto);
+                    estoque.Produto = produtos.FirstOrDefault(p => p.Id == guidProduto);
+                }
+            }
+
+            // Agora, checa estoque crítico usando a propriedade do Produto associado!
+            var produtosCriticos = estoques
+                .Where(e => e.Produto != null && e.EstoqueAtual < (e.Produto.EstoqueMinima ))
+                .ToList();
+
             ViewBag.ProdutosCriticos = produtosCriticos;
-            return View(await _context.Estoque.Find(e => e.IdUsuario == userId).ToListAsync());
+            return View(estoques);
         }
         public async Task<IActionResult> RegistrarNotaEntrega()
         {
@@ -49,11 +75,23 @@ namespace SmartProd.Controllers
                 var filtro = Builders<Estoque>.Filter.Eq(e => e.IdProduto, item.IdProduto);
                 var estoque = await _context.Estoque.Find(filtro).FirstOrDefaultAsync();
 
+                // Buscar o EstoqueMaxima do produto, assumindo que existe essa propriedade no Produto
+                var produto = await _context.Produto.Find(p => p.Id.ToString() == item.IdProduto).FirstOrDefaultAsync();
+                int estoqueMaximo = produto?.EstoqueMaxima ?? int.MaxValue; // int.MaxValue caso não encontre
+
                 if (estoque == null)
                 {
+                    if (item.Quantidade > estoqueMaximo)
+                    {
+                        ModelState.AddModelError("", $"Não é possível adicionar o produto {produto?.Nome ?? item.IdProduto}: quantidade inicial maior que o estoque máximo permitido ({estoqueMaximo}).");
+                        // Você pode optar por retornar a View aqui ou juntar tudo e exibir no final
+                        return View(); // Ou RedirectToAction com erro
+                    }
+
                     estoque = new Estoque
                     {
                         IdProduto = item.IdProduto,
+                        Produto = item.Produto,
                         EstoqueAtual = item.Quantidade,
                         Localizacao = "Depósito Principal",
                         DataUltimaAtualizacao = DateTime.UtcNow,
@@ -63,6 +101,13 @@ namespace SmartProd.Controllers
                 }
                 else
                 {
+                    int novoEstoque = estoque.EstoqueAtual + item.Quantidade;
+                    if (novoEstoque > estoqueMaximo)
+                    {
+                        ModelState.AddModelError("", $"Não é possível adicionar o produto {produto?.Nome ?? item.IdProduto}: estoque ultrapassa o máximo permitido ({estoqueMaximo}).");
+                        return View(); // Ou RedirectToAction com erro
+                    }
+
                     var update = Builders<Estoque>.Update
                         .Inc(e => e.EstoqueAtual, item.Quantidade)
                         .Set(e => e.DataUltimaAtualizacao, DateTime.UtcNow);
@@ -114,38 +159,7 @@ namespace SmartProd.Controllers
 
             return RedirectToAction("Index");
         }
-
-        // GET: /Estoque/EditarEstoque/{id}
-        public async Task<IActionResult> EditarEstoque(Guid id)
-        {
-            var userId = _userManager.GetUserId(User);
-            var estoque = await _context.Estoque.Find(e => e.Id == id && e.IdUsuario == userId).FirstOrDefaultAsync();
-
-            if (estoque == null)
-            {
-                return NotFound();
-            }
-
-            return View(estoque);
-        }
-
-        // POST: /Estoque/EditarEstoque
-        [HttpPost]
-        public async Task<IActionResult> EditarEstoque(Estoque estoqueEditado)
-        {
-            var userId = _userManager.GetUserId(User);
-
-            var filtro = Builders<Estoque>.Filter.Where(e => e.Id == estoqueEditado.Id && e.IdUsuario == userId);
-
-            var update = Builders<Estoque>.Update
-                .Set(e => e.EstoqueMinima, estoqueEditado.EstoqueMinima)
-                .Set(e => e.EstoqueMaxima, estoqueEditado.EstoqueMaxima)                
-                .Set(e => e.DataUltimaAtualizacao, DateTime.UtcNow);
-
-            await _context.Estoque.UpdateOneAsync(filtro, update);
-
-            return RedirectToAction("Index");
-        }
+        
 
     }
 }

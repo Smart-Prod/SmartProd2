@@ -1,105 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044\\desktop\\smartprod2\\smartprod\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044\\desktop\\smartprod2\\smartprod\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044\\desktop\\smartprod2\\smartprod\\views\\estoque\\registrarnotaentrega.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\views\\estoque\\registrarnotaentrega.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044\\desktop\\smartprod2\\smartprod\\views\\estoque\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\views\\estoque\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044\\desktop\\smartprod2\\smartprod\\controllers\\estoquecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\controllers\\estoquecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": [
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "SmartProd\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "SmartProd\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEkAAAB/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-26T15:10:48.099Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "site.js",
-              "DocumentMoniker": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\wwwroot\\js\\site.js",
-              "RelativeDocumentMoniker": "SmartProd\\wwwroot\\js\\site.js",
-              "ToolTip": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\wwwroot\\js\\site.js",
-              "RelativeToolTip": "SmartProd\\wwwroot\\js\\site.js",
-              "ViewState": "AgIAACgAAAAAAAAAAAAQwCAAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-05-26T14:16:24.68Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RegistrarNotaEntrega.cshtml",
-              "DocumentMoniker": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
-              "RelativeDocumentMoniker": "SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
-              "ToolTip": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
-              "RelativeToolTip": "SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAADEAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-26T14:12:10.471Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Views\\Estoque\\Index.cshtml",
-              "RelativeDocumentMoniker": "SmartProd\\Views\\Estoque\\Index.cshtml",
-              "ToolTip": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Views\\Estoque\\Index.cshtml",
-              "RelativeToolTip": "SmartProd\\Views\\Estoque\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-26T14:11:43.882Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EstoqueController.cs",
-              "DocumentMoniker": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Controllers\\EstoqueController.cs",
-              "RelativeDocumentMoniker": "SmartProd\\Controllers\\EstoqueController.cs",
-              "ToolTip": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Controllers\\EstoqueController.cs",
-              "RelativeToolTip": "SmartProd\\Controllers\\EstoqueController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T14:11:38.161Z",
-              "EditorCaption": ""
-            }
-          ]
-        }
-      ]
+      "DocumentGroups": []
     }
   ]
 }

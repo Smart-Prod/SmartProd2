@@ -22,7 +22,7 @@
         {
             var isCritico = item.EstoqueAtual < item.EstoqueMinima;
             <tr class="@(isCritico ? "table-danger" : "")">
-                <td>@item.Produto?.Nome (@item.IdProduto)</td>
+                <td>@item.Produto?.Nome</td>
                 <td>@item.EstoqueAtual</td>
                 <td>@item.EstoqueMinima</td>
                 <td>@item.EstoqueMaxima</td>

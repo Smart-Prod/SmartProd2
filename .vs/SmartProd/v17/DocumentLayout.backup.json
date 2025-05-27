@@ -3,20 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044\\desktop\\smartprod2\\smartprod\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044\\desktop\\smartprod2\\smartprod\\views\\estoque\\registrarnotaentrega.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\views\\estoque\\registrarnotaentrega.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044\\desktop\\smartprod2\\smartprod\\views\\estoque\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\views\\estoque\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044\\desktop\\smartprod2\\smartprod\\controllers\\estoquecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\controllers\\estoquecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044\\desktop\\smartprod2\\smartprod\\models\\produto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\models\\produto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044\\desktop\\smartprod2\\smartprod\\models\\estoque.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\models\\estoque.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044\\desktop\\smartprod2\\smartprod\\controllers\\produtoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\controllers\\produtoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044\\desktop\\smartprod2\\smartprod\\views\\relatorio\\movimentacoes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\views\\relatorio\\movimentacoes.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|c:\\users\\0201392411044\\desktop\\smartprod2\\smartprod\\controllers\\relatoriocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A4F9482-5E63-465F-BB5C-A2D5F7C46846}|SmartProd\\SmartProd.csproj|solutionrelative:smartprod\\controllers\\relatoriocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +38,97 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "site.js",
-              "DocumentMoniker": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\wwwroot\\js\\site.js",
-              "RelativeDocumentMoniker": "SmartProd\\wwwroot\\js\\site.js",
-              "ToolTip": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\wwwroot\\js\\site.js",
-              "RelativeToolTip": "SmartProd\\wwwroot\\js\\site.js",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAowCAAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-05-26T14:16:24.68Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RegistrarNotaEntrega.cshtml",
-              "DocumentMoniker": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
-              "RelativeDocumentMoniker": "SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
-              "ToolTip": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
-              "RelativeToolTip": "SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAADEAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-26T14:12:10.471Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Views\\Estoque\\Index.cshtml",
-              "RelativeDocumentMoniker": "SmartProd\\Views\\Estoque\\Index.cshtml",
-              "ToolTip": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Views\\Estoque\\Index.cshtml",
-              "RelativeToolTip": "SmartProd\\Views\\Estoque\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-26T14:11:43.882Z",
+              "DocumentIndex": 4,
+              "Title": "ProdutosController.cs",
+              "DocumentMoniker": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Controllers\\ProdutosController.cs",
+              "RelativeDocumentMoniker": "SmartProd\\Controllers\\ProdutosController.cs",
+              "ToolTip": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Controllers\\ProdutosController.cs",
+              "RelativeToolTip": "SmartProd\\Controllers\\ProdutosController.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T15:27:58.768Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "Estoque.cs",
+              "DocumentMoniker": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Models\\Estoque.cs",
+              "RelativeDocumentMoniker": "SmartProd\\Models\\Estoque.cs",
+              "ToolTip": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Models\\Estoque.cs",
+              "RelativeToolTip": "SmartProd\\Models\\Estoque.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T15:26:03.514Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Produto.cs",
+              "DocumentMoniker": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Models\\Produto.cs",
+              "RelativeDocumentMoniker": "SmartProd\\Models\\Produto.cs",
+              "ToolTip": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Models\\Produto.cs",
+              "RelativeToolTip": "SmartProd\\Models\\Produto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T15:25:59.731Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "EstoqueController.cs",
               "DocumentMoniker": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Controllers\\EstoqueController.cs",
               "RelativeDocumentMoniker": "SmartProd\\Controllers\\EstoqueController.cs",
               "ToolTip": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Controllers\\EstoqueController.cs",
               "RelativeToolTip": "SmartProd\\Controllers\\EstoqueController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAA5wDMAAABbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-26T14:11:38.161Z",
+              "WhenOpened": "2025-05-27T15:22:49.159Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RegistrarNotaEntrega.cshtml",
+              "DocumentMoniker": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
+              "RelativeDocumentMoniker": "SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
+              "ToolTip": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
+              "RelativeToolTip": "SmartProd\\Views\\Estoque\\RegistrarNotaEntrega.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAACoAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-27T15:22:39.494Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Movimentacoes.cshtml",
+              "DocumentMoniker": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Views\\Relatorio\\Movimentacoes.cshtml",
+              "RelativeDocumentMoniker": "SmartProd\\Views\\Relatorio\\Movimentacoes.cshtml",
+              "ToolTip": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Views\\Relatorio\\Movimentacoes.cshtml",
+              "RelativeToolTip": "SmartProd\\Views\\Relatorio\\Movimentacoes.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAD8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-27T14:08:33.159Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RelatorioController.cs",
+              "DocumentMoniker": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Controllers\\RelatorioController.cs",
+              "RelativeDocumentMoniker": "SmartProd\\Controllers\\RelatorioController.cs",
+              "ToolTip": "C:\\Users\\0201392411044\\Desktop\\SmartProd2\\SmartProd\\Controllers\\RelatorioController.cs",
+              "RelativeToolTip": "SmartProd\\Controllers\\RelatorioController.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAADwvy8AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T13:59:27.499Z",
               "EditorCaption": ""
             }
           ]
