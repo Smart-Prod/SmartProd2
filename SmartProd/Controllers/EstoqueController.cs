@@ -47,9 +47,8 @@ namespace SmartProd.Controllers
                 }
             }
 
-            // Agora, checa estoque crítico usando a propriedade do Produto associado!
             var produtosCriticos = estoques
-                .Where(e => e.Produto != null && e.EstoqueAtual < (e.Produto.EstoqueMinima ))
+                .Where(e => e.EstoqueAtual < e.EstoqueMinima)
                 .ToList();
 
             ViewBag.ProdutosCriticos = produtosCriticos;

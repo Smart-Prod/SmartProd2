@@ -20,50 +20,14 @@ namespace SmartProd.Controllers
         public async Task<IActionResult> Index()
         {
             var userId = _userManager.GetUserId(User);
-
             var estoques = await _context.Estoque.Find(_ => true).ToListAsync();
+
             var entradas = await _context.NotaEntrega.Find(_ => true).ToListAsync();
             var saidas = await _context.NotaSaida.Find(_ => true).ToListAsync();
 
-            // Busque todos os produtos. Considere que Produto.Id é Guid
-            var produtoIds = estoques
-                .Where(e => !string.IsNullOrEmpty(e.IdProduto))
-                .Select(e => Guid.Parse(e.IdProduto))
-                .Union(entradas.SelectMany(n => n.Itens).Where(i => !string.IsNullOrEmpty(i.IdProduto)).Select(i => Guid.Parse(i.IdProduto)))
-                .Union(saidas.SelectMany(n => n.Itens).Where(i => !string.IsNullOrEmpty(i.IdProduto)).Select(i => Guid.Parse(i.IdProduto)))
-                .Distinct()
-                .ToList();
-
-            var produtos = await _context.Produto.Find(p => produtoIds.Contains(p.Id)).ToListAsync();
-
-            // Associe manualmente Produto em Estoque
-            foreach (var e in estoques)
-            {
-                if (!string.IsNullOrEmpty(e.IdProduto))
-                    e.Produto = produtos.FirstOrDefault(p => p.Id == Guid.Parse(e.IdProduto));
-            }
-
-            // Associe manualmente Produto em entradas e saidas
-            foreach (var n in entradas)
-            {
-                foreach (var i in n.Itens)
-                {
-                    if (!string.IsNullOrEmpty(i.IdProduto))
-                        i.Produto = produtos.FirstOrDefault(p => p.Id == Guid.Parse(i.IdProduto));
-                }
-            }
-            foreach (var n in saidas)
-            {
-                foreach (var i in n.Itens)
-                {
-                    if (!string.IsNullOrEmpty(i.IdProduto))
-                        i.Produto = produtos.FirstOrDefault(p => p.Id == Guid.Parse(i.IdProduto));
-                }
-            }
-
             var produtosEstoque = estoques.Select(e => new EstoqueProdutoViewModel
             {
-                Nome = e.Produto?.Nome,
+                Nome = e.Produto?.Nome ?? "Desconhecido",
                 EstoqueAtual = e.EstoqueAtual,
                 EstoqueMinima = e.EstoqueMinima,
                 EstoqueMaxima = e.EstoqueMaxima
@@ -74,7 +38,7 @@ namespace SmartProd.Controllers
                 .GroupBy(i => i.Produto?.Nome)
                 .Select(g => new EntradaProdutoViewModel
                 {
-                    Nome = g.Key,
+                    Nome = g.Key ?? "Desconhecido",
                     TotalEntrada = g.Sum(x => x.Quantidade)
                 }).ToList();
 
@@ -83,7 +47,7 @@ namespace SmartProd.Controllers
                 .GroupBy(i => i.Produto?.Nome)
                 .Select(g => new SaidaProdutoViewModel
                 {
-                    Nome = g.Key,
+                    Nome = g.Key ?? "Desconhecido",
                     TotalSaida = g.Sum(x => x.Quantidade)
                 }).ToList();
 
