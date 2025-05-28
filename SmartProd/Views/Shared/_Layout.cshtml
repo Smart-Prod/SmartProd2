@@ -4,10 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - SmartProd</title>
+    <link rel="icon" type="image/x-icon" href="~/smartprodcls.ico" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SmartProd.styles.css" asp-append-version="true" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 </head>
 <body>
@@ -28,35 +30,19 @@
                                     <a class="nav-link" asp-controller="Dashboard" asp-action="Index">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                            <a class="nav-link" asp-area="" asp-controller="Produtos" asp-action="Index">Produto</a>
+                                    <a class="nav-link" asp-area="" asp-controller="Produtos" asp-action="Index">Produto</a>
+                                </li>                                
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Estoque" asp-action="Index">Estoque</a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Estoque
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a class="nav-link" asp-area="" asp-controller="Estoque" asp-action="Index">Estoque</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" asp-area="" asp-controller="Estoque" asp-action="RegistrarNotaEntrega">Entrada</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" asp-area="" asp-controller="Estoque" asp-action="RegistrarNotaSaida">Saída</a>
-                                        </li>
-                                    </ul>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Estoque" asp-action="RegistrarNotaEntrega">Entrada</a>
                                 </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                       Relatório
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        
-                                        <li class="nav-item">
-                                            <a class="nav-link" asp-area="" asp-controller="Relatorio" asp-action="Movimentacoes">Movimentação</a>
-                                        </li>
-                                        
-                                    </ul>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Estoque" asp-action="RegistrarNotaSaida">Saída</a>
+                                </li>                             
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Relatorio" asp-action="Movimentacoes">Movimentação</a>
                                 </li>
                             }
                         }
@@ -66,8 +52,7 @@
                             if (User?.Identity?.IsAuthenticated ?? false)
                             {
                                 <li class="nav-item dropdown">
-                                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="..." class="rounded-circle" alt="...">
+                                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">                                    
                                     Olá @User.Identity.Name
                                   </a>
                                     <ul class="dropdown-menu">
