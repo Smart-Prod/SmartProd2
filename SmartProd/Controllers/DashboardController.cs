@@ -27,7 +27,7 @@ namespace SmartProd.Controllers
 
             var produtosEstoque = estoques.Select(e => new EstoqueProdutoViewModel
             {
-                Nome = e.Produto?.Nome ?? "Desconhecido",
+                Nome = e.Produto?.Nome,
                 EstoqueAtual = e.EstoqueAtual,
                 EstoqueMinima = e.EstoqueMinima,
                 EstoqueMaxima = e.EstoqueMaxima
@@ -38,7 +38,7 @@ namespace SmartProd.Controllers
                 .GroupBy(i => i.Produto?.Nome)
                 .Select(g => new EntradaProdutoViewModel
                 {
-                    Nome = g.Key ?? "Desconhecido",
+                    Nome = g.Key,
                     TotalEntrada = g.Sum(x => x.Quantidade)
                 }).ToList();
 
@@ -47,7 +47,7 @@ namespace SmartProd.Controllers
                 .GroupBy(i => i.Produto?.Nome)
                 .Select(g => new SaidaProdutoViewModel
                 {
-                    Nome = g.Key ?? "Desconhecido",
+                    Nome = g.Key,
                     TotalSaida = g.Sum(x => x.Quantidade)
                 }).ToList();
 

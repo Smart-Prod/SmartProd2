@@ -74,19 +74,8 @@ namespace SmartProd.Controllers
                 var filtro = Builders<Estoque>.Filter.Eq(e => e.IdProduto, item.IdProduto);
                 var estoque = await _context.Estoque.Find(filtro).FirstOrDefaultAsync();
 
-                // Buscar o EstoqueMaxima do produto, assumindo que existe essa propriedade no Produto
-                var produto = await _context.Produto.Find(p => p.Id.ToString() == item.IdProduto).FirstOrDefaultAsync();
-                int estoqueMaximo = produto?.EstoqueMaxima ?? int.MaxValue; // int.MaxValue caso não encontre
-
                 if (estoque == null)
                 {
-                    if (item.Quantidade > estoqueMaximo)
-                    {
-                        ModelState.AddModelError("", $"Não é possível adicionar o produto {produto?.Nome ?? item.IdProduto}: quantidade inicial maior que o estoque máximo permitido ({estoqueMaximo}).");
-                        // Você pode optar por retornar a View aqui ou juntar tudo e exibir no final
-                        return View(); // Ou RedirectToAction com erro
-                    }
-
                     estoque = new Estoque
                     {
                         IdProduto = item.IdProduto,
@@ -100,13 +89,6 @@ namespace SmartProd.Controllers
                 }
                 else
                 {
-                    int novoEstoque = estoque.EstoqueAtual + item.Quantidade;
-                    if (novoEstoque > estoqueMaximo)
-                    {
-                        ModelState.AddModelError("", $"Não é possível adicionar o produto {produto?.Nome ?? item.IdProduto}: estoque ultrapassa o máximo permitido ({estoqueMaximo}).");
-                        return View(); // Ou RedirectToAction com erro
-                    }
-
                     var update = Builders<Estoque>.Update
                         .Inc(e => e.EstoqueAtual, item.Quantidade)
                         .Set(e => e.DataUltimaAtualizacao, DateTime.UtcNow);

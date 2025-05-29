@@ -15,49 +15,34 @@
         Excluir Selecionados
     </button>
 
-<div class="accordion accordion-flush" id="accordionFlushExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-        @foreach (var categoriaGrupo in produtosPorCategoria)
-        {
-            <h2>@categoriaGrupo.Key</h2>
-      </button>
-    </h2>
-    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-      <div class="accordion-body">           
-            <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
-                @foreach (var item in categoriaGrupo)
-                {
-                    <div class="col">
-                        <div class="card h-100">
-                            @if (!string.IsNullOrEmpty(item.Imagem))
-                            {
-                                <img src="@("/" + item.Imagem)" alt="@item.Nome" class="img-fluid" style="width:90px;height:90px;" />
-                            }
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none">@item.Nome</a>
-                                </h5>
-                                <p class="card-text">Categoria: @item.Categoria</p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="form-check">
-                                    <input class="form-check-input delete-checkbox" type="checkbox" name="selectedIds" value="@item.Id" id="check_@item.Id">
-                                    <label class="form-check-label" for="check_@item.Id">Selecionar</label>
-                                </div>
+    @foreach (var categoriaGrupo in produtosPorCategoria)
+    {
+        <h2>@categoriaGrupo.Key</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+            @foreach (var item in categoriaGrupo)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        @if (!string.IsNullOrEmpty(item.Imagem))
+                        {
+                            <img src="@("/" + item.Imagem)" alt="@item.Nome" class="img-fluid" style="width:90px;height:90px;" />
+                            //<img src="@item.Imagem" class="card-img-top" alt="@item.Nome" />
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title"><a asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none">@item.Nome</a></h5>
+                            <p class="card-text">Categoria: @item.Categoria</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="form-check">
+                                <input class="form-check-input delete-checkbox" type="checkbox" name="selectedIds" value="@item.Id" id="check_@item.Id">
+                                <label class="form-check-label" for="check_@item.Id">Selecionar</label>
                             </div>
                         </div>
                     </div>
-                }
-            </div>
-        }
-
-      </div>
-    </div>
-  </div>
-</div>
-
+                </div>
+            }
+        </div>
+    }
 </form>
 
 
