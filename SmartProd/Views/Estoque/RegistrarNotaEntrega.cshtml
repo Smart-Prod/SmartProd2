@@ -26,12 +26,14 @@
                     <tr>
                         <th>Produto</th>
                         <th>Quantidade</th>
+                        <th>Custo Unitário</th>
+                        <th>Valor Total</th>
                     </tr>
                 </thead>
                 <tbody id="itens-entrada">
                     <tr>
                         <td>
-                            <select name="Itens[0].IdProduto" class="form-control">
+                            <select name="Itens[0].IdProduto" class="form-control" style="width: 160px;">
                                 <option value="">-- Selecione --</option>
                                 @foreach (var produto in ViewBag.Produtos)
                                 {
@@ -39,8 +41,19 @@
                                 }
                             </select>
                         </td>
-                        <td><input name="Itens[0].Quantidade" type="number" class="form-control" /></td>
-                        <td><input name="Itens[0].Preco" type="number" class="form-control" /></td>
+                        <td>
+                            <input name="Itens[0].Quantidade" type="number" class="form-control" style="width: 160px;" />
+                        </td>
+                        <td>
+                            <input name="Itens[0].CustoUnitario" type="number" class="form-control" min="0" step="0.01" style="width: 160px;" onchange="atualizarValorTotal(this)" />
+                        </td>
+                        <td>
+                            <input name="Itens[0].ValorTotal" type="number" class="form-control" readonly style="width: 160px;" />
+                        </td>
+                        <td>
+                            <!-- Só mostrar o botão se houver mais de um item na lista (JS) -->
+                            <button type="button" class="btn btn-danger btn-remover-item" onclick="removerItemEntrada(this)" style="display: none;">Remover</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -61,6 +74,33 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 <script>
+        function validarQuantidade(input) {
+        const row = input.closest('tr');
+        const select = row.querySelector('select');
+        const selectedOption = select.options[select.selectedIndex];
+        const estoqueMaximo = parseInt(selectedOption.getAttribute('data-estoque-maximo')) || Infinity;
+        const quantidade = parseInt(input.value) || 0;
+        if (quantidade > estoqueMaximo) {
+            alert(`A quantidade não pode ser maior que o estoque máximo (${estoqueMaximo}).`);
+            input.value = estoqueMaximo;
+        }
+        atualizarValorTotal(row.querySelector('input[name$=".CustoUnitario"]'));
+    }
+
+    function atualizarValorTotal(input) {
+        const row = input.closest('tr');
+        const quantidade = parseFloat(row.querySelector('input[name$=".Quantidade"]').value) || 0;
+        const custo = parseFloat(row.querySelector('input[name$=".CustoUnitario"]').value) || 0;
+        const valorTotal = row.querySelector('input[name$=".ValorTotal"]');
+        valorTotal.value = (quantidade * custo).toFixed(2);
+    }
+
+    // Atualizar estoque máximo ao trocar produto
+    function atualizarEstoqueMaximo(select) {
+        const row = select.closest('tr');
+        const quantidadeInput = row.querySelector('input[name$=".Quantidade"]');
+        validarQuantidade(quantidadeInput);
+    }
     // Gera o HTML das opções dos produtos com segurança de encoding
     const produtosHtml = `@Html.Raw(
         string.Join("",
@@ -73,16 +113,60 @@
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>
-                <select name="Itens[${indexEntrada}].IdProduto" class="form-control" required>
+                <select name="Itens[${indexEntrada}].IdProduto" class="form-control" required style="width: 160px;">
                     <option value="">-- Selecione --</option>
                     ${produtosHtml}
                 </select>
             </td>
             <td>
-                <input name="Itens[${indexEntrada}].Quantidade" type="number" class="form-control" required min="1" />
+                <input name="Itens[${indexEntrada}].Quantidade" type="number" class="form-control" required min="1" style="width: 160px;"/>
+            </td>
+            <td>
+                <input name="Itens[${indexEntrada}].CustoUnitario" type="number" class="form-control" min="0" step="0.01" style="width: 160px;" onchange="atualizarValorTotal(this)" />
+            </td>
+            <td>
+                <input name="Itens[${indexEntrada}].ValorTotal" type="number" class="form-control" readonly style="width: 160px;"/>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger btn-remover-item" onclick="removerItemEntrada(this)">Remover</button>
             </td>
         `;
         tbody.appendChild(row);
         indexEntrada++;
+        atualizarVisibilidadeRemover();
     }
+    function removerItemEntrada(btn) {
+        const row = btn.closest('tr');
+        row.remove();
+        atualizarNomesItens();
+        atualizarVisibilidadeRemover();
+    }
+
+    // Atualiza os índices dos campos para manter o model binding correto após remover/adicionar itens
+    function atualizarNomesItens() {
+        const rows = document.querySelectorAll('#itens-entrada tr');
+        rows.forEach((row, idx) => {
+            const select = row.querySelector('select');
+            const input = row.querySelector('input[type="number"]');
+            if (select) select.name = `Itens[${idx}].IdProduto`;
+            if (input) input.name = `Itens[${idx}].Quantidade`;
+        });
+        indexEntrada = rows.length;
+    }
+
+    // Mostrar ou esconder o botão "Remover" conforme apropriado
+    function atualizarVisibilidadeRemover() {
+        const rows = document.querySelectorAll('#itens-entrada tr');
+        rows.forEach(row => {
+            const removerBtn = row.querySelector('.btn-remover-item');
+            if (removerBtn) {
+                removerBtn.style.display = (rows.length > 1) ? '' : 'none';
+            }
+        });
+    }
+
+    // Garante que o botão remover apareça corretamente ao carregar a página
+    document.addEventListener('DOMContentLoaded', () => {
+        atualizarVisibilidadeRemover();
+    });
 </script>

@@ -9,5 +9,9 @@
         public string? Imagem { get; set; }
         public string? IdUsuario { get; set; }
         public Empresa? Usuario { get; set; }
+
+        // Adicione estas propriedades:
+        public int EstoqueMinimo { get; set; }
+        public int EstoqueMaximo { get; set; }
     }
 }

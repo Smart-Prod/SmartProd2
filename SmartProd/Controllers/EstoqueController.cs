@@ -26,18 +26,15 @@ namespace SmartProd.Controllers
                 .Find(e => e.IdUsuario == userId)
                 .ToListAsync();
 
-            // Buscar todos os Ids de produtos únicos
             var produtoIds = estoques
                 .Where(e => !string.IsNullOrEmpty(e.IdProduto))
-                .Select(e => Guid.Parse(e.IdProduto))
+                .Select(e => Guid.Parse(e.IdProduto!))
                 .ToList();
 
-            // Buscar todos os produtos correspondentes
             var produtos = await _context.Produto
                 .Find(p => produtoIds.Contains(p.Id))
                 .ToListAsync();
 
-            // Associar produtos aos estoques
             foreach (var estoque in estoques)
             {
                 if (!string.IsNullOrEmpty(estoque.IdProduto))
@@ -47,8 +44,9 @@ namespace SmartProd.Controllers
                 }
             }
 
+            // Produtos críticos agora usam Produto.EstoqueMinimo
             var produtosCriticos = estoques
-                .Where(e => e.EstoqueAtual < e.EstoqueMinima)
+                .Where(e => e.Produto != null && e.EstoqueAtual < e.Produto.EstoqueMinimo)
                 .ToList();
 
             ViewBag.ProdutosCriticos = produtosCriticos;

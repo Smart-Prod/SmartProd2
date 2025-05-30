@@ -11,9 +11,9 @@
     {
         public string? Nome { get; set; }
         public int EstoqueAtual { get; set; }
-        public int EstoqueMinima { get; set; }
-        public int EstoqueMaxima { get; set; }
-        public bool EstoqueBaixo => EstoqueAtual < EstoqueMinima;
+        public int EstoqueMinimo { get; set; }
+        public int EstoqueMaximo { get; set; }
+        public bool EstoqueBaixo => EstoqueAtual < EstoqueMinimo;
     }
 
     public class EntradaProdutoViewModel
