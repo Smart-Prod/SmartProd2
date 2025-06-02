@@ -1,10 +1,10 @@
-﻿@model dynamic
+﻿@model List<NotaEntrega>
 @{
-    ViewData["Title"] = "Movimentações de Estoque";
-    var entradas = Model.Entradas as List<NotaEntrega>;
-    var saidas = Model.Saidas as List<NotaSaida>;
+    ViewData["Title"] = "Relatório de Custo de Estoque";
+    decimal totalCusto = ViewBag.TotalCusto ?? 0;
 }
-<h2>Entradas</h2>
+<h2>Relatório de Custo de Estoque</h2>
+<p><strong>Total de Custo no Período:</strong> @totalCusto.ToString("C")</p>
 <table class="table">
     <thead>
         <tr>
@@ -15,7 +15,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var nota in entradas)
+        @foreach (var nota in Model)
         {
             <tr>
                 <td>@nota.NumeroNota</td>
@@ -25,7 +25,9 @@
                     <ul>
                         @foreach (var item in nota.Itens)
                         {
-                            <li>@item.Produto?.Nome - @item.Quantidade un.</li>
+                            <li>
+                                @item.Produto?.Nome - @item.Quantidade un. - @item.CustoUnitario.ToString("C") un. - @item.ValorTotal.ToString("C") total
+                            </li>
                         }
                     </ul>
                 </td>

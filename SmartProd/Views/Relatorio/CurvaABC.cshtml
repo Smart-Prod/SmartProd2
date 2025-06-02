@@ -1,0 +1,24 @@
+﻿@model IEnumerable<dynamic>
+@{
+    ViewData["Title"] = "Curva ABC";
+}
+<h2>Curva ABC</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Valor Movimentado</th>
+            <th>Categoria</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Produto?.Nome</td>
+                <td>@item.Valor.ToString("C")</td>
+                <td>@item.Categoria</td>
+            </tr>
+        }
+    </tbody>
+</table>

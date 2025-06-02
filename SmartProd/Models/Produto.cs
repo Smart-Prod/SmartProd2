@@ -13,5 +13,6 @@
         // Adicione estas propriedades:
         public int EstoqueMinimo { get; set; }
         public int EstoqueMaximo { get; set; }
+        public int EstoqueAtual { get; set; }
     }
 }

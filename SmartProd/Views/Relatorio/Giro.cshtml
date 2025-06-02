@@ -1,0 +1,22 @@
+﻿@model IEnumerable<dynamic>
+@{
+    ViewData["Title"] = "Giro de Estoque";
+}
+<h2>Giro de Estoque</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Giro</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Produto.Nome</td>
+                <td>@item.Giro.ToString("N2")</td>
+            </tr>
+        }
+    </tbody>
+</table>

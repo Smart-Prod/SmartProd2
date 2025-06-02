@@ -27,12 +27,7 @@
                 <label asp-for="Preco" class="control-label"></label>
                 <input asp-for="Preco" class="form-control" />
                 <span asp-validation-for="Preco" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Imagem" class="control-label fw-bold fs-5"></label>
-                <input asp-for="Imagem" class="form-control" type="file" onchange="previewImage(event)" />
-                <span asp-validation-for="Imagem" class="text-danger"></span>
-            </div>
+            </div>            
             <div class="form-group">
                 <label asp-for="EstoqueMaximo" class="control-label"></label>
                 <input asp-for="EstoqueMaximo" class="form-control" />
@@ -50,6 +45,11 @@
                     <img id="imagePreview" src="@("/" + Model.Imagem)" alt="Imagem Preview" />
                 </div>
 
+            </div>
+            <div class="form-group">
+                <label asp-for="Imagem" class="control-label fw-bold fs-5"></label>
+                <input asp-for="Imagem" class="form-control" type="file" onchange="previewImage(event)" />
+                <span asp-validation-for="Imagem" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

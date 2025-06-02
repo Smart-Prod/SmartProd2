@@ -1,0 +1,29 @@
+﻿@model SmartProd.Models.NotaEntrega
+
+<div>
+    <h4>Nota: @Model.NumeroNota</h4>
+    <p><b>Data:</b> @Model.DataEntrega.ToString("dd/MM/yyyy")</p>
+    <p><b>Fornecedor:</b> @Model.Fornecedor</p>
+    <h5>Itens</h5>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Custo Unitário</th>
+                <th>Valor Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Itens)
+            {
+                <tr>
+                    <td>@item.Produto?.Nome</td>
+                    <td>@item.Quantidade</td>
+                    <td>@item.CustoUnitario.ToString("C")</td>
+                    <td>@item.ValorTotal.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

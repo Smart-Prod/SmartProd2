@@ -1,0 +1,90 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Resumo de Estoque";
+    var saldo = Model.Saldo as List<EstoqueProdutoViewModel>;
+    var inventario = Model.Inventario as IEnumerable<dynamic>;
+    var minimos = Model.Minimos as List<Produto>;
+    var maximos = Model.Maximos as List<Produto>;
+}
+
+<h1>Resumo de Estoque</h1>
+
+<h2>Saldo de Estoque</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Estoque Atual</th>
+            <th>Estoque Mínimo</th>
+            <th>Estoque Máximo</th>
+            <th>Estoque Baixo?</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in saldo)
+        {
+            <tr class="@(item.EstoqueBaixo ? "table-danger" : "")">
+                <td>@item.Nome</td>
+                <td>@item.EstoqueAtual</td>
+                <td>@item.EstoqueMinimo</td>
+                <td>@item.EstoqueMaximo</td>
+                <td>@(item.EstoqueBaixo ? "Sim" : "Não")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Inventário</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Produto</th>
+            <th>Categoria</th>
+            <th>Estoque Atual</th>
+            <th>Localização</th>
+            <th>Última Atualização</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in inventario)
+        {
+            <tr>
+                <td>@item.Produto?.Nome</td>
+                <td>@item.Produto?.Categoria</td>
+                <td>@item.EstoqueAtual</td>
+                <td>@item.Localizacao</td>
+                <td>@item.DataUltimaAtualizacao.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Produtos abaixo do Estoque Mínimo</h2>
+@if (minimos != null && minimos.Count > 0)
+{
+    <ul>
+        @foreach (var p in minimos)
+        {
+            <li>@p.Nome (@p.EstoqueMinimo) - Estoque mínimo: @p.EstoqueMinimo</li>
+        }
+    </ul>
+}
+else
+{
+    <div class="alert alert-success">Nenhum produto abaixo do estoque mínimo.</div>
+}
+
+<h2>Produtos acima do Estoque Máximo</h2>
+@if (maximos != null && maximos.Count > 0)
+{
+    <ul>
+        @foreach (var p in maximos)
+        {
+            <li>@p.Nome (@p.EstoqueMaximo) - Estoque máximo: @p.EstoqueMaximo</li>
+        }
+    </ul>
+}
+else
+{
+    <div class="alert alert-success">Nenhum produto acima do estoque máximo.</div>
+}

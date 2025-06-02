@@ -79,14 +79,22 @@ namespace SmartProd.Controllers
             }).ToList();
 
             var entradasPorProduto = entradas
-       .SelectMany(n => n.Itens)
-       .Where(i => i.Produto != null)
-       .GroupBy(i => i.Produto!.Nome)
-       .Select(g => new EntradaProdutoViewModel
-       {
-           Nome = g.Key,
-           TotalEntrada = g.Sum(x => x.Quantidade)
-       }).ToList();
+               .SelectMany(n => n.Itens)
+               .Where(i => i.Produto != null)
+               .GroupBy(i => i.Produto!.Nome)
+               .Select(g => new EntradaProdutoViewModel
+               {
+                   Nome = g.Key,
+                   TotalEntrada = g.Sum(x => x.Quantidade)
+               }).ToList();
+            var entradasPorNota = entradas
+                .Select(n => new EntradaNotaViewModel
+                {
+                    NotaId = n.Id.GetHashCode(), // Convert Guid to int using GetHashCode
+                    NumeroNota = n.NumeroNota,
+                    DataNota = n.DataEntrega, // Corrected property name to match NotaEntrega
+                    TotalEntrada = n.Itens.Sum(x => x.Quantidade)
+                }).ToList();
 
             var saidasPorProduto = saidas
                 .SelectMany(n => n.Itens)
@@ -102,10 +110,29 @@ namespace SmartProd.Controllers
             {
                 ProdutosEstoque = produtosEstoque,
                 EntradasPorProduto = entradasPorProduto,
-                SaidasPorProduto = saidasPorProduto
+                SaidasPorProduto = saidasPorProduto,
+                EntradasPorNota = entradasPorNota
             };
 
             return View(viewModel);
+        }
+
+        // Para Nota de Entrada
+        public IActionResult DetalhesNotaEntrada(Guid id)
+        {
+            var nota = _context.NotaEntrega.Find(n => n.Id == id);
+            if (nota == null)
+                return Content("Nota de entrada não encontrada.");
+            return PartialView("_DetalhesNotaEntrada", nota);
+        }
+
+        // Para Nota de Saída
+        public IActionResult DetalhesNotaSaida(Guid id)
+        {
+            var nota = _context.NotaSaida.Find(n => n.Id == id);
+            if (nota == null)
+                return Content("Nota de saída não encontrada.");
+            return PartialView("_DetalhesNotaSaida", nota);
         }
     }
 }
