@@ -4,48 +4,42 @@
     ViewData["Title"] = "Cadastro";
 }
 
-<h2>Cadastro</h2>
+<body>
 
-<form asp-action="Cadastrar" method="post" id="formEmpresa">
-    <div class="form-group">
-        <label asp-for="Cnpj"></label>
-        <input asp-for="Cnpj" class="form-control" id="Cnpj" />
-        <span asp-validation-for="Cnpj" class="text-danger"></span>
-        <button type="button" onclick="buscarCnpj()" class="btn btn-sm btn-primary mt-2">Buscar CNPJ</button>
+    <div class="container">
+        <div class="login-box">
+            <img src="logo.png" alt="SmartProd Logo" class="logo">
+
+            <form action="/Login/Entrar" method="post">
+                <div class="input-group">
+                    <label for="usuario">Usuário</label>
+                    <input type="text" id="usuario" name="usuario" placeholder="Usuário" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Senha" required>
+                </div>
+
+                <a href="#" class="link">Esqueci minha senha</a>
+
+                <button type="submit" class="btn">Entrar</button>
+
+                <p class="versao">Versão 1.0.0</p>
+            </form>
+        </div>
+
+        <div class="banner">
+            <h1>&lt;SmartProd&gt;</h1>
+            <p>Sua gestão inteligente de produção</p>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label asp-for="RazaoSocial"></label>
-        <input asp-for="RazaoSocial" class="form-control" id="RazaoSocial" />
-        <span asp-validation-for="RazaoSocial" class="text-danger"></span>
-    </div>
+</body>
 
-    <div class="form-group">
-        <label asp-for="NomeFantasia"></label>
-        <input asp-for="NomeFantasia" class="form-control" id="NomeFantasia" />
-        <span asp-validation-for="NomeFantasia" class="text-danger"></span>
-    </div>
 
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" id="Email" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
 
-    <div class="form-group">
-        <label asp-for="Telefone"></label>
-        <input asp-for="Telefone" class="form-control" id="Telefone" />
-        <span asp-validation-for="Telefone" class="text-danger"></span>
-    </div>
 
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" type="password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-
-    <button type="submit" class="btn btn-success">Cadastrar</button>
-</form>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
