@@ -4,6 +4,15 @@
     var produtosCriticos = ViewBag.ProdutosCriticos as List<Estoque>;
 }
 
+<!-- Botões para abrir os modais -->
+<div class="mb-3">
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalNotaEntrega">
+        Registrar Nota de Entrega
+    </button>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalNotaSaida">
+        Registrar Nota de Saída
+    </button>
+</div>
 <h2>Estoque</h2>
 
 <table class="table table-bordered">
@@ -34,6 +43,37 @@
         }
     </tbody>
 </table>
+<!-- Modal Nota de Entrega -->
+<div class="modal fade" id="modalNotaEntrega" tabindex="-1" aria-labelledby="modalNotaEntregaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalNotaEntregaLabel">Registrar Nota de Entrega</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Partial View: RegistrarNotaEntrega -->
+                @await Html.PartialAsync("_RegistrarNotaEntregaPartial", new SmartProd.Models.NotaEntrega { Itens = new List<SmartProd.Models.ItemNotaEntrega>() })
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Nota de Saída -->
+<div class="modal fade" id="modalNotaSaida" tabindex="-1" aria-labelledby="modalNotaSaidaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalNotaSaidaLabel">Registrar Nota de Saída</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Partial View: RegistrarNotaSaida -->
+                @await Html.PartialAsync("_RegistrarNotaSaidaPartial", new SmartProd.Models.NotaSaida { Itens = new List<SmartProd.Models.ItemNotaSaida>() })
+            </div>
+        </div>
+    </div>
+</div>
 
 @if (produtosCriticos != null && produtosCriticos.Any())
 {

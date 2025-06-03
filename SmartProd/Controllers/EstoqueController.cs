@@ -50,6 +50,7 @@ namespace SmartProd.Controllers
                 .ToList();
 
             ViewBag.ProdutosCriticos = produtosCriticos;
+            ViewBag.Produtos = await _context.Produto.Find(p => p.IdUsuario == userId).ToListAsync();
             return View(estoques);
         }
         public async Task<IActionResult> RegistrarNotaEntrega()

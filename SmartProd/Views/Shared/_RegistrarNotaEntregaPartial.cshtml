@@ -1,78 +1,57 @@
 ﻿@model SmartProd.Models.NotaEntrega
 
-@{
-    ViewData["Title"] = "RegistrarNotaEntrega";
-}
-
-<h1>RegistrarNotaEntrega</h1>
-
-<h4>NotaEntrega</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="RegistrarNotaEntrega" method="post">
-            <div>
-                <label>Número da Nota:</label>
-                <input asp-for="NumeroNota" class="form-control" />
-            </div>
-            <div>
-                <label>Fornecedor:</label>
-                <input asp-for="Fornecedor" class="form-control" />
-            </div>
-
-            <h4>Itens da Entrega</h4>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Quantidade</th>
-                        <th>Custo Unitário</th>
-                        <th>Valor Total</th>
-                    </tr>
-                </thead>
-                <tbody id="itens-entrada">
-                    <tr>
-                        <td>
-                            <select name="Itens[0].IdProduto" class="form-control" style="width: 160px;">
-                                <option value="">-- Selecione --</option>
-                                @foreach (var produto in ViewBag.Produtos)
-                                {
-                                    <option value="@produto.Id">@produto.Nome</option>
-                                }
-                            </select>
-                        </td>
-                        <td>
-                            <input name="Itens[0].Quantidade" type="number" class="form-control" style="width: 160px;" />
-                        </td>
-                        <td>
-                            <input name="Itens[0].CustoUnitario" type="number" class="form-control" min="0" step="0.01" style="width: 160px;" onchange="atualizarValorTotal(this)" />
-                        </td>
-                        <td>
-                            <input name="Itens[0].ValorTotal" type="number" class="form-control" readonly style="width: 160px;" />
-                        </td>
-                        <td>
-                            <!-- Só mostrar o botão se houver mais de um item na lista (JS) -->
-                            <button type="button" class="btn btn-danger btn-remover-item" onclick="removerItemEntrada(this)" style="display: none;">Remover</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <button type="button" onclick="adicionarItemEntrada()">Adicionar Item</button>
-
-            <br /><br />
-            <button type="submit" class="btn btn-success">Salvar Nota de Entrega</button>
-        </form>
-
+<form asp-action="RegistrarNotaEntrega" method="post" id="formNotaEntrega">
+    <div>
+        <label>Número da Nota:</label>
+        <input asp-for="NumeroNota" class="form-control" />
     </div>
-</div>
+    <div>
+        <label>Fornecedor:</label>
+        <input asp-for="Fornecedor" class="form-control" />
+    </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    <h4>Itens da Entrega</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Custo Unitário</th>
+                <th>Valor Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="itens-entrada">
+            <tr>
+                <td>
+                    <select name="Itens[0].IdProduto" class="form-control" style="width: 160px;">
+                        <option value="">-- Selecione --</option>
+                        @foreach (var produto in ViewBag.Produtos)
+                        {
+                            <option value="@produto.Id">@produto.Nome</option>
+                        }
+                    </select>
+                </td>
+                <td>
+                    <input name="Itens[0].Quantidade" type="number" class="form-control" style="width: 160px;" />
+                </td>
+                <td>
+                    <input name="Itens[0].CustoUnitario" type="number" class="form-control" min="0" step="0.01" style="width: 160px;" onchange="atualizarValorTotal(this)" />
+                </td>
+                <td>
+                    <input name="Itens[0].ValorTotal" type="number" class="form-control" readonly style="width: 160px;" />
+                </td>
+                <td>
+                    <!-- Só mostrar o botão se houver mais de um item na lista (JS) -->
+                    <button type="button" class="btn btn-danger btn-remover-item" onclick="removerItemEntrada(this)" style="display: none;">Remover</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" onclick="adicionarItemEntrada()">Adicionar Item</button>
+    <br /><br />
+    <button type="submit" class="btn btn-success">Salvar Nota de Entrega</button>
+</form>
 <script>
         function validarQuantidade(input) {
         const row = input.closest('tr');
