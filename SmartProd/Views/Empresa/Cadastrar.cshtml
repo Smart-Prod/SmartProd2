@@ -4,61 +4,63 @@
     ViewData["Title"] = "Cadastro";
 }
 
-<div class="singup">
-    <div class="singup-logo">
+<div class="cadastro-container">
+    <div class="cadastro-logo">
         <img src="/Logo.png" alt="SmartProd" />
-        <p class="text-center text-muted mt-3">
-            Já possui uma conta?
-            <a asp-controller="Account" asp-action="Login">Entrar</a>
-        </p>
     </div>
-    <div class="singup-forme">
-        <div class="text-center mb-4">            
-            <h1 class="h3">Cadastro de Empresa</h1>            
+
+    <div>
+        <div class="cadastro-header">
+            <h1>Cadastro de Empresa</h1>
         </div>
+
         <form asp-action="Cadastrar" method="post" id="formEmpresa">
-            <div class="form-group">
+            <div class="cadastro-form-group">
                 <label asp-for="Cnpj"></label>
-                <input asp-for="Cnpj" class="form-control" id="Cnpj" />
-                <span asp-validation-for="Cnpj" class="text-danger"></span>
-                <button type="button" onclick="buscarCnpj()" class="btn btn-sm btn-primary mt-2">Buscar CNPJ</button>
+                <input asp-for="Cnpj" id="Cnpj" />
+                <span asp-validation-for="Cnpj"></span>
+                <button type="button" onclick="buscarCnpj()" class="cadastro-buscar-btn">Buscar CNPJ</button>
             </div>
 
-            <div class="form-group">
+            <div class="cadastro-form-group">
                 <label asp-for="RazaoSocial"></label>
-                <input asp-for="RazaoSocial" class="form-control" id="RazaoSocial" />
-                <span asp-validation-for="RazaoSocial" class="text-danger"></span>
+                <input asp-for="RazaoSocial" id="RazaoSocial" />
+                <span asp-validation-for="RazaoSocial"></span>
             </div>
 
-            <div class="form-group">
+            <div class="cadastro-form-group">
                 <label asp-for="NomeFantasia"></label>
-                <input asp-for="NomeFantasia" class="form-control" id="NomeFantasia" />
+                <input asp-for="NomeFantasia" id="NomeFantasia" />
                 <span asp-validation-for="NomeFantasia" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            <div class="cadastro-form-group">
                 <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" id="Email" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="Email" id="Email" />
+                <span asp-validation-for="Email"></span>
             </div>
 
-            <div class="form-group">
+            <div class="cadastro-form-group">
                 <label asp-for="Telefone"></label>
-                <input asp-for="Telefone" class="form-control" id="Telefone" />
-                <span asp-validation-for="Telefone" class="text-danger"></span>
+                <input asp-for="Telefone" id="Telefone" />
+                <span asp-validation-for="Telefone"></span>
             </div>
 
-            <div class="form-group">
+            <div class="cadastro-form-group">
                 <label asp-for="Password">Senha</label>
-                <input asp-for="Password" type="password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger" placeholder="Digite uma senha segura" required></span>
+                <input asp-for="Password" type="password" />
+                <span asp-validation-for="Password" placeholder="Digite uma senha segura" required></span>
             </div>
 
-            <button type="submit" class="btn btn-success">Cadastrar</button>
+            <button type="submit" class="cadastro-submit-btn">Cadastrar</button>
+
+            <p class="cadastro-link">
+                Já possui uma conta?
+                <a asp-controller="Account" asp-action="Login">Entrar</a>
+            </p>
         </form>
     </div>
 </div>
-
 
 
 

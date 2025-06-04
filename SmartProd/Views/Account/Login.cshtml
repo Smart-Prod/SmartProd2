@@ -2,7 +2,7 @@
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<section class="meu-container">
+<section class="cadastro-container2">
     <div class="form-geral">
         <h1>Login</h1>
         <div class="text-danger" asp-validation-summary="All"></div>
@@ -19,8 +19,8 @@
                 <button class="btn-meu" type="submit">Enviar</button>
             </div>
         </form>
-        <p>
-            Não tem conta? <a asp-area="" asp-controller="User" asp-action="Create">Clique aqui!</a>
+        <p class="clique">
+            Não tem conta? <a asp-area="Empresa" asp-controller="Empresa" asp-action="Cadastrar">Clique aqui!</a>
         </p>
     </div>
 </section>
