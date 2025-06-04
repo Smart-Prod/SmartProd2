@@ -4,13 +4,27 @@
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-/*body {
-    display: flex;
+body {
     height: 100vh;
-    padding: 7rem 0rem;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
 }
 
-html {
+.singup {
+    display: flex;
+    justify-content: center ;
+}
+.singup-logo{
+    justify-content:center;
+    margin-right:40px;
+    margin-top:150px;
+}
+.singup-logo img{
+    width: 150px;
+    height:70px
+}
+
+/*tml {
   position: relative;
   min-height: 100%;
 }

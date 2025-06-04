@@ -2,7 +2,51 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- Hero Section -->
+<section class="text-center py-5">
+    <h1 class="display-4 fw-bold">Bem-vindo ao <img src="/Logo.png" alt="SmartProd"  /> </h1>
+    <p class="lead">Otimize sua gestão de produtos e estoque com uma plataforma simples, moderna e eficiente.</p>
+    <a class="btn btn-primary btn-lg mt-3" asp-controller="Empresa" asp-action="Cadastrar">Comece Agora</a>
+</section>
+
+<!-- Sobre nós -->
+<section class="py-5">
+    <h2 class="mb-4">Sobre o SmartProd</h2>
+    <p>
+        O SmartProd é uma solução inteligente para pequenas e médias empresas que precisam controlar estoques, movimentar mercadorias e gerar relatórios com facilidade.
+        Criamos uma interface intuitiva para que sua equipe possa focar no que realmente importa: resultados.
+    </p>
+</section>
+
+<!-- Funcionalidades -->
+<section class="py-5">
+    <h2 class="mb-4">Funcionalidades Principais</h2>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Gestão de Produtos</h5>
+                    <p class="card-text">Cadastre e gerencie todos os produtos do seu catálogo de maneira organizada e eficiente.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Controle de Estoque</h5>
+                    <p class="card-text">Registre entradas e saídas de mercadorias com total precisão e acompanhe o saldo atualizado.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Relatórios Detalhados</h5>
+                    <p class="card-text">Gere relatórios para tomada de decisão rápida, com dados atualizados e confiáveis.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
