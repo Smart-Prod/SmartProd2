@@ -1,0 +1,66 @@
+[{
+  "_id": {
+    "$binary": {
+      "base64": "kUatVPs+QwqokkW5kNXLnw==",
+      "subType": "04"
+    }
+  },
+  "UserName": "CAMINEROINDUSTRIAECOMERCIODEOLEOSLTDA",
+  "NormalizedUserName": "CAMINEROINDUSTRIAECOMERCIODEOLEOSLTDA",
+  "Email": "comercial@cicol.com.br",
+  "NormalizedEmail": "COMERCIAL@CICOL.COM.BR",
+  "EmailConfirmed": false,
+  "PasswordHash": "AQAAAAIAAYagAAAAEHY0M2wtO8CNNAOEwaX594LMp+lVO4KxyoRU8endKW3G24qkQ0W14jd59xOolwKGdw==",
+  "SecurityStamp": "64ZMKGC7U565TWBNDET2PTG3IH4L3DXF",
+  "ConcurrencyStamp": "ef3d5f74-49da-4985-83d4-9fe7fa4860c9",
+  "PhoneNumber": "(14) 3662-9499",
+  "PhoneNumberConfirmed": false,
+  "TwoFactorEnabled": false,
+  "LockoutEnd": null,
+  "LockoutEnabled": true,
+  "AccessFailedCount": 0,
+  "Version": 1,
+  "CreatedOn": {
+    "$date": "2025-06-06T14:28:03.381Z"
+  },
+  "Claims": [],
+  "Roles": [],
+  "Logins": [],
+  "Tokens": [],
+  "RazaoSocial": "CAMINERO INDUSTRIA E COMERCIO DE OLEOS LTDA",
+  "NomeFantasia": "CAMINERO INDUSTRIA E COMERCIO DE OLEOS LTDA",
+  "Cnpj": "00.474.698/0001-87"
+},
+{
+  "_id": {
+    "$binary": {
+      "base64": "tQyHrnNRTemE7CGRaZikWw==",
+      "subType": "04"
+    }
+  },
+  "UserName": "AQUILANTESERVICOSMEDICOSLTDA",
+  "NormalizedUserName": "AQUILANTESERVICOSMEDICOSLTDA",
+  "Email": "contato@clinicaciapi.com.br",
+  "NormalizedEmail": "CONTATO@CLINICACIAPI.COM.BR",
+  "EmailConfirmed": false,
+  "PasswordHash": "AQAAAAIAAYagAAAAEKYGGniduKqzWHF1ulzSncEbRwIYAsUKKHa8ct0MIlMujEAB5W8fxeKYslXMVaZHzg==",
+  "SecurityStamp": "XEOODFIQLFBZXGNKYHZUPI2OLMJ47FOL",
+  "ConcurrencyStamp": "4c4eeb32-e4b2-4afb-b966-46f62d82945f",
+  "PhoneNumber": "(14) 3418-3973",
+  "PhoneNumberConfirmed": false,
+  "TwoFactorEnabled": false,
+  "LockoutEnd": null,
+  "LockoutEnabled": true,
+  "AccessFailedCount": 0,
+  "Version": 1,
+  "CreatedOn": {
+    "$date": "2025-06-06T15:39:44.306Z"
+  },
+  "Claims": [],
+  "Roles": [],
+  "Logins": [],
+  "Tokens": [],
+  "RazaoSocial": "AQUILANTE SERVICOS MEDICOS LTDA",
+  "NomeFantasia": "AQUILANTE SERVICOS MEDICOS LTDA",
+  "Cnpj": "38.400.764/0001-47"
+}]

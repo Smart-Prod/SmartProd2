@@ -101,8 +101,27 @@ namespace SmartProd.Controllers
         public async Task<IActionResult> RegistrarNotaSaida()
         {
             var userId = _userManager.GetUserId(User);
+
+            // Busca todos os produtos do usuário
             var produtos = await _context.Produto.Find(p => p.IdUsuario == userId).ToListAsync();
-            ViewBag.Produtos = produtos;
+
+            // Busca todos os estoques do usuário (ou de todos os produtos do usuário)
+            var estoques = await _context.Estoque.Find(e => e.IdUsuario == userId).ToListAsync();
+
+            // Monta um objeto anônimo ou ViewModel para a View com os dados necessários
+            var produtosParaView = produtos.Select(p => {
+                var estoque = estoques.FirstOrDefault(e => e.IdProduto == p.Id.ToString());
+                return new
+                {
+                    Id = p.Id,
+                    Nome = p.Nome,
+                    Preco = p.Preco,
+                    EstoqueMinimo = p.EstoqueMinimo,
+                    EstoqueAtual = estoque?.EstoqueAtual ?? 0 // <-- Vem da classe Estoque!
+                };
+            }).ToList();
+
+            ViewBag.Produtos = produtosParaView;
             return View();
         }
 

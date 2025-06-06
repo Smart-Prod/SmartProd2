@@ -83,7 +83,7 @@
     // Gera o HTML das opções dos produtos com segurança de encoding
     const produtosHtml = `@Html.Raw(
         string.Join("",
-            (ViewBag.Produtos as IEnumerable<dynamic>)
+            ((ViewBag.Produtos as IEnumerable<dynamic>) ?? Enumerable.Empty<dynamic>())
             .Select(p => $"<option value='{p.Id}'>{System.Net.WebUtility.HtmlEncode(p.Nome)}</option>")
         ))`;
     let indexEntrada = 1;

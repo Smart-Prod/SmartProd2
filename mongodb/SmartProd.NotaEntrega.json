@@ -1,0 +1,62 @@
+[{
+  "_id": {
+    "$binary": {
+      "base64": "cH+tl7BVS2G0+05jOd4sOA==",
+      "subType": "04"
+    }
+  },
+  "NumeroNota": "1",
+  "DataEntrega": {
+    "$date": "2025-06-06T14:33:25.418Z"
+  },
+  "Fornecedor": "cicol",
+  "Itens": [
+    {
+      "IdProduto": "eee22402-c853-4d90-abf7-f25bc3238cd5",
+      "Produto": null,
+      "Quantidade": 500,
+      "CustoUnitario": "200",
+      "ValorTotal": "10000000",
+      "IdUsuario": null,
+      "Usuario": null
+    },
+    {
+      "IdProduto": "03cf3d47-516a-4e20-adc2-47eee22eb671",
+      "Produto": null,
+      "Quantidade": 480,
+      "CustoUnitario": "190",
+      "ValorTotal": "9120000",
+      "IdUsuario": null,
+      "Usuario": null
+    },
+    {
+      "IdProduto": "45ad3650-ef42-49b7-8cec-fa3c6a45e622",
+      "Produto": null,
+      "Quantidade": 600,
+      "CustoUnitario": "180",
+      "ValorTotal": "10800000",
+      "IdUsuario": null,
+      "Usuario": null
+    },
+    {
+      "IdProduto": "c5df6f6f-5ba3-443f-9609-8aae7b6756a1",
+      "Produto": null,
+      "Quantidade": 700,
+      "CustoUnitario": "170",
+      "ValorTotal": "11900000",
+      "IdUsuario": null,
+      "Usuario": null
+    },
+    {
+      "IdProduto": "7574383f-8b9d-4a2d-a50b-4970a808c520",
+      "Produto": null,
+      "Quantidade": 800,
+      "CustoUnitario": "160",
+      "ValorTotal": "12800000",
+      "IdUsuario": null,
+      "Usuario": null
+    }
+  ],
+  "IdUsuario": null,
+  "Usuario": null
+}]

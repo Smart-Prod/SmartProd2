@@ -1,0 +1,85 @@
+[{
+  "_id": {
+    "$binary": {
+      "base64": "7uIkAshTTZCr9/JbwyOM1Q==",
+      "subType": "04"
+    }
+  },
+  "Nome": "Cicol HS 42 Low Trans",
+  "Categoria": "Gordura Vegetal",
+  "Preco": "32000",
+  "Imagem": "img\\Cicol_HS_42_Low_Trans.png",
+  "IdUsuario": "9146ad54-fb3e-430a-a892-45b990d5cb9f",
+  "Usuario": null,
+  "EstoqueMinimo": 200,
+  "EstoqueMaximo": 1000,
+  "EstoqueAtual": 0
+},
+{
+  "_id": {
+    "$binary": {
+      "base64": "A889R1FqTiCtwkfu4i62cQ==",
+      "subType": "04"
+    }
+  },
+  "Nome": "Óleo de Palma Palmtop",
+  "Categoria": "Gordura Vegetal",
+  "Preco": "30000",
+  "Imagem": "img\\Óleo_de_Palma_Palmtop.png",
+  "IdUsuario": "9146ad54-fb3e-430a-a892-45b990d5cb9f",
+  "Usuario": null,
+  "EstoqueMinimo": 200,
+  "EstoqueMaximo": 1000,
+  "EstoqueAtual": 0
+},
+{
+  "_id": {
+    "$binary": {
+      "base64": "Ra02UO9CSbeM7Po8akXmIg==",
+      "subType": "04"
+    }
+  },
+  "Nome": " Cicol Fry Maxxi",
+  "Categoria": "Gordura Vegetal",
+  "Preco": "29000",
+  "Imagem": "img\\cicol_fry_maxxi.png",
+  "IdUsuario": "9146ad54-fb3e-430a-a892-45b990d5cb9f",
+  "Usuario": null,
+  "EstoqueMinimo": 200,
+  "EstoqueMaximo": 1000,
+  "EstoqueAtual": 0
+},
+{
+  "_id": {
+    "$binary": {
+      "base64": "xd9vb1ujRD+WCYque2dWoQ==",
+      "subType": "04"
+    }
+  },
+  "Nome": "Cicol HS 36 Low Trans",
+  "Categoria": "Gordura Vegetal",
+  "Preco": "28000",
+  "Imagem": "img\\Cicol_HS_36_Low_Trans.png",
+  "IdUsuario": "9146ad54-fb3e-430a-a892-45b990d5cb9f",
+  "Usuario": null,
+  "EstoqueMinimo": 200,
+  "EstoqueMaximo": 1000,
+  "EstoqueAtual": 0
+},
+{
+  "_id": {
+    "$binary": {
+      "base64": "dXQ4P4udSi2lC0lwqAjFIA==",
+      "subType": "04"
+    }
+  },
+  "Nome": "Creme Cicol 80%",
+  "Categoria": "Gordura Vegetal",
+  "Preco": "27000",
+  "Imagem": "img\\Creme_Cicol_80%.png",
+  "IdUsuario": "9146ad54-fb3e-430a-a892-45b990d5cb9f",
+  "Usuario": null,
+  "EstoqueMinimo": 200,
+  "EstoqueMaximo": 1000,
+  "EstoqueAtual": 0
+}]
