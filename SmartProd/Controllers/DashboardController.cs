@@ -21,9 +21,9 @@ namespace SmartProd.Controllers
         {
             var userId = _userManager.GetUserId(User);
 
-            var estoques = await _context.Estoque.Find(_ => true).ToListAsync();
-            var entradas = await _context.NotaEntrega.Find(_ => true).ToListAsync();
-            var saidas = await _context.NotaSaida.Find(_ => true).ToListAsync();
+            var estoques = await _context.Estoque.Find(e => e.IdUsuario == userId).ToListAsync();
+            var entradas = await _context.NotaEntrega.Find(e => e.IdUsuario == userId).ToListAsync();
+            var saidas = await _context.NotaSaida.Find(e => e.IdUsuario == userId).ToListAsync();
 
             var produtoIdsEstoque = estoques.Where(e => !string.IsNullOrEmpty(e.IdProduto)).Select(e => Guid.Parse(e.IdProduto!));
             var produtoIdsEntradas = entradas.SelectMany(n => n.Itens).Where(i => !string.IsNullOrEmpty(i.IdProduto)).Select(i => Guid.Parse(i.IdProduto!));

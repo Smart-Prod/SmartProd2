@@ -1,4 +1,7 @@
 ﻿@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
 
 <h2>📊 Dashboard</h2>
 <!-- Produtos com Estoque -->
@@ -61,35 +64,40 @@
 </table>
 
 
-<!-- Saídas por Produto -->
-<h3>⬇️ Saídas por Produto</h3>
+<!-- Saídas por Produto (igual Entradas por Nota) -->
+<h3>⬇️ Saídas por Nota</h3>
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Produto</th>
+            <th>Número da Nota</th>
+            <th>Data</th>
             <th>Total de Saídas</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.SaidasPorProduto)
+        @foreach (var nota in Model.SaidasPorNota)
         {
             <tr>
-                <td>@item.Nome</td>
-                <td>@item.TotalSaida</td>
+                <td>
+                    <a href="#" class="link-nota-saida" data-notaid="@nota.NotaId">@nota.NumeroNota</a>
+                </td>
+                <td>@nota.DataNota.ToString("dd/MM/yyyy")</td>
+                <td>@nota.TotalSaida</td>
             </tr>
         }
     </tbody>
 </table>
 
+<!-- Modal de Detalhes (mesmo modal já existente) -->
 <div class="modal fade" id="modalNotaDetalhes" tabindex="-1" aria-labelledby="modalNotaLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content" id="conteudo-modal-imprimir">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalNotaLabel">Detalhes da Nota de Entrega</h5>
+                <h5 class="modal-title" id="modalNotaLabel">Detalhes da Nota</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body" id="modalNotaBody">
-                <!-- Os detalhes da nota serão carregados via AJAX -->
+                <!-- Conteúdo AJAX -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -101,12 +109,24 @@
 
 @section Scripts {
     <script>
+        // Clique para mostrar detalhes da nota de entrada (já existe)
         $(document).on('click', '.link-nota', function (e) {
             e.preventDefault();
             var notaId = $(this).data('notaid');
             $('#modalNotaBody').html('<div class="text-center"><span class="spinner-border"></span></div>');
             $('#modalNotaDetalhes').modal('show');
             $.get('@Url.Action("DetalhesNotaEntrada", "Dashboard")', { id: notaId }, function (data) {
+                $('#modalNotaBody').html(data);
+            });
+        });
+
+        // Clique para mostrar detalhes da nota de saída (novo)
+        $(document).on('click', '.link-nota-saida', function (e) {
+            e.preventDefault();
+            var notaId = $(this).data('notaid');
+            $('#modalNotaBody').html('<div class="text-center"><span class="spinner-border"></span></div>');
+            $('#modalNotaDetalhes').modal('show');
+            $.get('@Url.Action("DetalhesNotaSaida", "Dashboard")', { id: notaId }, function (data) {
                 $('#modalNotaBody').html(data);
             });
         });

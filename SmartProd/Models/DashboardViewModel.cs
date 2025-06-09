@@ -6,6 +6,7 @@
         public List<EntradaProdutoViewModel> EntradasPorProduto { get; set; } = new();
         public List<SaidaProdutoViewModel> SaidasPorProduto { get; set; } = new();
         public List<EntradaNotaViewModel> EntradasPorNota { get; set; } = new();
+        public List<SaidaPorNotaViewModel> SaidasPorNota { get; set; } = new();
     }
 
     public class EstoqueProdutoViewModel
@@ -38,5 +39,14 @@
         public string? NumeroNota { get; set; }
         public DateTime DataNota { get; set; }
         public int TotalEntrada { get; set; }
+    }
+
+    public class SaidaPorNotaViewModel
+    {
+        public int NotaId { get; set; }
+        public string? NumeroNota { get; set; }
+        public DateTime DataNota { get; set; }
+        public decimal TotalSaida { get; set; }
+        // ... outros campos se desejar
     }
 }

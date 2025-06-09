@@ -138,7 +138,7 @@
             }
         });
     }
-            function validarQuantidadeSaida(input) {
+     function validarQuantidadeSaida(input) {
         const row = input.closest('tr');
         const select = row.querySelector('select');
         const selectedOption = select.options[select.selectedIndex];
@@ -150,7 +150,8 @@
             return;
         }
 
-       
+        let quantidade = parseFloat(input.value) || 0;
+
         // Não permite valor negativo
         if (quantidade < 0) {
             input.value = 0;
@@ -162,6 +163,33 @@
     function atualizarPrecoUnitario(select) {
         const row = select.closest('tr');
         const selectedOption = select.options[select.selectedIndex];
+
+        if (!selectedOption || !selectedOption.value) {
+            // Limpa campos se nada selecionado
+            row.querySelector('input[name$=".PrecoUnitario"]').value = '';
+            row.querySelector('input[name$=".ValorTotal"]').value = '';
+            return;
+        }
+
+        const estoqueAtualAttr = selectedOption.getAttribute('data-estoque-atual');
+    const estoqueAtual = estoqueAtualAttr === null || estoqueAtualAttr === '' ? null : Number(estoqueAtualAttr);
+
+    if (estoqueAtualAttr !== null && Number(estoqueAtualAttr) <= 0) {
+        // Limpa seleção e campos
+        select.value = '';
+        row.querySelector('input[name$=".PrecoUnitario"]').value = '';
+        row.querySelector('input[name$=".Quantidade"]').value = '';
+        row.querySelector('input[name$=".ValorTotal"]').value = '';
+        // Mostra o modal
+        if (window.bootstrap && bootstrap.Modal) {
+            var modal = new bootstrap.Modal(document.getElementById('estoqueZeradoModal'));
+            modal.show();
+        } else {
+            $('#estoqueZeradoModal').modal('show');
+        }
+        return;
+    }
+
         const preco = selectedOption.getAttribute('data-preco') || 0;
         const precoInput = row.querySelector('input[name$=".PrecoUnitario"]');
         precoInput.value = parseFloat(preco).toFixed(2);
