@@ -66,6 +66,7 @@ namespace SmartProd.Controllers
             nota.Id = Guid.NewGuid();
             var userId = _userManager.GetUserId(User);
             nota.DataEntrega = DateTime.UtcNow;
+            nota.IdUsuario = userId;
             await _context.NotaEntrega.InsertOneAsync(nota);
 
             foreach (var item in nota.Itens)
@@ -132,6 +133,7 @@ namespace SmartProd.Controllers
             nota.Id = Guid.NewGuid();
             var userId = _userManager.GetUserId(User);
             nota.DataSaida = DateTime.UtcNow;
+            nota.IdUsuario = userId;
             await _context.NotaSaida.InsertOneAsync(nota);
 
             foreach (var item in nota.Itens)

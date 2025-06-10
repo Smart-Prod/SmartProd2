@@ -4,85 +4,57 @@
 }
 
 <h2>📊 Dashboard</h2>
-<!-- Produtos com Estoque -->
-<h3>📦 Produtos em Estoque</h3>
-<table class="table table-bordered">
+<div class="dashboard">
+    <div class="dashboard-box">
+		<img src="~/img/src/produto.png" alt="Produto Image" class="img-fluid" />
+        <p>Total de produtos cadastrados:</p>
+		<p> @Model.TotalProdutosCadastrados</p>
+    </div>
+    <div class="dashboard-box">
+		<img src="~/img/src/estoque.png" alt="Estoque Image" class="img-fluid" />
+        <p>Total atual em estoque:</p>
+		<p> @Model.TotalEstoque</p>
+    </div>
+	<div class="dashboard-box">
+		<img src="~/img/src/entrada.png" alt="Entrada Image" class="img-fluid" />
+        <p>Total entradas:</p>
+		<p> @Model.TotalEntradas</p>
+    </div >
+	<div class ="dashboard-box">
+		<img src="~/img/src/saida.png" alt="Saída Image" class="img-fluid" />
+        <p>Total saídas:</p>
+		<p> @Model.TotalSaidas</p>
+    </div>
+   
+</div>
+
+<h3>Movimentações por Nota</h3>
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>Produto</th>
-            <th>Estoque Atual</th>
-            <th>Mínimo</th>
-            <th>Máximo</th>
-            <th>Status</th>
+            <th>Número da Nota</th>
+            <th>Data</th>
+            <th>Quantidade</th>
+            <th>Tipo</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.ProdutosEstoque)
+        @foreach (var mov in Model.MovimentacoesPorNota)
         {
-            <tr class="@(item.EstoqueBaixo ? "table-danger" : "")">
-                <td>@item.Nome</td>
-                <td>@item.EstoqueAtual</td>
-                <td>@item.EstoqueMinimo</td>
-                <td>@item.EstoqueMaximo</td>
+            <tr>
                 <td>
-                    @if (item.EstoqueBaixo)
+                    @if (mov.Tipo == "Entrada")
                     {
-                        <span class="text-danger">Abaixo do mínimo</span>
+                        <a href="#" class="link-nota" data-notaid="@mov.NotaId">@mov.NumeroNota</a>
                     }
                     else
                     {
-                        <span class="text-success">OK</span>
+                        <a href="#" class="link-nota-saida" data-notaid="@mov.NotaId">@mov.NumeroNota</a>
                     }
                 </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<!-- Entradas por Produto -->
-<h3>⬆️ Entradas por Produto</h3>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Número da Nota</th>
-            <th>Data</th>
-            <th>Total de Entradas</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var nota in Model.EntradasPorNota)
-        {
-            <tr>
-                <td>
-                    <a href="#" class="link-nota" data-notaid="@nota.NotaId">@nota.NumeroNota</a>
-                </td>
-                <td>@nota.DataNota.ToString("dd/MM/yyyy")</td>
-                <td>@nota.TotalEntrada</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-
-<!-- Saídas por Produto (igual Entradas por Nota) -->
-<h3>⬇️ Saídas por Nota</h3>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Número da Nota</th>
-            <th>Data</th>
-            <th>Total de Saídas</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var nota in Model.SaidasPorNota)
-        {
-            <tr>
-                <td>
-                    <a href="#" class="link-nota-saida" data-notaid="@nota.NotaId">@nota.NumeroNota</a>
-                </td>
-                <td>@nota.DataNota.ToString("dd/MM/yyyy")</td>
-                <td>@nota.TotalSaida</td>
+                <td>@mov.DataNota.ToString("dd/MM/yyyy")</td>
+                <td>@mov.Quantidade</td>
+                <td>@mov.Tipo</td>
             </tr>
         }
     </tbody>

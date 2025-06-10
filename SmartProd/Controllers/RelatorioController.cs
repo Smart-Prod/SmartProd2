@@ -83,11 +83,43 @@ namespace SmartProd.Controllers
                 Entradas = entradas,
                 Saidas = saidas
             };
+            var movimentacoesUnificadas = new List<MovimentacaoViewModel>();
+
+            movimentacoesUnificadas.AddRange(entradas.Select(e => new MovimentacaoViewModel
+            {
+                Tipo = "Entrada",
+                NumeroNota = e.NumeroNota!,
+                Data = e.DataEntrega,
+                FornecedorOuCliente = e.Fornecedor!,
+                Itens = e.Itens.Select(i => new MovimentacaoItemViewModel
+                {
+                    ProdutoNome = i.Produto?.Nome!,
+                    Quantidade = i.Quantidade
+                }).ToList()
+            }));
+
+            movimentacoesUnificadas.AddRange(saidas.Select(s => new MovimentacaoViewModel
+            {
+                Tipo = "Saída",
+                NumeroNota = s.NumeroNota!,
+                Data = s.DataSaida,
+                FornecedorOuCliente = s.Cliente!, // ou Destinatario
+                Itens = s.Itens.Select(i => new MovimentacaoItemViewModel
+                {
+                    ProdutoNome = i.Produto?.Nome!,
+                    Quantidade = i.Quantidade
+                }).ToList()
+            }));
+
+            // Ordene por data (opcional)
+            movimentacoesUnificadas = movimentacoesUnificadas
+                .OrderByDescending(m => m.Data)
+                .ToList();
 
             ViewBag.DataInicial = dataInicial.Value.ToString("yyyy-MM-dd");
             ViewBag.DataFinal = dataFinal.Value.ToString("yyyy-MM-dd");
 
-            return View(movimentacoes);
+            return View(movimentacoesUnificadas);
         }
 
         // 3. Relatório de Custo (custo total de entradas no período)

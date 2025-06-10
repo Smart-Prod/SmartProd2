@@ -1,11 +1,9 @@
-﻿@model dynamic
+﻿@model List<MovimentacaoViewModel>
 @{
     ViewData["Title"] = "Movimentações de Estoque";
-    var entradas = Model.Entradas as List<NotaEntrega>;
-    var saidas = Model.Saidas as List<NotaSaida>;
 }
-<h2>Entradas</h2>
 
+<h2>Movimentações de Estoque</h2>
 <form method="get" class="mb-3">
     <label>De: <input type="date" name="dataInicial" value="@ViewBag.DataInicial" /></label>
     <label>Até: <input type="date" name="dataFinal" value="@ViewBag.DataFinal" /></label>
@@ -14,24 +12,26 @@
 <table class="table">
     <thead>
         <tr>
+            <th>Tipo</th>
             <th>Nota</th>
             <th>Data</th>
-            <th>Fornecedor</th>
+            <th>Fornecedor/Cliente</th>
             <th>Itens</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var nota in entradas)
+        @foreach (var mov in Model)
         {
             <tr>
-                <td>@nota.NumeroNota</td>
-                <td>@nota.DataEntrega.ToShortDateString()</td>
-                <td>@nota.Fornecedor</td>
+                <td>@mov.Tipo</td>
+                <td>@mov.NumeroNota</td>
+                <td>@mov.Data.ToShortDateString()</td>
+                <td>@mov.FornecedorOuCliente</td>
                 <td>
                     <ul>
-                        @foreach (var item in nota.Itens)
+                        @foreach (var item in mov.Itens)
                         {
-                            <li>@item.Produto?.Nome - @item.Quantidade un.</li>
+                            <li>@item.ProdutoNome - @item.Quantidade un.</li>
                         }
                     </ul>
                 </td>

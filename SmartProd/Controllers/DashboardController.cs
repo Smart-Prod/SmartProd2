@@ -105,13 +105,67 @@ namespace SmartProd.Controllers
                     Nome = g.Key,
                     TotalSaida = g.Sum(x => x.Quantidade)
                 }).ToList();
+            var saidasPorNota = saidas
+                .Select(n => new SaidaNotaViewModel
+                {
+                    NotaId = n.Id.GetHashCode(),
+                    NumeroNota = n.NumeroNota,
+                    DataNota = n.DataSaida, // Supondo que NotaSaida tenha DataSaida
+                    TotalSaida = n.Itens.Sum(x => x.Quantidade)
+                }).ToList();
+            var movimentacoesPorNota = new List<MovimentacaoNotaViewModel>();
+
+            movimentacoesPorNota.AddRange(entradas.Select(n => new MovimentacaoNotaViewModel
+            {
+                Tipo = "Entrada",
+                NotaId = n.Id.GetHashCode(),
+                NumeroNota = n.NumeroNota!,
+                DataNota = n.DataEntrega,
+                Quantidade = n.Itens.Sum(x => x.Quantidade)
+            }));
+
+            movimentacoesPorNota.AddRange(saidas.Select(n => new MovimentacaoNotaViewModel
+            {
+                Tipo = "Saída",
+                NotaId = n.Id.GetHashCode(),
+                NumeroNota = n.NumeroNota!,
+                DataNota = n.DataSaida,
+                Quantidade = n.Itens.Sum(x => x.Quantidade)
+            }));
+
+            movimentacoesPorNota = movimentacoesPorNota.OrderByDescending(m => m.DataNota).ToList();
+
+            // Soma do valor de todos os produtos cadastrados
+            var totalProdutosCadastrados = produtos.Sum(p => p.Preco);
+
+            // Soma total de itens em estoque
+            var totalEstoque = estoques.Sum(e => e.EstoqueAtual);
+
+            // Soma de itens de todas as notas de entrada
+            var totalEntradas = entradas.SelectMany(n => n.Itens).Sum(i => i.Quantidade);
+
+            // Soma de itens de todas as notas de saída
+            var totalSaidas = saidas.SelectMany(n => n.Itens).Sum(i => i.Quantidade);
+
+            // Produto com mais estoque
+            var estoqueMaisAlto = estoques.OrderByDescending(e => e.EstoqueAtual).FirstOrDefault();
+            var produtoMaisEstoque = estoqueMaisAlto?.Produto?.Nome ?? "N/A";
+            var quantidadeMaisEstoque = estoqueMaisAlto?.EstoqueAtual ?? 0;
 
             var viewModel = new DashboardViewModel
             {
                 ProdutosEstoque = produtosEstoque,
                 EntradasPorProduto = entradasPorProduto,
                 SaidasPorProduto = saidasPorProduto,
-                EntradasPorNota = entradasPorNota
+                EntradasPorNota = entradasPorNota,
+                SaidasPorNota = saidasPorNota,
+                MovimentacoesPorNota = movimentacoesPorNota,
+                TotalProdutosCadastrados = totalProdutosCadastrados,
+                TotalEstoque = totalEstoque,
+                TotalEntradas = totalEntradas,
+                TotalSaidas = totalSaidas,
+                ProdutoMaisEstoque = produtoMaisEstoque,
+                QuantidadeMaisEstoque = quantidadeMaisEstoque
             };
 
             return View(viewModel);

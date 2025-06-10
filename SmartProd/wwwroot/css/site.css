@@ -377,3 +377,21 @@ body {
         .cadastro-container p a:hover {
             text-decoration: underline;
         }
+
+.dashboard {
+    display: flex;
+    justify-content: center;
+    align-content:center;
+}
+.dashboard-box{
+    border:1px solid;
+    margin: 10px;
+    text-align: center;
+    width:200px;
+    justify-content:center;
+}
+
+.dashboard-box > img {
+    width: 100px;
+    height: 100px;
+}

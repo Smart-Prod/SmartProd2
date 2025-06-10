@@ -172,9 +172,9 @@
         }
 
         const estoqueAtualAttr = selectedOption.getAttribute('data-estoque-atual');
-    const estoqueAtual = estoqueAtualAttr === null || estoqueAtualAttr === '' ? null : Number(estoqueAtualAttr);
+        const estoqueAtual = estoqueAtualAttr !== null && estoqueAtualAttr !== '' ? Number(estoqueAtualAttr) : null;
 
-    if (estoqueAtualAttr !== null && Number(estoqueAtualAttr) <= 0) {
+        if (estoqueAtual !== null && estoqueAtual <= 0) {
         // Limpa seleção e campos
         select.value = '';
         row.querySelector('input[name$=".PrecoUnitario"]').value = '';
@@ -188,7 +188,8 @@
             $('#estoqueZeradoModal').modal('show');
         }
         return;
-    }
+        }
+    
 
         const preco = selectedOption.getAttribute('data-preco') || 0;
         const precoInput = row.querySelector('input[name$=".PrecoUnitario"]');
