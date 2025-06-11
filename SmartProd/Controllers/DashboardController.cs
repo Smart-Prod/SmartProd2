@@ -136,16 +136,17 @@ namespace SmartProd.Controllers
             movimentacoesPorNota = movimentacoesPorNota.OrderByDescending(m => m.DataNota).ToList();
 
             // Soma do valor de todos os produtos cadastrados
-            var totalProdutosCadastrados = produtos.Sum(p => p.Preco);
+            var totalProdutosCadastrados = produtos.Count;
+            
 
             // Soma total de itens em estoque
             var totalEstoque = estoques.Sum(e => e.EstoqueAtual);
 
-            // Soma de itens de todas as notas de entrada
-            var totalEntradas = entradas.SelectMany(n => n.Itens).Sum(i => i.Quantidade);
+            // Quantidade de notas de entrada
+            var totalEntradas = entradas.Count;
 
-            // Soma de itens de todas as notas de saída
-            var totalSaidas = saidas.SelectMany(n => n.Itens).Sum(i => i.Quantidade);
+            // Quantidade de notas de saída
+            var totalSaidas = saidas.Count;
 
             // Produto com mais estoque
             var estoqueMaisAlto = estoques.OrderByDescending(e => e.EstoqueAtual).FirstOrDefault();
@@ -160,7 +161,7 @@ namespace SmartProd.Controllers
                 EntradasPorNota = entradasPorNota,
                 SaidasPorNota = saidasPorNota,
                 MovimentacoesPorNota = movimentacoesPorNota,
-                TotalProdutosCadastrados = totalProdutosCadastrados,
+                TotalProdutosCadastrados = totalProdutosCadastrados,                
                 TotalEstoque = totalEstoque,
                 TotalEntradas = totalEntradas,
                 TotalSaidas = totalSaidas,
@@ -171,22 +172,18 @@ namespace SmartProd.Controllers
             return View(viewModel);
         }
 
-        // Para Nota de Entrada
-        public IActionResult DetalhesNotaEntrada(Guid id)
+        public async Task<IActionResult> DetalhesNotaEntrada(Guid id)
         {
-            var nota = _context.NotaEntrega.Find(n => n.Id == id);
-            if (nota == null)
-                return Content("Nota de entrada não encontrada.");
-            return PartialView("_DetalhesNotaEntrada", nota);
+            var notaEntrada = await _context.NotaEntrega.Find(e => e.Id == id).FirstOrDefaultAsync();
+            // Carregue os itens e produtos se necessário
+            return PartialView("_DetalhesNotaEntrada", notaEntrada);
         }
 
-        // Para Nota de Saída
-        public IActionResult DetalhesNotaSaida(Guid id)
+        public async Task<IActionResult> DetalhesNotaSaida(Guid id)
         {
-            var nota = _context.NotaSaida.Find(n => n.Id == id);
-            if (nota == null)
-                return Content("Nota de saída não encontrada.");
-            return PartialView("_DetalhesNotaSaida", nota);
+            var notaSaida = await _context.NotaSaida.Find(e => e.Id == id).FirstOrDefaultAsync();
+            // Carregue os itens e produtos se necessário
+            return PartialView("_DetalhesNotaSaida", notaSaida);
         }
     }
 }

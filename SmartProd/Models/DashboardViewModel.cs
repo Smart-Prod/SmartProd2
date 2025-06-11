@@ -86,4 +86,11 @@
         public string? ProdutoNome { get; set; }
         public decimal Quantidade { get; set; }
     }
+
+    public class DashboardIndexViewModel
+{
+    public NotaEntrega NotaEntrega { get; set; }
+    public NotaSaida NotaSaida { get; set; }
+    // Adicione outros campos que sua página precisar
+}
 }

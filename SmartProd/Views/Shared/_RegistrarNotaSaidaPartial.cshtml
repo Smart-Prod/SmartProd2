@@ -13,7 +13,7 @@
         <form asp-action="RegistrarNotaSaida" method="post">
             <div>
                 <label>Número da Nota:</label>
-                <input asp-for="NumeroNota" class="form-control" />
+                <input asp-for="NumeroNota" class="form-control" type="text" maxlength="8" minlength="8" pattern="\d{8}" title="Digite exatamente 8 dígitos" required oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,8)" />
             </div>
             <div>
                 <label>Destino:</label>
@@ -36,13 +36,12 @@
                         <td>
                             <select name="Itens[0].IdProduto" class="form-control" style="width: 160px;" onchange="atualizarPrecoUnitario(this)">
                                 <option value="">-- Selecione --</option>
-                                @if (ViewBag.Produtos != null)
-                                {
+                                
                                     @foreach (var produto in ViewBag.Produtos)
                                     {
                                         <option value="@produto.Id" data-preco="@produto.Preco" data-estoque-atual="@produto.EstoqueAtual" data-estoque-minimo="@produto.EstoqueMinimo">@produto.Nome</option>
                                     }
-                                }
+                                
                             </select>
                         </td>
                         <td>
@@ -141,7 +140,8 @@
             }
         });
     }
-        function validarQuantidadeSaida(input) {
+
+    function validarQuantidadeSaida(input) {
         const row = input.closest('tr');
         const select = row.querySelector('select');
         const selectedOption = select.options[select.selectedIndex];
@@ -157,48 +157,22 @@
             input.value = 0;
             quantidade = 0;
         }
-
-        // Valida quantidade não maior que estoque
-        const estoqueAtual = Number(selectedOption.getAttribute('data-estoque-atual'));
-        if (!isNaN(estoqueAtual) && quantidade > estoqueAtual) {
-            alert(`Quantidade indisponível em estoque! Estoque atual: ${estoqueAtual}`);
-            input.value = estoqueAtual > 0 ? estoqueAtual : '';
-            quantidade = estoqueAtual > 0 ? estoqueAtual : 0;
-        }
+        
 
         atualizarValorTotalSaida(input);
     }
 
-            function atualizarPrecoUnitario(select) {
+    function atualizarPrecoUnitario(select) {
         const row = select.closest('tr');
         const selectedOption = select.options[select.selectedIndex];
-
-        if (!selectedOption || !selectedOption.value) {
-            row.querySelector('input[name$=".PrecoUnitario"]').value = '';
-            row.querySelector('input[name$=".ValorTotal"]').value = '';
-            return;
-        }
-
-        const estoqueAtualAttr = selectedOption.getAttribute('data-estoque-atual');
-        const estoqueAtual = Number(estoqueAtualAttr);
-        console.log("EstoqueAtualAttr:", estoqueAtualAttr, "EstoqueAtual:", estoqueAtual);
-
-        if (!isNaN(estoqueAtual) && estoqueAtual <= 0) {
-            // Só limpa campos, mas não des-seleciona
-            row.querySelector('input[name$=".PrecoUnitario"]').value = '';
-            row.querySelector('input[name$=".Quantidade"]').value = '';
-            row.querySelector('input[name$=".ValorTotal"]').value = '';
-            // alert('Produto sem estoque!');
-            return;
-        }
-
-        const preco = Number(selectedOption.getAttribute('data-preco')) || 0;
-        row.querySelector('input[name$=".PrecoUnitario"]').value = preco.toFixed(2);
-        atualizarValorTotalSaida(row.querySelector('input[name$=".Quantidade"]'));
+        const preco = selectedOption.getAttribute('data-preco') || 0;
+        const precoInput = row.querySelector('input[name$=".PrecoUnitario"]');
+        precoInput.value = parseFloat(preco).toFixed(2);
+        atualizarValorTotalSaida(precoInput);
     }
 
 
-        function atualizarValorTotalSaida(input) {
+    function atualizarValorTotalSaida(input) {
         const row = input.closest('tr');
         const quantidade = parseFloat(row.querySelector('input[name$=".Quantidade"]').value) || 0;
         const preco = parseFloat(row.querySelector('input[name$=".PrecoUnitario"]').value) || 0;

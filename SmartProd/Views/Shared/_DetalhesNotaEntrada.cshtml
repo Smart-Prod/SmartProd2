@@ -1,29 +1,39 @@
 ﻿@model SmartProd.Models.NotaEntrega
 
-<div>
-    <h4>Nota: @Model.NumeroNota</h4>
-    <p><b>Data:</b> @Model.DataEntrega.ToString("dd/MM/yyyy")</p>
-    <p><b>Fornecedor:</b> @Model.Fornecedor</p>
-    <h5>Itens</h5>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Produto</th>
-                <th>Quantidade</th>
-                <th>Custo Unitário</th>
-                <th>Valor Total</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Itens)
-            {
-                <tr>
-                    <td>@item.Produto?.Nome</td>
-                    <td>@item.Quantidade</td>
-                    <td>@item.CustoUnitario.ToString("C")</td>
-                    <td>@item.ValorTotal.ToString("C")</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="modal fade" id="modalNotaEntregaDetalhe" tabindex="-1" aria-labelledby="modalNotaEntregaDetalheLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalNotaEntregaDetalheLabel">Detalhes da Nota de Entrega</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <h4>Nota: @Model.NumeroNota</h4>
+                <p><b>Data:</b> @Model.DataEntrega.ToString("dd/MM/yyyy")</p>
+                <p><b>Fornecedor:</b> @Model.Fornecedor</p>
+                <h5>Itens</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Custo Unitário</th>
+                            <th>Valor Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Itens)
+                        {
+                            <tr>
+                                <td>@item.Produto?.Nome</td>
+                                <td>@item.Quantidade</td>
+                                <td>@item.CustoUnitario.ToString("C")</td>
+                                <td>@item.ValorTotal.ToString("C")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
