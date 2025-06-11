@@ -36,9 +36,12 @@
                         <td>
                             <select name="Itens[0].IdProduto" class="form-control" style="width: 160px;" onchange="atualizarPrecoUnitario(this)">
                                 <option value="">-- Selecione --</option>
-                                @foreach (var produto in ViewBag.Produtos)
+                                @if (ViewBag.Produtos != null)
                                 {
-                                    <option value="@produto.Id" data-preco="@produto.Preco" data-estoque-atual="@produto.EstoqueAtual" data-estoque-minimo="@produto.EstoqueMinimo">@produto.Nome</option>
+                                    @foreach (var produto in ViewBag.Produtos)
+                                    {
+                                        <option value="@produto.Id" data-preco="@produto.Preco" data-estoque-atual="@produto.EstoqueAtual" data-estoque-minimo="@produto.EstoqueMinimo">@produto.Nome</option>
+                                    }
                                 }
                             </select>
                         </td>
@@ -138,12 +141,11 @@
             }
         });
     }
-     function validarQuantidadeSaida(input) {
+        function validarQuantidadeSaida(input) {
         const row = input.closest('tr');
         const select = row.querySelector('select');
         const selectedOption = select.options[select.selectedIndex];
 
-        // Só valida se produto está selecionado
         if (!selectedOption || !selectedOption.value) {
             input.value = '';
             atualizarValorTotalSaida(input);
@@ -151,53 +153,52 @@
         }
 
         let quantidade = parseFloat(input.value) || 0;
-
-        // Não permite valor negativo
         if (quantidade < 0) {
             input.value = 0;
             quantidade = 0;
         }
+
+        // Valida quantidade não maior que estoque
+        const estoqueAtual = Number(selectedOption.getAttribute('data-estoque-atual'));
+        if (!isNaN(estoqueAtual) && quantidade > estoqueAtual) {
+            alert(`Quantidade indisponível em estoque! Estoque atual: ${estoqueAtual}`);
+            input.value = estoqueAtual > 0 ? estoqueAtual : '';
+            quantidade = estoqueAtual > 0 ? estoqueAtual : 0;
+        }
+
         atualizarValorTotalSaida(input);
     }
 
-    function atualizarPrecoUnitario(select) {
+            function atualizarPrecoUnitario(select) {
         const row = select.closest('tr');
         const selectedOption = select.options[select.selectedIndex];
 
         if (!selectedOption || !selectedOption.value) {
-            // Limpa campos se nada selecionado
             row.querySelector('input[name$=".PrecoUnitario"]').value = '';
             row.querySelector('input[name$=".ValorTotal"]').value = '';
             return;
         }
 
         const estoqueAtualAttr = selectedOption.getAttribute('data-estoque-atual');
-        const estoqueAtual = estoqueAtualAttr !== null && estoqueAtualAttr !== '' ? Number(estoqueAtualAttr) : null;
+        const estoqueAtual = Number(estoqueAtualAttr);
+        console.log("EstoqueAtualAttr:", estoqueAtualAttr, "EstoqueAtual:", estoqueAtual);
 
-        if (estoqueAtual !== null && estoqueAtual <= 0) {
-        // Limpa seleção e campos
-        select.value = '';
-        row.querySelector('input[name$=".PrecoUnitario"]').value = '';
-        row.querySelector('input[name$=".Quantidade"]').value = '';
-        row.querySelector('input[name$=".ValorTotal"]').value = '';
-        // Mostra o modal
-        if (window.bootstrap && bootstrap.Modal) {
-            var modal = new bootstrap.Modal(document.getElementById('estoqueZeradoModal'));
-            modal.show();
-        } else {
-            $('#estoqueZeradoModal').modal('show');
+        if (!isNaN(estoqueAtual) && estoqueAtual <= 0) {
+            // Só limpa campos, mas não des-seleciona
+            row.querySelector('input[name$=".PrecoUnitario"]').value = '';
+            row.querySelector('input[name$=".Quantidade"]').value = '';
+            row.querySelector('input[name$=".ValorTotal"]').value = '';
+            // alert('Produto sem estoque!');
+            return;
         }
-        return;
-        }
-    
 
-        const preco = selectedOption.getAttribute('data-preco') || 0;
-        const precoInput = row.querySelector('input[name$=".PrecoUnitario"]');
-        precoInput.value = parseFloat(preco).toFixed(2);
-        atualizarValorTotalSaida(precoInput);
+        const preco = Number(selectedOption.getAttribute('data-preco')) || 0;
+        row.querySelector('input[name$=".PrecoUnitario"]').value = preco.toFixed(2);
+        atualizarValorTotalSaida(row.querySelector('input[name$=".Quantidade"]'));
     }
 
-    function atualizarValorTotalSaida(input) {
+
+        function atualizarValorTotalSaida(input) {
         const row = input.closest('tr');
         const quantidade = parseFloat(row.querySelector('input[name$=".Quantidade"]').value) || 0;
         const preco = parseFloat(row.querySelector('input[name$=".PrecoUnitario"]').value) || 0;
