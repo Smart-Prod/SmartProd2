@@ -32,13 +32,12 @@
             var minimo = item.Produto?.EstoqueMinimo ?? 0;
             var maximo = item.Produto?.EstoqueMaximo ?? 0;
             var isCritico = item.EstoqueAtual < minimo;
-            <tr class="@(isCritico ? "table-danger" : "")">
+            <tr class="@(isCritico ? "table-danger" : "")" data-produto-id="@item.Produto?.Id">
                 <td>@item.Produto?.Nome</td>
                 <td>@item.EstoqueAtual</td>
                 <td>@minimo</td>
                 <td>@maximo</td>
                 <td>@item.Localizacao</td>
-                
             </tr>
         }
     </tbody>

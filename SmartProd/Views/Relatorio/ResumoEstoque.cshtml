@@ -1,11 +1,17 @@
 ﻿@model dynamic
+@using Newtonsoft.Json
 @{
     ViewData["Title"] = "Resumo de Estoque";
     var saldo = Model.Saldo as List<EstoqueProdutoViewModel>;
     var inventario = Model.Inventario as IEnumerable<dynamic>;
     var minimos = Model.Minimos as List<Produto>;
     var maximos = Model.Maximos as List<Produto>;
+
+    // Projeção para o gráfico
+    var nomesSaldo = saldo.Select(x => x.Nome).ToList();
+    var estoquesSaldo = saldo.Select(x => x.EstoqueAtual).ToList();
 }
+
 
 <h1>Resumo de Estoque</h1>
 
@@ -59,6 +65,8 @@
     </tbody>
 </table>
 
+<canvas id="graficoSaldo"></canvas>
+
 <h2>Produtos abaixo do Estoque Mínimo</h2>
 @if (minimos != null && minimos.Count > 0)
 {
@@ -87,4 +95,22 @@ else
 else
 {
     <div class="alert alert-success">Nenhum produto acima do estoque máximo.</div>
+}
+
+@section Scripts {
+    <script>
+        var ctx = document.getElementById('graficoSaldo').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: nomesSaldo,
+                datasets: [{
+                    label: 'Estoque Atual',
+                    data: estoquesSaldo,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                }]
+            },
+            options: { responsive: true }
+        });
+    </script>
 }

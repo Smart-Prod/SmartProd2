@@ -11,6 +11,7 @@
     <a asp-action="Create" class="btn btn-primary">Criar Novo</a>
 </p>
 <form id="deleteForm" asp-action="DeleteMultiple" method="post">
+    @Html.AntiForgeryToken()
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" disabled id="deleteSelectedBtn">
         Excluir Selecionados
     </button>
@@ -22,22 +23,33 @@
             @foreach (var item in categoriaGrupo)
             {
                 <div class="col">
-                    <div class="card h-100">
+                    <div class="card h-100" data-produto-id="@item.Id">
                         @if (!string.IsNullOrEmpty(item.Imagem))
                         {
                             <img src="@("/" + item.Imagem)" alt="@item.Nome" class="img-fluid" style="width:90px;height:90px;" />
-                            //<img src="@item.Imagem" class="card-img-top" alt="@item.Nome" />
                         }
                         <div class="card-body">
-                            <h5 class="card-title"><a asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none">@item.Nome</a></h5>
+                            <h5 class="card-title">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none">@item.Nome</a>
+                            </h5>
                             <p class="card-text">Categoria: @item.Categoria</p>
                         </div>
-                        <div class="card-footer">
-                            <div class="form-check">
-                                <input class="form-check-input delete-checkbox" type="checkbox" name="selectedIds" value="@item.Id" id="check_@item.Id">
-                                <label class="form-check-label" for="check_@item.Id">Selecionar</label>
-                            </div>
+                        <div class="form-check">
+                            <input class="form-check-input delete-checkbox"
+                                   type="checkbox"
+                                   name="selectedIds"
+                                   value="@item.Id"
+                                   id="check_@item.Id"
+                            @(item.EstoqueAtual != 0 ? "disabled" : "")>
+
+                            <label class="form-check-label" for="check_@item.Id">Selecionar</label>
+
+                            @if (item.EstoqueAtual != 0)
+                            {
+                                <small class="text-danger d-block">Só pode excluir quando estoque for zero</small>
+                            }
                         </div>
+
                     </div>
                 </div>
             }

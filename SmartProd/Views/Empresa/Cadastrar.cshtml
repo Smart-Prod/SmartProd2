@@ -17,9 +17,9 @@
         <form asp-action="Cadastrar" method="post" id="formEmpresa">
             <div class="cadastro-form-group">
                 <label asp-for="Cnpj"></label>
-                <input asp-for="Cnpj" id="Cnpj" />
+                <input asp-for="Cnpj" id="Cnpj" 
+                       oninput="apenasNumeros(event); buscarCnpjAuto()" autocomplete="off" />
                 <span asp-validation-for="Cnpj"></span>
-                <button type="button" onclick="buscarCnpj()" class="cadastro-buscar-btn">Buscar CNPJ</button>
             </div>
 
             <div class="cadastro-form-group">

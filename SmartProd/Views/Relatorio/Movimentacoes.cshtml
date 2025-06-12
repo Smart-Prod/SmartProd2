@@ -39,3 +39,31 @@
         }
     </tbody>
 </table>
+
+<canvas id="graficoMovimentacoes"></canvas>
+@section Scripts {
+    <script>
+        // Agrupe por produto e tipo
+        var entradas = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Where(x => x.Tipo == "Entrada").SelectMany(m => m.Itens)));
+        var saidas = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Where(x => x.Tipo == "Saída").SelectMany(m => m.Itens)));
+        // Crie lógica JS para agrupar por produto e somar quantidades
+
+        // Exemplo simplificado: obtenha nomes únicos
+        var nomesProdutos = [...new Set([...entradas.map(i => i.ProdutoNome), ...saidas.map(i => i.ProdutoNome)])];
+        var dadosEntradas = nomesProdutos.map(n => entradas.filter(i => i.ProdutoNome === n).reduce((acc, v) => acc + v.Quantidade, 0));
+        var dadosSaidas = nomesProdutos.map(n => saidas.filter(i => i.ProdutoNome === n).reduce((acc, v) => acc + v.Quantidade, 0));
+
+        var ctx = document.getElementById('graficoMovimentacoes').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: nomesProdutos,
+                datasets: [
+                    { label: 'Entradas', data: dadosEntradas, backgroundColor: 'rgba(75, 192, 192, 0.6)' },
+                    { label: 'Saídas', data: dadosSaidas, backgroundColor: 'rgba(255, 99, 132, 0.6)' }
+                ]
+            },
+            options: { responsive: true }
+        });
+    </script>
+}

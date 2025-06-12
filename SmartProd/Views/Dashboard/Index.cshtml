@@ -1,6 +1,17 @@
 ﻿@model DashboardViewModel
 @{
     ViewData["Title"] = "Dashboard";
+
+    var movimentacoes = Model.MovimentacoesPorNota as IEnumerable<dynamic> ?? new List<dynamic>();
+
+    // Separar por tipo
+    var notas = movimentacoes.Select(x => (string)x.NumeroNota).Distinct().ToList();
+    var entradas = notas
+        .Select(nota => movimentacoes.Where(x => x.NumeroNota == nota && x.Tipo == "Entrada").Sum(x => (int)x.Quantidade))
+        .ToList();
+    var saidas = notas
+        .Select(nota => movimentacoes.Where(x => x.NumeroNota == nota && x.Tipo == "Saída").Sum(x => (int)x.Quantidade))
+        .ToList();
 }
 
 <h2>📊 Dashboard</h2>
@@ -40,7 +51,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var mov in Model.MovimentacoesPorNota)
+        @foreach (var mov in Model.MovimentacoesPorNota!)
         {
             <tr>
                 <td>
@@ -61,7 +72,9 @@
     </tbody>
 </table>
 
-<!-- Modal Detalhe Nota de Entrega -->
+<canvas id="graficoMovPorNota" ></canvas>
+
+<!-- Modal Detalhe Nota de Entrega 
 <div class="modal fade" id="modalNotaEntregaDetalhe" tabindex="-1" aria-labelledby="modalNotaEntregaDetalheLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -70,13 +83,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
-                @await Html.PartialAsync("_DetalhesNotaEntrega", Model.NotaEntrega)
+               
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
-<!-- Modal Detalhe Nota de Saída -->
+<!-- Modal Detalhe Nota de Saída 
 <div class="modal fade" id="modalNotaSaidaDetalhe" tabindex="-1" aria-labelledby="modalNotaSaidaDetalheLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -85,51 +98,38 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
-                @await Html.PartialAsync("_DetalhesNotaSaida", Model.NotaSaida)
+                
             </div>
         </div>
     </div>
-</div>
+</div>-->
 @section Scripts {
     <script>
-    // Para nota de entrega
-$(document).on('click', '.link-nota-entrada', function (e) {
-    e.preventDefault();
-    var notaId = $(this).data('notaid');
-    $('#detalheNotaEntregaBody').html('<div class="text-center"><span class="spinner-border"></span></div>');
-    $('#modalNotaEntregaDetalhe').modal('show');
-    $.get('@Url.Action("DetalhesNotaEntrada", "Dashboard")', { id: notaId }, function (data) {
-        $('#detalheNotaEntregaBody').html(data);
-    });
-});
-
-// Para nota de saída
-$(document).on('click', '.link-nota-saida', function (e) {
-    e.preventDefault();
-    var notaId = $(this).data('notaid');
-    $('#detalheNotaSaidaBody').html('<div class="text-center"><span class="spinner-border"></span></div>');
-    $('#modalNotaSaidaDetalhe').modal('show');
-    $.get('@Url.Action("DetalhesNotaSaida", "Dashboard")', { id: notaId }, function (data) {
-        $('#detalheNotaSaidaBody').html(data);
-    });
-});
-
-// Funções de imprimir para cada modal
-function imprimirNotaEntrada() {
-    var printContents = document.getElementById('conteudo-modal-imprimir-entrada').innerHTML;
-    var originalContents = document.body.innerHTML;
-    document.body.innerHTML = printContents;
-    window.print();
-    document.body.innerHTML = originalContents;
-    location.reload();
-}
-function imprimirNotaSaida() {
-    var printContents = document.getElementById('conteudo-modal-imprimir-saida').innerHTML;
-    var originalContents = document.body.innerHTML;
-    document.body.innerHTML = printContents;
-    window.print();
-    document.body.innerHTML = originalContents;
-    location.reload();
-}
+         var ctx = document.getElementById('graficoMovPorNota').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(notas)),
+                datasets: [
+                    {
+                        label: 'Entradas',
+                        data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(entradas)),
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                    },
+                    {
+                        label: 'Saídas',
+                        data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(saidas)),
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { stacked: true },
+                    y: { beginAtZero: true, stacked: true }
+                }
+            }
+        });
     </script>
 }

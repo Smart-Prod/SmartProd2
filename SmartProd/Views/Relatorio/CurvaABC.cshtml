@@ -1,6 +1,14 @@
 ﻿@model IEnumerable<dynamic>
 @{
     ViewData["Title"] = "Curva ABC";
+
+    var lista = Model as IEnumerable<dynamic> ?? new List<dynamic>();
+
+    var produtos = lista.Select(x => x?.Produto != null ? (string)x.Produto.Nome : "").ToList();
+    var valores = lista.Select(x => x?.Valor != null ? (decimal)x.Valor : 0).ToList();
+    var categorias = lista.Select(x => x?.Categoria != null ? (string)x.Categoria : "").ToList();
+  
+
 }
 
 <h2>Curva ABC</h2>
@@ -29,3 +37,27 @@
         }
     </tbody>
 </table>
+
+<canvas id="graficoCurvaABC"></canvas>
+@section Scripts {
+    <script>
+            var produtos = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(produtos));
+            var valores = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(valores));
+            var categorias = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(categorias));
+
+        var cores = categorias.map(c => c === "A" ? "rgba(0,200,83,0.7)" : c === "B" ? "rgba(255,235,59,0.7)" : "rgba(255,87,34,0.7)");
+        var ctx = document.getElementById('graficoCurvaABC').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: produtos,
+                datasets: [{
+                    label: 'Valor Movimentado',
+                    data: valores,
+                    backgroundColor: cores
+                }]
+            },
+            options: { responsive: true }
+        });
+    </script>
+}

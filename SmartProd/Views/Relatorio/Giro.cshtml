@@ -26,3 +26,25 @@
         }
     </tbody>
 </table>
+
+<canvas id="graficoGiro"></canvas>
+@section Scripts {
+    <script>
+        var produtos = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.Produto.Nome)));
+        var giros = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.Giro)));
+
+        var ctx = document.getElementById('graficoGiro').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: produtos,
+                datasets: [{
+                    label: 'Giro de Estoque',
+                    data: giros,
+                    backgroundColor: 'rgba(33, 150, 243, 0.7)'
+                }]
+            },
+            options: { responsive: true }
+        });
+    </script>
+}

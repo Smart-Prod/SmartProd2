@@ -33,3 +33,22 @@ else
         </tbody>
     </table>
 }
+
+<canvas id="graficoParados"></canvas>
+@section Scripts {
+    <script>
+        var nomes = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.Nome)));
+        var ctx = document.getElementById('graficoParados').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: nomes,
+                datasets: [{
+                    data: nomes.map(x => 1), // Cada produto é 1, só para mostrar proporção/quantidade
+                    backgroundColor: nomes.map((_,i) => `hsl(${i*40},70%,60%)`)
+                }]
+            },
+            options: { responsive: true }
+        });
+    </script>
+}
