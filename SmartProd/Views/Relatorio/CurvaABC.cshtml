@@ -7,23 +7,29 @@
     var produtos = lista.Select(x => x?.Produto != null ? (string)x.Produto.Nome : "").ToList();
     var valores = lista.Select(x => x?.Valor != null ? (decimal)x.Valor : 0).ToList();
     var categorias = lista.Select(x => x?.Categoria != null ? (string)x.Categoria : "").ToList();
-  
 
+    decimal percentualAcumulado = ViewBag.PercentualAcumulado ?? 0;
+    decimal percentual = ViewBag.Percentual ?? 0;
 }
 
-<h2>Curva ABC</h2>
+<div class="text-center mb-4">
+    <h2 class="fw-bold">RELATÓRIO DE CURVA ABC</h2>
+</div>
 
-<form method="get" class="mb-3">
-    <label>De: <input type="date" name="dataInicial" value="@ViewBag.DataInicial" /></label>
-    <label>Até: <input type="date" name="dataFinal" value="@ViewBag.DataFinal" /></label>
+<a asp-action="Index">Voltar</a>
+
+<form method="get" class="mb-3 d-flex justify-content-center gap-2">
+    <label>De: <input type="date" name="dataInicial" value="@ViewBag.DataInicial" class="form-control" /></label>
+    <label>Até: <input type="date" name="dataFinal" value="@ViewBag.DataFinal" class="form-control" /></label>
     <button type="submit" class="btn btn-primary">Filtrar</button>
 </form>
-<table class="table">
-    <thead>
+
+<table class="table table-bordered text-center w-50 mx-auto">
+    <thead class="table-dark">
         <tr>
-            <th>Produto</th>
-            <th>Valor Movimentado</th>
-            <th>Categoria</th>
+            <th>PRODUTO</th>
+            <th>FATURAMENTO</th>
+            <th>CATEGORIA</th>
         </tr>
     </thead>
     <tbody>
@@ -31,19 +37,35 @@
         {
             <tr>
                 <td>@item.Produto?.Nome</td>
-                <td>@item.Valor.ToString("C")</td>
+                <td>@item.Valor.ToString("N0")</td>
                 <td>@item.Categoria</td>
             </tr>
         }
     </tbody>
 </table>
 
-<canvas id="graficoCurvaABC"></canvas>
-@section Scripts {
+@if (produtos.Any())
+{
+    <div class="w-75 mx-auto">
+        <canvas id="graficoCurvaABC"></canvas>
+    </div>
+
+    <div class="d-flex justify-content-around mt-4 border-top border-bottom py-3">
+        <div class="text-center">
+            <div class="fw-bold"> % ACUMULADO </div>
+            <div class="fs-3 fw-bold"> @percentualAcumulado% </div>
+        </div>
+        <div class="text-center">
+            <div class="fw-bold"> PERCENTUAL </div>
+            <div class="fs-3 fw-bold"> @percentual% </div>
+        </div>
+    </div>
+
+    @section Scripts {
     <script>
-            var produtos = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(produtos));
-            var valores = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(valores));
-            var categorias = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(categorias));
+        var produtos = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(produtos));
+        var valores = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(valores));
+        var categorias = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(categorias));
 
         var cores = categorias.map(c => c === "A" ? "rgba(0,200,83,0.7)" : c === "B" ? "rgba(255,235,59,0.7)" : "rgba(255,87,34,0.7)");
         var ctx = document.getElementById('graficoCurvaABC').getContext('2d');
@@ -52,12 +74,20 @@
             data: {
                 labels: produtos,
                 datasets: [{
-                    label: 'Valor Movimentado',
+                    label: 'Faturamento',
                     data: valores,
                     backgroundColor: cores
                 }]
             },
-            options: { responsive: true }
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
         });
     </script>
+    }
 }

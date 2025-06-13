@@ -5,6 +5,7 @@ using SmartProd.Models;
 using Microsoft.AspNetCore.Identity;
 using QuestPDF.Fluent;
 
+
 namespace SmartProd.Controllers
 {
     [Authorize]
@@ -51,7 +52,6 @@ namespace SmartProd.Controllers
             return View(lista);
         }
 
-        // 2. Relatório de Movimentações (entradas e saídas no período)
         [HttpGet("movimentacoes")]
         public async Task<IActionResult> Movimentacoes(DateTime? dataInicial, DateTime? dataFinal)
         {
@@ -77,12 +77,15 @@ namespace SmartProd.Controllers
                     item.Produto = produtos.FirstOrDefault(p => p.Id.ToString() == item.IdProduto);
                 }
             }
-
-            var movimentacoes = new
+            // Adicione este trecho para as saídas:
+            foreach (var nota in saidas)
             {
-                Entradas = entradas,
-                Saidas = saidas
-            };
+                foreach (var item in nota.Itens)
+                {
+                    item.Produto = produtos.FirstOrDefault(p => p.Id.ToString() == item.IdProduto);
+                }
+            }
+
             var movimentacoesUnificadas = new List<MovimentacaoViewModel>();
 
             movimentacoesUnificadas.AddRange(entradas.Select(e => new MovimentacaoViewModel
@@ -116,13 +119,35 @@ namespace SmartProd.Controllers
                 .OrderByDescending(m => m.Data)
                 .ToList();
 
+            // Cálculos com decimal (utilize movimentacoesUnificadas)
+            var entradasTotais = movimentacoesUnificadas
+                .Where(x => x.Tipo == "Entrada")
+                .SelectMany(x => x.Itens)
+                .Sum(i => (decimal)i.Quantidade);
+
+            var saidasTotais = movimentacoesUnificadas
+                .Where(x => x.Tipo == "Saída")
+                .SelectMany(x => x.Itens)
+                .Sum(i => (decimal)i.Quantidade);
+
+            // Se não existe EstoqueFinal, remova ou adapte este cálculo
+            var estoqueFinal = movimentacoesUnificadas
+                .SelectMany(x => x.Itens)
+                .GroupBy(i => i.ProdutoNome)
+                .Sum(g => g.LastOrDefault()?.EstoqueFinal ?? 0);
+
+            var movimentacaoTotal = entradasTotais + saidasTotais;
+
             ViewBag.DataInicial = dataInicial.Value.ToString("yyyy-MM-dd");
             ViewBag.DataFinal = dataFinal.Value.ToString("yyyy-MM-dd");
+            ViewBag.EntradasTotais = entradasTotais;
+            ViewBag.SaidasTotais = saidasTotais;
+            ViewBag.EstoqueFinal = estoqueFinal;
+            ViewBag.MovimentacaoTotal = movimentacaoTotal;
 
             return View(movimentacoesUnificadas);
         }
 
-        // 3. Relatório de Custo (custo total de entradas no período)
         [HttpGet("custo")]
         public async Task<IActionResult> Custo(DateTime? dataInicial, DateTime? dataFinal)
         {
@@ -131,9 +156,11 @@ namespace SmartProd.Controllers
             // Valores padrão se não enviados
             dataInicial ??= agora.AddMonths(-3);
             dataFinal ??= agora;
+
             var entradas = await _context.NotaEntrega
                 .Find(n => n.DataEntrega >= dataInicial && n.DataEntrega <= dataFinal)
                 .ToListAsync();
+
             // Populando produtos:
             var produtos = await _context.Produto.Find(e => e.IdUsuario == userId).ToListAsync();
             foreach (var nota in entradas)
@@ -143,9 +170,23 @@ namespace SmartProd.Controllers
                     item.Produto = produtos.FirstOrDefault(p => p.Id.ToString() == item.IdProduto);
                 }
             }
-            var totalCusto = entradas.SelectMany(n => n.Itens).Sum(i => i.ValorTotal);
 
-            ViewBag.TotalCusto = totalCusto;
+            // Use entradas ao invés de Model
+            var itens = entradas.SelectMany(n => n.Itens).ToList();
+            var custoTotal = itens.Sum(i => i.ValorTotal);
+            var custoMedio = itens.Any() ? itens.Average(i => i.CustoUnitario) : 0;
+
+            var agrupado = itens
+                .GroupBy(i => i.Produto?.Nome)
+                .Select(g => new {
+                    Produto = g.Key,
+                    CustoUnitario = g.Average(i => i.CustoUnitario),
+                    CustoTotal = g.Sum(i => i.ValorTotal)
+                }).ToList();
+
+            ViewBag.CustoTotal = custoTotal;
+            ViewBag.CustoMedio = custoMedio;
+            ViewBag.Agrupado = agrupado;
             ViewBag.DataInicial = dataInicial.Value.ToString("yyyy-MM-dd");
             ViewBag.DataFinal = dataFinal.Value.ToString("yyyy-MM-dd");
 
@@ -231,18 +272,19 @@ namespace SmartProd.Controllers
                 .Find(n => n.DataSaida >= dataInicial && n.DataSaida <= dataFinal)
                 .ToListAsync();
 
-            var giro = produtos.Select(p =>
-            {
+            var giro = produtos.Select(p => {
                 var estoque = estoques.FirstOrDefault(e => e.IdProduto == p.Id.ToString());
                 var saidasProduto = saidas
                     .SelectMany(n => n.Itens)
                     .Where(i => i.IdProduto == p.Id.ToString())
                     .Sum(i => i.Quantidade);
 
-                var estoqueMedio = estoque?.EstoqueAtual ?? 0; // Você pode calcular a média real se quiser
-                return new
+                var estoqueMedio = (decimal)(estoque?.EstoqueAtual ?? 0);
+                return new GiroEstoqueViewModel
                 {
                     Produto = p,
+                    Vendas = saidasProduto,
+                    EstoqueMedio = estoqueMedio,
                     Giro = estoqueMedio > 0 ? (decimal)saidasProduto / estoqueMedio : 0
                 };
             }).OrderByDescending(x => x.Giro).ToList();

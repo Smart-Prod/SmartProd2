@@ -46,7 +46,7 @@ namespace SmartProd.Controllers
                 try
                 {
                     // Consulta API da Receita WS para obter dados da empresa via CNPJ
-                    var dadosCnpj = await _receitaWs.ConsultarCnpjAsync(empresa.Cnpj);
+                    var dadosCnpj = await _receitaWs.ConsultarCnpjAsync(empresa.Cnpj!);
 
                     // Preenche os dados da empresa com os retornados da API
                     empresa.RazaoSocial = dadosCnpj.Nome;
@@ -81,12 +81,12 @@ namespace SmartProd.Controllers
                     appempresa.RazaoSocial = empresa.RazaoSocial;
                     appempresa.Cnpj = empresa.Cnpj;
 
-                    IdentityResult result = await _userManager.CreateAsync(appempresa, empresa.Password);
+                    IdentityResult result = await _userManager.CreateAsync(appempresa, empresa.Password!);
 
                     if (result.Succeeded)
                     {
                         ViewBag.Message = "Empresa cadastrada com sucesso";
-                        return RedirectToAction("Login", "Account");
+                        return RedirectToAction("CadastroSucesso");
                     }
                     else
                     {
@@ -94,6 +94,7 @@ namespace SmartProd.Controllers
                         {
                             ModelState.AddModelError("", error.Description);
                         }
+                       
                     }
                 }
                 catch (Exception ex)
@@ -105,7 +106,12 @@ namespace SmartProd.Controllers
             // Retorna a mesma view com os erros de validação
             return View(empresa);
         }
-            
-        
+
+        public ActionResult CadastroSucesso()
+        {
+            return View();
+        }
+
+
     }
 }

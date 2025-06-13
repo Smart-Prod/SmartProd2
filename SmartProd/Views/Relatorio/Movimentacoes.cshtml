@@ -1,14 +1,18 @@
 ﻿@model List<MovimentacaoViewModel>
 @{
     ViewData["Title"] = "Movimentações de Estoque";
+
 }
 
 <h2>Movimentações de Estoque</h2>
+<a asp-action="Index">Voltar</a>
+
 <form method="get" class="mb-3">
     <label>De: <input type="date" name="dataInicial" value="@ViewBag.DataInicial" /></label>
     <label>Até: <input type="date" name="dataFinal" value="@ViewBag.DataFinal" /></label>
     <button type="submit" class="btn btn-primary">Filtrar</button>
 </form>
+
 <table class="table">
     <thead>
         <tr>
@@ -40,15 +44,26 @@
     </tbody>
 </table>
 
-<canvas id="graficoMovimentacoes"></canvas>
-@section Scripts {
+@if (Model.Any())
+{
+    <canvas id="graficoMovimentacoes"></canvas>
+
+    <div class="mt-4 d-flex justify-content-around">
+        <div>
+            <h4>Movimentação Total</h4>
+            <p class="display-6">@ViewBag.MovimentacaoTotal.ToString("N0")</p>
+        </div>
+        <div>
+            <h4>Estoque Final</h4>
+            <p class="display-6">@ViewBag.EstoqueFinal.ToString("N0")</p>
+        </div>
+    </div>
+
+    @section Scripts {
     <script>
-        // Agrupe por produto e tipo
         var entradas = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Where(x => x.Tipo == "Entrada").SelectMany(m => m.Itens)));
         var saidas = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Where(x => x.Tipo == "Saída").SelectMany(m => m.Itens)));
-        // Crie lógica JS para agrupar por produto e somar quantidades
 
-        // Exemplo simplificado: obtenha nomes únicos
         var nomesProdutos = [...new Set([...entradas.map(i => i.ProdutoNome), ...saidas.map(i => i.ProdutoNome)])];
         var dadosEntradas = nomesProdutos.map(n => entradas.filter(i => i.ProdutoNome === n).reduce((acc, v) => acc + v.Quantidade, 0));
         var dadosSaidas = nomesProdutos.map(n => saidas.filter(i => i.ProdutoNome === n).reduce((acc, v) => acc + v.Quantidade, 0));
@@ -63,7 +78,13 @@
                     { label: 'Saídas', data: dadosSaidas, backgroundColor: 'rgba(255, 99, 132, 0.6)' }
                 ]
             },
-            options: { responsive: true }
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
         });
     </script>
+    }
 }

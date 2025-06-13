@@ -14,6 +14,7 @@
 
 
 <h1>Resumo de Estoque</h1>
+<a asp-action="Index">Voltar</a>
 
 <h2>Saldo de Estoque</h2>
 <table class="table table-bordered">
@@ -64,41 +65,13 @@
         }
     </tbody>
 </table>
-
-<canvas id="graficoSaldo"></canvas>
-
-<h2>Produtos abaixo do Estoque Mínimo</h2>
-@if (minimos != null && minimos.Count > 0)
+@if (saldo.Any())
 {
-    <ul>
-        @foreach (var p in minimos)
-        {
-            <li>@p.Nome (@p.EstoqueMinimo) - Estoque mínimo: @p.EstoqueMinimo</li>
-        }
-    </ul>
-}
-else
-{
-    <div class="alert alert-success">Nenhum produto abaixo do estoque mínimo.</div>
-}
-
-<h2>Produtos acima do Estoque Máximo</h2>
-@if (maximos != null && maximos.Count > 0)
-{
-    <ul>
-        @foreach (var p in maximos)
-        {
-            <li>@p.Nome (@p.EstoqueMaximo) - Estoque máximo: @p.EstoqueMaximo</li>
-        }
-    </ul>
-}
-else
-{
-    <div class="alert alert-success">Nenhum produto acima do estoque máximo.</div>
-}
-
-@section Scripts {
+    <canvas id="graficoSaldo"></canvas>
+    @section Scripts {
     <script>
+        var nomesSaldo = @Html.Raw(JsonConvert.SerializeObject(nomesSaldo));
+        var estoquesSaldo = @Html.Raw(JsonConvert.SerializeObject(estoquesSaldo));
         var ctx = document.getElementById('graficoSaldo').getContext('2d');
         var chart = new Chart(ctx, {
             type: 'bar',
@@ -113,4 +86,5 @@ else
             options: { responsive: true }
         });
     </script>
+    }
 }

@@ -36,12 +36,10 @@
                         <td>
                             <select name="Itens[0].IdProduto" class="form-control" style="width: 160px;" onchange="atualizarPrecoUnitario(this)">
                                 <option value="">-- Selecione --</option>
-                                
-                                    @foreach (var produto in ViewBag.Produtos)
-                                    {
-                                        <option value="@produto.Id" data-preco="@produto.Preco" data-estoque-atual="@produto.EstoqueAtual" data-estoque-minimo="@produto.EstoqueMinimo">@produto.Nome</option>
-                                    }
-                                
+                                @foreach (var produto in ViewBag.Produtos)
+                                {
+                                    <option value="@produto.Id" data-preco="@produto.Preco" data-estoque-atual="@produto.EstoqueAtual" data-estoque-minimo="@produto.EstoqueMinimo">@produto.Nome</option>
+                                }
                             </select>
                         </td>
                         <td>
@@ -66,7 +64,6 @@
         </form>
     </div>
 </div>
-
 
 @section Scripts {
     @{

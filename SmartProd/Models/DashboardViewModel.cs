@@ -83,14 +83,22 @@
 
     public class MovimentacaoItemViewModel
     {
-        public string? ProdutoNome { get; set; }
+        public string ProdutoNome { get; set; }
         public decimal Quantidade { get; set; }
+        public decimal? EstoqueFinal { get; set; } // Adicione esta linha se precisar do EstoqueFinal
     }
 
     public class DashboardIndexViewModel
-{
-    public NotaEntrega NotaEntrega { get; set; }
-    public NotaSaida NotaSaida { get; set; }
-    // Adicione outros campos que sua página precisar
-}
+    {
+        public NotaEntrega NotaEntrega { get; set; }
+        public NotaSaida NotaSaida { get; set; }
+        // Adicione outros campos que sua página precisar
+    }
+    public class GiroEstoqueViewModel
+    {
+        public Produto Produto { get; set; }
+        public int Vendas { get; set; }
+        public decimal EstoqueMedio { get; set; }
+        public decimal Giro { get; set; }
+    }
 }
