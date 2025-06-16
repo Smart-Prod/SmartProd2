@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SmartProd.Models;
 using SmartProd.Sevices;
 
@@ -10,6 +11,7 @@ namespace SmartProd.Controllers
 {
     public class EmpresaController : Controller
     {
+        
         private readonly ReceitaWsService _receitaWs;
         private UserManager<ApplicationEmpresa> _userManager;
 
@@ -18,11 +20,13 @@ namespace SmartProd.Controllers
         {
             this._userManager = userManager;
             this._receitaWs = receitaWs;
+
         }
         public IActionResult Cadastrar()
         {
             return View();
         }
+
         [HttpGet]
         public async Task<IActionResult> BuscarCnpj(string cnpj)
         {
@@ -37,7 +41,6 @@ namespace SmartProd.Controllers
             }
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Cadastrar(Empresa empresa)
         {
@@ -45,21 +48,14 @@ namespace SmartProd.Controllers
             {
                 try
                 {
-                    // Consulta API da Receita WS para obter dados da empresa via CNPJ
-                    var dadosCnpj = await _receitaWs.ConsultarCnpjAsync(empresa.Cnpj!);
+                    
 
-                    // Preenche os dados da empresa com os retornados da API
-                    empresa.RazaoSocial = dadosCnpj.Nome;
-                    empresa.NomeFantasia = string.IsNullOrWhiteSpace(dadosCnpj.Fantasia) ? dadosCnpj.Nome : dadosCnpj.Fantasia;
-                    empresa.Email ??= dadosCnpj.Email;
-                    empresa.Telefone ??= dadosCnpj.Telefone;
-
+                    // Monta objeto para Identity
                     ApplicationEmpresa appempresa = new ApplicationEmpresa();
 
                     string nomeFantasia = empresa.NomeFantasia?.Replace(" ", "") ?? "";
                     var normalizedString = nomeFantasia.Normalize(NormalizationForm.FormD);
 
-                    // Remove os caracteres de acentuação
                     StringBuilder sb = new StringBuilder();
                     foreach (char c in normalizedString)
                     {
@@ -70,8 +66,6 @@ namespace SmartProd.Controllers
                     }
 
                     string userName = sb.ToString().Normalize(NormalizationForm.FormC);
-
-                    // Remove caracteres especiais
                     userName = Regex.Replace(userName, @"[^a-zA-Z0-9]", "");
 
                     appempresa.UserName = userName;
@@ -94,19 +88,17 @@ namespace SmartProd.Controllers
                         {
                             ModelState.AddModelError("", error.Description);
                         }
-                       
                     }
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("", $"Erro ao consultar CNPJ: {ex.Message}");
+                    ModelState.AddModelError("", $"Erro ao cadastrar: {ex.Message}");
                 }
             }
 
             // Retorna a mesma view com os erros de validação
             return View(empresa);
         }
-
         public ActionResult CadastroSucesso()
         {
             return View();

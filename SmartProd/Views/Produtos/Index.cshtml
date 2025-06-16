@@ -23,7 +23,7 @@
             @foreach (var item in categoriaGrupo)
             {
                 <div class="col">
-                    <div class="card h-100" data-produto-id="@item.Id">
+                    <div class="card h-100" data-produto-id="@item.Id" data-estoque-atual="0">
                         @if (!string.IsNullOrEmpty(item.Imagem))
                         {
                             <img src="@("/" + item.Imagem)" alt="@item.Nome" class="img-fluid" style="width:90px;height:90px;" />

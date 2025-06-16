@@ -175,7 +175,7 @@ namespace SmartProd.Controllers
 
             await _context.Produto.DeleteManyAsync(filter);
             // 🔥 Deletar o estoque relacionado a esses produtos
-            var filterEstoque = Builders<Estoque>.Filter.In(e => e.Produto.Id, selectedIds);
+            var filterEstoque = Builders<Estoque>.Filter.In(e => e.Produto!.Id, selectedIds);
             await _context.Estoque.DeleteManyAsync(filterEstoque);
 
             return Json(new { success = true });
