@@ -1,5 +1,6 @@
 
 
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -394,4 +395,82 @@ body {
 .dashboard-box > img {
     width: 100px;
     height: 100px;
+}
+
+/* Imagem de preview no cadastro */
+#imagePreview {
+    display: block;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+}
+
+/* Ajusta espaçamento dos campos */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Título da página */
+h1, h4 {
+    text-align: center;
+    color: #333;
+}
+
+/* Estilização do botão submit (usa classe existente se quiser) */
+input[type="submit"] {
+    background: #f58220;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+    input[type="submit"]:hover {
+        background: #e56c0b;
+    }
+
+/* Link de voltar */
+a {
+    color: #f58220;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+/* Responsivo para tela menor */
+@media (max-width: 600px) {
+    .cadastro-container, .cadastro-container2 {
+        padding: 1rem;
+        width: 90%;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    #imagePreview {
+        width: 100px;
+        height: 100px;
+    }
+}
+.form-container-centralizado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    max-width: 600px;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex-direction: column;
 }
