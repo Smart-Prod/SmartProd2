@@ -1,4 +1,4 @@
-
+@import 'dashboard.css';
 
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -44,7 +44,7 @@ body {
 .divheader {
     width: 100%;
     display: flex;
-    justify-content: space-between; /* Logo à esquerda, links à direita */
+    justify-content: space-between; /* Logo ï¿½ esquerda, links ï¿½ direita */
     align-items: center;
 }
 
@@ -57,7 +57,7 @@ body {
     .divheader > div {
         display: flex;
         align-items: center;
-        gap: 2rem; /* Espaçamento entre os dois <ul> */
+        gap: 2rem; /* Espaï¿½amento entre os dois <ul> */
     }
 
     .divheader ul {
@@ -408,18 +408,18 @@ body {
     margin-bottom: 1rem;
 }
 
-/* Ajusta espaçamento dos campos */
+/* Ajusta espaï¿½amento dos campos */
 .form-group {
     margin-bottom: 1.5rem;
 }
 
-/* Título da página */
+/* Tï¿½tulo da pï¿½gina */
 h1, h4 {
     text-align: center;
     color: #333;
 }
 
-/* Estilização do botão submit (usa classe existente se quiser) */
+/* Estilizaï¿½ï¿½o do botï¿½o submit (usa classe existente se quiser) */
 input[type="submit"] {
     background: #f58220;
     color: white;

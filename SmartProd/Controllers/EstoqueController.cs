@@ -159,6 +159,24 @@ namespace SmartProd.Controllers
             }
 
             return RedirectToAction("Index");
+
+        }
+        private async Task PreencherProdutosViewBag(string userId)
+        {
+            var produtos = await _context.Produto.Find(p => p.IdUsuario == userId).ToListAsync();
+            var estoques = await _context.Estoque.Find(e => e.IdUsuario == userId).ToListAsync();
+            var produtosParaView = produtos.Select(p => {
+                var estoque = estoques.FirstOrDefault(e => e.IdProduto == p.Id.ToString());
+                return new
+                {
+                    Id = p.Id,
+                    Nome = p.Nome,
+                    Preco = p.Preco,
+                    EstoqueMinimo = p.EstoqueMinimo,
+                    EstoqueAtual = estoque?.EstoqueAtual ?? 0
+                };
+            }).ToList();
+            ViewBag.Produtos = produtosParaView;
         }
         
 

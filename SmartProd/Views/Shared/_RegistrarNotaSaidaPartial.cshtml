@@ -36,9 +36,17 @@
                         <td>
                             <select name="Itens[0].IdProduto" class="form-control" style="width: 160px;" onchange="atualizarPrecoUnitario(this)">
                                 <option value="">-- Selecione --</option>
-                                @foreach (var produto in ViewBag.Produtos)
+                                @if (ViewBag.Produtos != null)
                                 {
-                                    <option value="@produto.Id" data-preco="@produto.Preco" data-estoque-atual="@produto.EstoqueAtual" data-estoque-minimo="@produto.EstoqueMinimo">@produto.Nome</option>
+                                    foreach (var produto in ViewBag.Produtos)
+                                    {
+                                        <option value="@produto.Id" data-preco="@produto.Preco" data-estoque-atual="@produto.EstoqueAtual" data-estoque-minimo="@produto.EstoqueMinimo">@produto.Nome</option>
+                                    }
+                                }else
+                                {
+                                    ModelState.AddModelError("", $"Estoque insuficiente para o produto {item.IdProduto}");
+                                    await PreencherProdutosViewBag(userId);
+                                    return View("Index", await _context.Estoque.Find(_ => true).ToListAsync());
                                 }
                             </select>
                         </td>

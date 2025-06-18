@@ -72,9 +72,14 @@
     </tbody>
 </table>
 
-<canvas id="graficoMovPorNota" ></canvas>
+<div class="grafico">
+    <canvas id="graficoMovPorNota"></canvas>
+    <canvas id="graficoCusto"></canvas>
+    <canvas id="graficoFatuaramento"></canvas>
+    <canvas id="graficoSaldo"></canvas>
+</div>
 
- Modal Detalhe Nota de Entrega 
+<!-- Modal Detalhe Nota de Entrega 
 <div class="modal fade" id="modalNotaEntregaDetalhe" tabindex="-1" aria-labelledby="modalNotaEntregaDetalheLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -102,12 +107,13 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
 @section Scripts {
     <script>
-         var ctx = document.getElementById('graficoMovPorNota').getContext('2d');
+         // Gráfico Movimentação por Nota
+        var ctx = document.getElementById('graficoMovPorNota').getContext('2d');
         var chart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(notas)),
                 datasets: [
@@ -128,6 +134,71 @@
                 scales: {
                     x: { stacked: true },
                     y: { beginAtZero: true, stacked: true }
+                }
+            }
+        });
+
+        // Gráfico Custo por Produto
+        var ctxCusto = document.getElementById('graficoCusto').getContext('2d');
+        var dados = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@ViewBag.Agrupado));
+        new Chart(ctxCusto, {
+            type: 'bar',
+            data: {
+                labels: dados.map(d => d.Produto),
+                datasets: [{
+                    label: 'Custo Total',
+                    data: dados.map(d => d.CustoTotal),
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Gráfico de Faturamento
+        var ctxFaturamento = document.getElementById('graficoFatuaramento').getContext('2d');
+        var dadosFaturamento = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@ViewBag.Faturamento)); // [{Mes: 'Jan', Valor: 1000}, ...]
+        new Chart(ctxFaturamento, {
+            type: 'bar',
+            data: {
+                labels: dadosFaturamento.map(d => d.Mes),
+                datasets: [{
+                    label: 'Faturamento',
+                    data: dadosFaturamento.map(d => d.Valor),
+                    backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        // Gráfico de Saldo
+        var ctxSaldo = document.getElementById('graficoSaldo').getContext('2d');
+        var dadosSaldo = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@ViewBag.Saldo)); // [{Mes: 'Jan', Valor: 500}, ...]
+        new Chart(ctxSaldo, {
+            type: 'line',
+            data: {
+                labels: dadosSaldo.map(d => d.Mes),
+                datasets: [{
+                    label: 'Saldo',
+                    data: dadosSaldo.map(d => d.Valor),
+                    backgroundColor: 'rgba(255, 206, 86, 0.6)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
                 }
             }
         });
