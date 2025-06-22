@@ -1,7 +1,7 @@
 
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 body {
@@ -198,7 +198,7 @@ body {
     font-weight: bold;
 }
 
-.cadastro-container {
+/*.cadastro-container {
     width: 900px;
     background: #fff;
     padding: 5rem;
@@ -207,6 +207,19 @@ body {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     display: flex;
     flex-direction: column;
+    height: 800px;
+}*/
+
+.form-container {
+    width: 670px;
+    background: #fff;
+    padding: 1rem;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    height: 770px;
 }
 
 .cadastro-logo {
@@ -377,3 +390,307 @@ body {
         .cadastro-container p a:hover {
             text-decoration: underline;
         }
+
+/* ==== Estilização específica para o Dashboard ==== */
+
+.dashboard-container {
+    padding: 1rem 2rem;
+}
+
+    /* Cabeçalhos compactos */
+    .dashboard-container h2,
+    .dashboard-container h3 {
+        margin: 0.5rem 0 1rem 0;
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+
+    /* Tabelas com espaçamento reduzido */
+    .dashboard-container table {
+        margin-bottom: 1.5rem;
+    }
+
+        .dashboard-container table th,
+        .dashboard-container table td {
+            padding: 6px 10px;
+            font-size: 13px;
+            vertical-align: middle;
+        }
+
+    /* Links das notas */
+    .dashboard-container .link-nota {
+        color: #0d6efd;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .dashboard-container .link-nota:hover {
+            text-decoration: underline;
+        }
+
+    /* Modal compacto */
+    /*.dashboard-container .modal-content {
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .dashboard-container .modal-header,
+    .dashboard-container .modal-footer {
+        padding: 10px 15px;
+    }
+
+    .dashboard-container .modal-title {
+        font-size: 16px;
+    }*/
+
+    /* Estilo para alertas visuais */
+    .dashboard-container .text-danger {
+        color: red;
+        font-size: 0.9rem;
+    }
+
+    .dashboard-container .text-success {
+        color: green;
+        font-size: 0.9rem;
+    }
+
+    /* Estilo da tabela para visual limpo */
+    .dashboard-container .table th {
+        background-color: #f8f8f8;
+        font-weight: 600;
+    }
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 1rem;
+    }
+
+        .dashboard-container h2,
+        .dashboard-container h3 {
+            font-size: 1.1rem;
+        }
+
+        .dashboard-container table th,
+        .dashboard-container table td {
+            font-size: 12px;
+            padding: 5px;
+        }
+}
+
+/* ===== Estilo para a tela de Cadastro de Produto ===== */
+
+.produto-container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+    .produto-container h1,
+    .produto-container h4 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .produto-container .form-group {
+        margin-bottom: 20px;
+    }
+
+    .produto-container input[type="text"],
+    .produto-container input[type="number"],
+    .produto-container input[type="file"],
+    .produto-container .form-control {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .produto-container .btn-primary {
+        background-color: #f57c00; /* laranja */
+        border-color: #ef6c00;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        width: 100%;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+        .produto-container .btn-primary:hover {
+            background-color: #e65100;
+            border-color: #d84315;
+        }
+
+    .produto-container a {
+        color: #f57c00;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+        .produto-container a:hover {
+            text-decoration: underline;
+        }
+
+#imagePreview {
+    display: none;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.produtos-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+    .produtos-container h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2.5rem;
+    }
+
+    .produtos-container h2 {
+        margin-top: 40px;
+        margin-bottom: 20px;
+        color: #333;
+        border-bottom: 2px solid #f57c00;
+        padding-bottom: 5px;
+        font-size: 1.5rem;
+    }
+
+    .produtos-container .btn-primary {
+        background-color: #f57c00; /* laranja */
+        border-color: #ef6c00;
+        color: white;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        margin-bottom: 20px;
+    }
+
+        .produtos-container .btn-primary:hover {
+            background-color: #e65100;
+            border-color: #d84315;
+        }
+
+    .produtos-container .card {
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s;
+    }
+
+        .produtos-container .card:hover {
+            transform: translateY(-3px);
+        }
+
+        .produtos-container .card img {
+            display: block;
+            margin: 15px auto 0;
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+    .produtos-container .card-title a {
+        color: #f57c00;
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+        .produtos-container .card-title a:hover {
+            text-decoration: underline;
+        }
+
+    .produtos-container .card-footer {
+        background-color: #fafafa;
+        border-top: none;
+        padding: 12px 16px;
+    }
+
+    .produtos-container .form-check-input {
+        margin-right: 8px;
+    }
+
+    .produtos-container form {
+        margin-bottom: 40px;
+    }
+
+/* Botões principais de ações (Entrega e Saída) */
+.btn-warning {
+    background-color: #f57c00;
+    border-color: #f57c00;
+    color: #fff;
+    font-weight: bold;
+}
+
+    .btn-warning:hover {
+        background-color: #ef6c00;
+        border-color: #ef6c00;
+    }
+
+/* Botão de saída já usa o btn-danger do Bootstrap, apenas reforçamos o peso */
+.btn-danger {
+    font-weight: bold;
+}
+
+/* Estilo da tabela de estoque */
+table.table {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    background-color: #fff;
+}
+
+table thead th {
+    background-color: #f9f9f9;
+    font-weight: 600;
+    border-bottom: 2px solid #dee2e6;
+}
+
+/* Linhas de alerta (estoque crítico) */
+.table-danger {
+    background-color: #ffebee !important;
+    color: #c62828 !important;
+}
+
+/* Modal */
+.modal-content {
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Modal headers com cores específicas */
+.modal-header.bg-warning {
+    background-color: #f57c00 !important;
+    color: #fff;
+}
+
+.modal-header.bg-danger {
+    background-color: #d32f2f !important;
+    color: #fff;
+}
+
+.modal-title {
+    font-weight: 600;
+}
+
+/* Alerta de produtos críticos */
+.alert-danger {
+    border-left: 6px solid #d32f2f;
+    background-color: #fdecea;
+    color: #b71c1c;
+    font-size: 16px;
+}
+
+/* Ícone opcional para alertas (se usar Bootstrap Icons) */
+.alert i {
+    font-size: 18px;
+}

@@ -1,123 +1,127 @@
 ﻿@model DashboardViewModel
 
-<h2>📊 Dashboard</h2>
-<!-- Produtos com Estoque -->
-<h3>📦 Produtos em Estoque</h3>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Produto</th>
-            <th>Estoque Atual</th>
-            <th>Mínimo</th>
-            <th>Máximo</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.ProdutosEstoque)
-        {
-            <tr class="@(item.EstoqueBaixo ? "table-danger" : "")">
-                <td>@item.Nome</td>
-                <td>@item.EstoqueAtual</td>
-                <td>@item.EstoqueMinimo</td>
-                <td>@item.EstoqueMaximo</td>
-                <td>
-                    @if (item.EstoqueBaixo)
-                    {
-                        <span class="text-danger">Abaixo do mínimo</span>
-                    }
-                    else
-                    {
-                        <span class="text-success">OK</span>
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<!-- Entradas por Produto -->
-<h3>⬆️ Entradas por Produto</h3>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Número da Nota</th>
-            <th>Data</th>
-            <th>Total de Entradas</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var nota in Model.EntradasPorNota)
-        {
-            <tr>
-                <td>
-                    <a href="#" class="link-nota" data-notaid="@nota.NotaId">@nota.NumeroNota</a>
-                </td>
-                <td>@nota.DataNota.ToString("dd/MM/yyyy")</td>
-                <td>@nota.TotalEntrada</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="dashboard-container">
 
 
-<!-- Saídas por Produto -->
-<h3>⬇️ Saídas por Produto</h3>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Produto</th>
-            <th>Total de Saídas</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.SaidasPorProduto)
-        {
-            <tr>
-                <td>@item.Nome</td>
-                <td>@item.TotalSaida</td>
-            </tr>
-        }
-    </tbody>
-</table>
+        <h2>📊 Dashboard</h2>
+        <!-- Produtos com Estoque -->
+        <h3>📦 Produtos em Estoque</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Estoque Atual</th>
+                    <th>Mínimo</th>
+                    <th>Máximo</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ProdutosEstoque)
+                {
+                    <tr class="@(item.EstoqueBaixo ? "table-danger" : "")">
+                        <td>@item.Nome</td>
+                        <td>@item.EstoqueAtual</td>
+                        <td>@item.EstoqueMinimo</td>
+                        <td>@item.EstoqueMaximo</td>
+                        <td>
+                            @if (item.EstoqueBaixo)
+                            {
+                                <span class="text-danger">Abaixo do mínimo</span>
+                            }
+                            else
+                            {
+                                <span class="text-success">OK</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-<div class="modal fade" id="modalNotaDetalhes" tabindex="-1" aria-labelledby="modalNotaLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content" id="conteudo-modal-imprimir">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalNotaLabel">Detalhes da Nota de Entrega</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-            </div>
-            <div class="modal-body" id="modalNotaBody">
-                <!-- Os detalhes da nota serão carregados via AJAX -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" onclick="imprimirNota()">Imprimir</button>
+        <!-- Entradas por Produto -->
+        <h3>⬆️ Entradas por Produto</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Número da Nota</th>
+                    <th>Data</th>
+                    <th>Total de Entradas</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var nota in Model.EntradasPorNota)
+                {
+                    <tr>
+                        <td>
+                            <a href="#" class="link-nota" data-notaid="@nota.NotaId">@nota.NumeroNota</a>
+                        </td>
+                        <td>@nota.DataNota.ToString("dd/MM/yyyy")</td>
+                        <td>@nota.TotalEntrada</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+        <!-- Saídas por Produto -->
+        <h3>⬇️ Saídas por Produto</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Total de Saídas</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.SaidasPorProduto)
+                {
+                    <tr>
+                        <td>@item.Nome</td>
+                        <td>@item.TotalSaida</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="modal fade" id="modalNotaDetalhes" tabindex="-1" aria-labelledby="modalNotaLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" id="conteudo-modal-imprimir">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalNotaLabel">Detalhes da Nota de Entrega</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body" id="modalNotaBody">
+                        <!-- Os detalhes da nota serão carregados via AJAX -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" onclick="imprimirNota()">Imprimir</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-@section Scripts {
-    <script>
-        $(document).on('click', '.link-nota', function (e) {
-            e.preventDefault();
-            var notaId = $(this).data('notaid');
-            $('#modalNotaBody').html('<div class="text-center"><span class="spinner-border"></span></div>');
-            $('#modalNotaDetalhes').modal('show');
-            $.get('@Url.Action("DetalhesNotaEntrada", "Dashboard")', { id: notaId }, function (data) {
-                $('#modalNotaBody').html(data);
-            });
-        });
+        @section Scripts {
+            <script>
+                $(document).on('click', '.link-nota', function (e) {
+                    e.preventDefault();
+                    var notaId = $(this).data('notaid');
+                    $('#modalNotaBody').html('<div class="text-center"><span class="spinner-border"></span></div>');
+                    $('#modalNotaDetalhes').modal('show');
+                    $.get('@Url.Action("DetalhesNotaEntrada", "Dashboard")', { id: notaId }, function (data) {
+                        $('#modalNotaBody').html(data);
+                    });
+                });
 
-        function imprimirNota() {
-            var printContents = document.getElementById('conteudo-modal-imprimir').innerHTML;
-            var originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
-            window.print();
-            document.body.innerHTML = originalContents;
-            location.reload();
+                function imprimirNota() {
+                    var printContents = document.getElementById('conteudo-modal-imprimir').innerHTML;
+                    var originalContents = document.body.innerHTML;
+                    document.body.innerHTML = printContents;
+                    window.print();
+                    document.body.innerHTML = originalContents;
+                    location.reload();
+                }
+            </script>
         }
-    </script>
-}
+</div>
