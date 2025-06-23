@@ -393,9 +393,6 @@ body {
 
 /* ==== Estilização específica para o Dashboard ==== */
 
-.dashboard-container {
-    padding: 1rem 2rem;
-}
 
     /* Cabeçalhos compactos */
     .dashboard-container h2,
@@ -693,4 +690,72 @@ table thead th {
 /* Ícone opcional para alertas (se usar Bootstrap Icons) */
 .alert i {
     font-size: 18px;
+}
+
+
+/*-------------css dos relatorios --------------------------*/
+
+.estoque-relatorios-container {
+    max-width: 1000px;
+    margin: 3rem auto;
+    background: #fff;
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+    .estoque-relatorios-container h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+        color: #333;
+    }
+
+.relatorio-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    background: #f9f9f9;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    transition: background 0.3s ease;
+}
+
+    .relatorio-item:hover {
+        background: #fef4ed;
+    }
+
+.relatorio-icon {
+    font-size: 1.8rem;
+    color: #f58220;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.relatorio-conteudo {
+    flex-grow: 1;
+}
+
+    .relatorio-conteudo a {
+        display: inline-block;
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: #f58220;
+        text-decoration: none;
+        margin-bottom: 0.3rem;
+        transition: color 0.3s ease;
+    }
+
+        .relatorio-conteudo a:hover {
+            color: #d76600;
+            text-decoration: underline;
+        }
+
+    .relatorio-conteudo p {
+        font-size: 0.95rem;
+        color: #555;
+        line-height: 1.4;
+    }
 }

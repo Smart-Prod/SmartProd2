@@ -1,50 +1,55 @@
-﻿
-@{
-	ViewData["Title"] = "Relatórios de Estoque";	
+﻿@{
+    ViewData["Title"] = "Relatórios de Estoque";
 }
 
-<h1>Relatórios de Estoque</h1>
+<div class="estoque-relatorios-container">
+    <h1>Relatórios de Estoque</h1>
 
+    <div class="relatorio-item">
+        <i class="bi bi-file-earmark-bar-graph-fill relatorio-icon"></i>
+        <div class="relatorio-conteudo">
+            <a asp-action="ResumoEstoque">Resumo de Estoque</a>
+            <p>Resumo de todos os produtos em estoque, incluindo saldo atual, inventário e produtos com estoque mínimo e máximo definidos.</p>
+        </div>
+    </div>
 
-<div>
-	<i class="bi bi-file-earmark-bar-graph-fill"></i>
-	<a asp-action="ResumoEstoque">Resumo de Estoque</a>
-	<p>
-		Resumo de todos os produtos em estoque, incluindo saldo atual, inventário e produtos com estoque mínimo e máximo definidos.
-	</p>
-</div>
-<div>
-	<i class="bi bi-file-earmark-bar-graph-fill"></i>
-	<a asp-action="Movimentacoes">Movimentações de Estoque</a>
-	<p>
-		Relatório detalhado de todas as movimentações de estoque, incluindo entradas e saídas.
-	</p>
-</div>
-<div>
-	<i class="bi bi-file-earmark-bar-graph-fill"></i>
-	<a asp-action="Giro">Giro de Estoque</a>
-	<p>
-		Análise do giro de estoque, identificando produtos com maior e menor rotatividade.
-	</p>
-</div>
-<div>
-	<i class="bi bi-file-earmark-bar-graph-fill"></i>
-	<a asp-action="Custo">Custo de Estoque</a>
-	<p>
-		Relatório de custo de estoque, incluindo custo médio ponderado e total investido em estoque.
-	</p>
-</div>
-<div>
-	<i class="bi bi-file-earmark-bar-graph-fill"></i>
-	<a asp-action="CurvaABC">CurvaABC de Estoque</a>
-	<p>
-		Análise da curva ABC de estoque, classificando produtos em categorias A, B e C com base no valor de consumo.
-	</p>
-</div>
-<div>
-	<i class="bi bi-file-earmark-bar-graph-fill"></i>
-	<a asp-action="ProdutosParados">Relatório de Produto Parados</a>
-	<p>
-		Relatório de produtos que estão parados ou obsoletos, sem movimentação nos últimos meses.
-	</p>
+    <div class="relatorio-item">
+        <i class="bi bi-file-earmark-bar-graph-fill relatorio-icon"></i>
+        <div class="relatorio-conteudo">
+            <a asp-action="Movimentacoes">Movimentações de Estoque</a>
+            <p>Relatório detalhado de todas as movimentações de estoque, incluindo entradas e saídas.</p>
+        </div>
+    </div>
+
+    <div class="relatorio-item">
+        <i class="bi bi-file-earmark-bar-graph-fill relatorio-icon"></i>
+        <div class="relatorio-conteudo">
+            <a asp-action="Giro">Giro de Estoque</a>
+            <p>Análise do giro de estoque, identificando produtos com maior e menor rotatividade.</p>
+        </div>
+    </div>
+
+    <div class="relatorio-item">
+        <i class="bi bi-file-earmark-bar-graph-fill relatorio-icon"></i>
+        <div class="relatorio-conteudo">
+            <a asp-action="Custo">Custo de Estoque</a>
+            <p>Relatório de custo de estoque, incluindo custo médio ponderado e total investido em estoque.</p>
+        </div>
+    </div>
+
+    <div class="relatorio-item">
+        <i class="bi bi-file-earmark-bar-graph-fill relatorio-icon"></i>
+        <div class="relatorio-conteudo">
+            <a asp-action="CurvaABC">CurvaABC de Estoque</a>
+            <p>Análise da curva ABC de estoque, classificando produtos em categorias A, B e C com base no valor de consumo.</p>
+        </div>
+    </div>
+
+    <div class="relatorio-item">
+        <i class="bi bi-file-earmark-bar-graph-fill relatorio-icon"></i>
+        <div class="relatorio-conteudo">
+            <a asp-action="ProdutosParados">Relatório de Produto Parados</a>
+            <p>Relatório de produtos que estão parados ou obsoletos, sem movimentação nos últimos meses.</p>
+        </div>
+    </div>
 </div>
