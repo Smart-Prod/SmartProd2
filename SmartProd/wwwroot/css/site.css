@@ -1,6 +1,34 @@
 @import 'dashboard.css';
 
+.login-btn {
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--font-color);
+    border-bottom: 2px solid var(--main-color);
+    border-radius: 0;
+    padding: 1rem 0 .5rem 0;
+    transition: all .2s ease;
+}
 
+    .login-btn:hover {
+        transform: scale(0.95);
+        color: var(--main-color);
+    }
+
+.signup-btn {
+    font-weight: bold;
+    text-decoration: none;
+    color: #FFFFFF;
+    border-radius: 10px;
+    background-color: var(--second-color);
+    padding: 1rem 2rem;
+    margin-left: 1.5rem;
+    transition: background-color .2s ease;
+}
+
+    .signup-btn:hover {
+        background-color: var(--main-color);
+    }
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -24,7 +52,7 @@ body {
     height:70px
 }
 
-.tml {
+.html {
   position: relative;
   min-height: 100%;
 }

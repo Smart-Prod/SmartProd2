@@ -1,0 +1,256 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    list-style: none;
+}
+
+:root {
+    font-family: "Poppins", sans-serif;
+    
+    --bg-color: #F3F4F6; /* cinza claro */
+    --main-color: #F97316; /* laranja */
+    --second-color: #EA580C; /* laranja escuro (hover) */
+    --font-color: #1F2937; /* cinza escuro */
+}
+
+
+section {
+    display: flex;
+    
+    padding: 7rem 7% 2rem;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+}
+
+.title {
+    font-weight: 1000;
+    font-size: 4rem;
+    color: var(--font-color);
+}
+
+a {
+    text-decoration: none;
+    border: 1px none;
+    border-radius: 100px;
+    display: inline-block;
+}
+
+p {
+    color: #666;
+    margin-top: 1.6rem;
+}
+
+span {
+    color: var(--main-color);
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* HOME */
+
+.home {
+    align-content: center;
+    padding: 7rem 4% 0;
+}
+
+.home-text {
+    width: 50%;
+    align-content: center;
+}
+
+.about-btn {
+    text-decoration: none;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: var(--second-color);
+    font-size: 1.5rem;
+    border-radius: 10px;
+    padding: 1.2rem 2.7rem;
+    margin-top: 5rem;
+}
+
+    .about-btn:hover {
+        background-color: var(--main-color);
+        color: #FFFFFF;
+    }
+
+.meet-btn {
+    font-weight: 600;
+    color: var(--font-color);
+    border-bottom: 2px solid var(--main-color);
+    border-radius: 0;
+    padding: 1rem 0 .5rem 0;
+    margin-left: 20px;
+    transition: all .2s ease;
+}
+
+    .meet-btn:hover {
+        transform: scale(0.95);
+    }
+
+.home-img {
+    width: 40%;
+    align-content: center;
+    text-align: center;
+}
+
+    .home-img img {
+        width: 80%;
+    }
+
+/* ABOUT */
+
+.about-us {
+    padding: 7rem 7% 0;
+    align-content: center;
+    min-height: 50vh;
+    flex-direction: row-reverse;
+}
+
+.about-img {
+    width: 40%;
+    align-content: center;
+    text-align: center;
+}
+
+    .about-img img {
+        width: 80%;
+    }
+
+.about-text {
+    width: 70%;
+    align-content: center;
+}
+
+    .about-text .meet-btn {
+        font-weight: 600;
+        border-bottom: 2px solid var(--main-color);
+        border-radius: 0;
+        margin: 0;
+        padding: 5rem 0 .5rem 0;
+        transition: all .2s ease;
+        float: right;
+    }
+
+/* FOR TEACHER */
+
+.for-teacher {
+    min-height: 50vh;
+    padding: 0 7%;
+    align-content: center;
+}
+
+.teacher-text {
+    width: 50%;
+    align-content: center;
+}
+
+.teacher-img {
+    width: 50%;
+    align-content: center;
+    text-align: center;
+}
+
+.teacher-text .meet-btn {
+    font-weight: 600;
+    color: var(--font-color);
+    border-bottom: 2px solid var(--main-color);
+    border-radius: 0;
+    margin: 0;
+    padding: 5rem 0 .5rem 0;
+    transition: all .2s ease;
+}
+
+/* CONTACT */
+
+.contact {
+    padding: 7rem 7%;
+    align-content: center;
+    flex-direction: row-reverse;
+    min-height: 100vh;
+}
+
+    .contact form {
+        width: 50%;
+        align-content: center;
+        margin: 0;
+        padding: 5rem;
+    }
+
+.contact-text {
+    padding: 5rem;
+    width: 50%;
+    align-content: center;
+}
+
+.social-icons {
+    display: flex;
+    margin-top: 3rem;
+}
+
+    .social-icons i {
+        font-size: 4rem;
+        color: var(--font-color);
+        padding-right: 2rem;
+        transition: .2s all ease;
+    }
+
+        .social-icons i:hover {
+            color: var(--main-color);
+        }
+
+/* RESPONSIVO */
+
+@media (max-width: 768px) {
+    .home, .about-us, .for-teacher, .contact {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .title {
+        font-size: 3rem;
+    }
+
+    [class$="-text"] {
+        width: 100%;
+        align-content: center;
+        text-align: center;
+    }
+
+    [class$="-img"] {
+        width: 95%;
+        margin: auto;
+    }
+
+    .about-img {
+        width: 95%;
+        margin: auto;
+    }
+
+    .about-text .meet-btn, .meet-btn {
+        margin: auto;
+        padding: 5rem 0 .5rem 0;
+        float: none;
+    }
+
+    .for-teacher {
+        padding-top: 2rem;
+    }
+
+    .contact form {
+        width: 100%;
+        padding: 0rem;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}

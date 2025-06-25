@@ -1,0 +1,208 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --bg-color: #F3F4F6; /* cinza claro */
+    --main-color: #F97316; /* laranja */
+    --second-color: #EA580C; /* laranja escuro */
+    --font-color: #1F2937; /* cinza escuro */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-color);
+}
+
+button {
+    all: unset;
+    box-sizing: border-box;
+}
+
+
+
+#page {
+    height: 100vh;
+}
+
+.flex {
+    display: flex;
+}
+
+#page > * {
+    width: 50%;
+}
+
+#page img {
+    width: 50%;
+    object-fit: cover;
+}
+
+#page > div {
+    padding: 4rem 11.2rem;
+}
+
+.main-login {
+    margin-top: 11.4rem;
+}
+
+.main-signup {
+    margin-top: 5rem;
+}
+
+.headline {
+    max-width: 35rem;
+}
+
+h1 {
+    font-size: 3rem;
+    line-height: 55px;
+    color: var(--font-color);
+}
+
+form {
+    margin-top: 4rem;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+label {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color: var(--font-color);
+}
+
+    label + a {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 21px;
+        color: var(--main-color);
+    }
+
+::placeholder {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    line-height: 21px;
+    color: #ccc;
+}
+
+input,
+textarea {
+    font-family: "Poppins", sans-serif;
+    width: 100%;
+    padding: 1.6rem 1.2rem;
+    background-color: var(--bg-color);
+    border: 0.1rem solid #ccc;
+    border-radius: 0.4rem;
+    margin-top: 0.8rem;
+    font-size: 14px;
+    line-height: 21px;
+    color: var(--font-color);
+}
+
+    input:focus,
+    input:hover,
+    textarea:focus,
+    textarea:hover {
+        border: 1px solid var(--main-color);
+        outline: 0;
+    }
+
+    form input:focus,
+    textarea:focus {
+        outline: 1px solid var(--main-color);
+    }
+
+form .input-wrapper + .input-wrapper {
+    margin-top: 1.6em;
+}
+
+textarea {
+    min-height: 10rem;
+    resize: none;
+}
+
+.label-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+::-ms-reveal {
+    display: none;
+}
+
+.eye {
+    cursor: pointer;
+    font-size: 3rem;
+    color: #ccc;
+    position: absolute;
+    top: 50%;
+    right: 2%;
+    transform: translateY(-50%);
+}
+
+#hide {
+    display: none;
+}
+
+form button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.6rem 2.4rem;
+    background-color: var(--second-color);
+    border-radius: 0.4rem;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+    margin-block: 3.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+    form button:focus {
+        outline: 2px solid black;
+        border-radius: 0.2rem;
+    }
+
+    form button:hover {
+        background-color: var(--main-color);
+    }
+
+.create-account p {
+    color: #475569;
+}
+
+@media (max-width: 900px) {
+    #page > * {
+        width: 100%;
+    }
+
+    #page > img {
+        display: none;
+    }
+
+    #page > div {
+        padding: 11rem;
+    }
+
+    main {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    #page > div {
+        padding: 4rem;
+    }
+}

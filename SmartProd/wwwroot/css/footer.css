@@ -1,0 +1,50 @@
+﻿footer {
+    background-color: #1F2937; /* substituindo #333 por cinza escuro da paleta */
+    padding: 2rem;
+    text-align: center;
+}
+
+.footer-links a {
+    margin: 1rem;
+    color: #FFFFFF;
+    transition: .2s all ease;
+    font-weight: 500;
+}
+
+    .footer-links a:hover {
+        color: var(--main-color); /* laranja */
+    }
+
+.back-to-top {
+    position: relative;
+    padding: 1rem;
+    margin: 2rem 2rem 0;
+    background-color: var(--second-color); /* laranja escuro */
+    color: var(--bg-color); /* cinza claro */
+    border: none;
+    border-radius: 1rem;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    transition: background-color .2s ease;
+}
+
+    .back-to-top:hover {
+        background-color: var(--main-color); /* laranja */
+    }
+
+.copy {
+    width: 100%;
+    background-color: var(--main-color); /* laranja */
+    text-align: center;
+}
+
+    .copy h3 {
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: var(--bg-color); /* texto branco/cinza claro */
+        margin: 0;
+        display: inline-block;
+        padding: 1rem;
+    }

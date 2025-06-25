@@ -11,6 +11,7 @@
     
     <!-- CSS Geral -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="~/css/landpage.css" rel="stylesheet" />
 </head>
 <body>
     <header class="headerup">
@@ -34,6 +35,23 @@
                                 <a asp-area="" asp-controller="Relatorio" asp-action="Index">Relatórios</a>
                             </li>
                         }
+                        else
+                        {
+                            <div>
+                                <ul class="nav-links">
+                                    <li>
+                                        <a href="#about-us">Sobre</a>
+                                    </li>
+                                    <li>
+                                        <a href="#contact">Contato</a>
+
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Home" asp-action="Devs">Desenvolvedores</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        }
                     </ul>
                     <ul>
                         @if (User?.Identity?.IsAuthenticated ?? false)
@@ -51,10 +69,10 @@
                         else
                         {
                             <li>
-                                <a asp-area="" asp-controller="Empresa" asp-action="Cadastrar">Criar</a>
+                                <a asp-area="" asp-controller="Empresa" asp-action="Cadastrar" class="signup-btn">Criar</a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="Account" asp-action="Login">Entrar</a>
+                                <a asp-area="" asp-controller="Account" asp-action="Login" class="login-btn">Entrar</a>
                             </li>
                         }
                     </ul>

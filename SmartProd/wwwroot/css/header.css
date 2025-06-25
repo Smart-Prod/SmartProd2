@@ -1,0 +1,109 @@
+﻿header {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding: 1rem 2rem; 
+    justify-content: space-between; 
+    align-items: center;
+    background-color: var(--bg-color);
+    margin-top: 1rem;
+}
+
+.logoLink {
+    width: auto;
+    max-width: 30rem;
+    display: flex;
+    align-items: center;
+    margin-right: 2rem; 
+}
+
+
+.logo {
+    height: 8rem;
+    width: auto;
+    object-fit: contain;
+    cursor: pointer;
+    transition: .3s;
+}
+
+nav {
+    align-content: center;
+}
+
+.nav-links {
+    display: flex;
+    gap: 8rem; /* espaçamento entre os links */
+}
+
+    .nav-links a {
+        align-content: center;
+        border-radius: 0;
+        font-weight: 400;
+        border-bottom: 3px solid transparent;
+        text-decoration: none;
+        color: var(--font-color);
+        transition: all .2s ease;
+    }
+
+        .nav-links a:hover {
+            color: var(--main-color);
+            border-bottom: 3px solid var(--main-color);
+        }
+
+.login-btn {
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--font-color);
+    border-bottom: 2px solid var(--main-color);
+    border-radius: 0;
+    padding: 1rem 0 .5rem 0;
+    transition: all .2s ease;
+}
+
+    .login-btn:hover {
+        transform: scale(0.95);
+        color: var(--main-color);
+    }
+
+.signup-btn {
+    font-weight: bold;
+    text-decoration: none;
+    color: #FFFFFF;
+    border-radius: 10px;
+    background-color: var(--second-color);
+    padding: 1rem 2rem;
+    margin-left: 1.5rem;
+    transition: background-color .2s ease;
+}
+
+    .signup-btn:hover {
+        background-color: var(--main-color);
+    }
+
+@media (max-width: 992px) {
+    .nav-links {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .logoLink {
+        margin: 1rem;
+        width: 12rem;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    nav + nav a {
+        font-size: 14px;
+    }
+
+    .signup-btn {
+        padding: 0.5rem 1rem;
+    }
+}

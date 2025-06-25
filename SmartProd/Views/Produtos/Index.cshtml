@@ -7,10 +7,6 @@
 
 <div class="produtos-container">
     <h1>Produtos</h1>
-
-<p>
-    <a asp-action="Create" class="btn btn-primary">Criar Novo</a>
-</p>
 <form id="deleteForm" asp-action="DeleteMultiple" method="post">
     @Html.AntiForgeryToken()
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" disabled id="deleteSelectedBtn">
@@ -20,10 +16,7 @@
         <a asp-action="Create" class="btn btn-primary">Criar Novo</a>
     </p>
 
-    <form id="deleteForm" asp-action="DeleteMultiple" method="post">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" disabled id="deleteSelectedBtn">
-            Excluir Selecionados
-        </button>
+    
 
     @foreach (var categoriaGrupo in produtosPorCategoria)
     {

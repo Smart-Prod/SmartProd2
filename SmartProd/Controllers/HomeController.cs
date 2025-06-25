@@ -20,7 +20,12 @@ namespace SmartProd.Controllers
         public IActionResult Index()
         {
             return View();
-        }      
+        }
+
+        public IActionResult Devs()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

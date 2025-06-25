@@ -2,51 +2,132 @@
     ViewData["Title"] = "Home Page";
 }
 
-<!-- Hero Section -->
-<section class="text-center py-5">
-    <h1 class="display-4 fw-bold">Bem-vindo ao <img src="/Logo.png" alt="SmartProd"  /> </h1>
-    <p class="lead">Otimize sua gestão de produtos e estoque com uma plataforma simples, moderna e eficiente.</p>
-    <a class="btn btn-primary btn-lg mt-3" asp-controller="Empresa" asp-action="Cadastrar">Comece Agora</a>
-</section>
-
-<!-- Sobre nós -->
-<section class="py-5">
-    <h2 class="mb-4">Sobre o SmartProd</h2>
-    <p>
-        O SmartProd é uma solução inteligente para pequenas e médias empresas que precisam controlar estoques, movimentar mercadorias e gerar relatórios com facilidade.
-        Criamos uma interface intuitiva para que sua equipe possa focar no que realmente importa: resultados.
-    </p>
-</section>
-
-<!-- Funcionalidades -->
-<section class="py-5">
-    <h2 class="mb-4">Funcionalidades Principais</h2>
-    <div class="row g-4">
-        <div class="col-md-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Gestão de Produtos</h5>
-                    <p class="card-text">Cadastre e gerencie todos os produtos do seu catálogo de maneira organizada e eficiente.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Controle de Estoque</h5>
-                    <p class="card-text">Registre entradas e saídas de mercadorias com total precisão e acompanhe o saldo atualizado.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Relatórios Detalhados</h5>
-                    <p class="card-text">Gere relatórios para tomada de decisão rápida, com dados atualizados e confiáveis.</p>
-                </div>
-            </div>
-        </div>
+<section class="home" id="home">
+    <div class="home-text">
+        <h2 class="title">
+            GERENCIE SEU <span>ESTOQUE</span> DE FORMA <span>INTELIGENTE</span>
+        </h2>
+        <p>
+            Tenha total controle sobre seus produtos, previsões de reposição e relatórios
+            automáticos. Otimize sua operação e reduza perdas com o SmartProd.
+        </p>
+        <a href="#about-us" class="about-btn">SAIBA MAIS</a>
+        <a asp-controller="Empresa" asp-action="Cadastrar" class="meet-btn">CONHEÇA A PLATAFORMA</a>
+    </div>
+    <div class="home-img">
+        <img src="~/img/images/1.svg" alt="Mockup SmartProd" />
     </div>
 </section>
+
+<section class="about-us" id="about-us">
+    <div class="about-text">
+        <h2 class="title">SOBRE <span>NÓS</span></h2>
+        <p>
+            O <span>SmartProd</span> é uma plataforma desenvolvida para simplificar o controle de estoque da sua empresa.
+            Automatize processos, evite rupturas, receba alertas de produtos com baixo volume e
+            tome decisões baseadas em dados reais e atualizados em tempo real.
+        </p>
+        <a asp-controller="Empresa" asp-action="Cadastrar" class="meet-btn">CONHEÇA A PLATAFORMA</a>
+    </div>
+    <div class="about-img">
+        <img src="~/img/images/3.svg" alt="Sobre o SmartProd" />
+    </div>
+</section>
+
+<section class="for-teacher">
+    <div class="teacher-text">
+        <h2 class="title">RECURSOS <span>ESSENCIAIS</span></h2>
+        <ul>
+            <li>✔ Estoque em tempo real com atualização automática</li>
+            <li>✔ Notificações de reposição de produtos</li>
+            <li>✔ Cadastro completo de produtos e categorias</li>
+            <li>✔ Relatórios de desempenho e histórico de movimentações</li>
+            <li>✔ Interface simples, moderna e responsiva</li>
+        </ul>
+        <a asp-controller="Empresa" asp-action="Cadastrar" class="meet-btn">CONHEÇA A PLATAFORMA</a>
+    </div>
+    <div class="teacher-img">
+        <img src="~/img/images/2.svg" alt="Funcionalidades" />
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <div class="contact-text">
+        <h2 class="title">ENTRE EM <span>CONTATO</span></h2>
+        <p>
+            Entre em contato conosco para sanar dúvidas, discutir interesses e
+            oportunidades de parceria. Estamos abertos para sugestões ou apenas
+            para ter uma conversa.
+        </p>
+        <div class="social-icons">
+            <a href="#" class="socialIcon"><i class="bx bxl-facebook"></i></a>
+            <a href="#" class="socialIcon"><i class="bx bxl-twitter"></i></a>
+            <a href="#" class="socialIcon"><i class="bx bxl-instagram"></i></a>
+            <a href="#" class="socialIcon"><i class="bx bxl-linkedin"></i></a>
+            <a href="#" class="socialIcon"><i class="bx bxl-github"></i></a>
+        </div>
+    </div>
+
+    @* Formulário que envia para o método ContatoController/Enviar *@
+    <form asp-controller="Contato" asp-action="Enviar" method="post" class="contact-form">
+        <div class="input-wrapper">
+            <label for="nome">Nome completo</label>
+            <input id="nome" name="Nome" type="text" placeholder="Digite seu nome completo" required />
+        </div>
+        <div class="input-wrapper">
+            <label for="email">E-mail</label>
+            <input id="email" name="Email" type="email" placeholder="Digite seu email" required />
+        </div>
+        <div class="input-wrapper">
+            <label for="telefone">Telefone</label>
+            <input id="telefone" name="Telefone" type="tel" placeholder="Digite seu telefone" />
+        </div>
+        <div class="input-wrapper">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="Mensagem"
+                      placeholder="Escreva sua mensagem"
+                      maxlength="500"
+                      oninput="contador()"
+                      onfocus="mostrarContador()"
+                      onblur="esconderContador()"></textarea>
+            <div id="contador"></div>
+        </div>
+        <button type="submit">Enviar</button>
+    </form>
+</section>
+
+<footer>
+    <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#about-us">Sobre</a>
+        <a href="#contact">Contato</a>
+        <a asp-controller="Home" asp-action="Devs">Desenvolvedores</a>
+    </div>
+    <div>
+        <p>
+            O SmartProd é uma solução digital pensada para simplificar e
+            automatizar o controle de estoque de pequenas e médias empresas.
+        </p>
+    </div>
+    <button class="back-to-top" onclick="scrollToTop()">Voltar ao topo</button>
+</footer>
+
+<div class="copy">
+    <h3>© 2025 SmartProd | Todos os direitos reservados</h3>
+</div>
+
+<script>
+    function contador() {
+        const textarea = document.getElementById('mensagem');
+        const contador = document.getElementById('contador');
+        contador.innerText = `${textarea.value.length}/500`;
+    }
+
+    function mostrarContador() {
+        document.getElementById('contador').style.display = 'block';
+    }
+
+    function esconderContador() {
+        document.getElementById('contador').style.display = 'none';
+    }
+</script>
