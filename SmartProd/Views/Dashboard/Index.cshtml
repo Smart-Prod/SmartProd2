@@ -1,129 +1,141 @@
 ﻿@model DashboardViewModel
 @{
     ViewData["Title"] = "Dashboard";
+
+    var movimentacoes = Model.MovimentacoesPorNota as IEnumerable<dynamic> ?? new List<dynamic>();
+
+    // Separar por tipo
+    var notas = movimentacoes.Select(x => (string)x.NumeroNota).Distinct().ToList();
+    var entradas = notas
+        .Select(nota => movimentacoes.Where(x => x.NumeroNota == nota && x.Tipo == "Entrada").Sum(x => (int)x.Quantidade))
+        .ToList();
+    var saidas = notas
+        .Select(nota => movimentacoes.Where(x => x.NumeroNota == nota && x.Tipo == "Saída").Sum(x => (int)x.Quantidade))
+        .ToList();
 }
-<div class="dashboard-container">
+
+<h2>📊 Dashboard</h2>
+<div class="dashboard">
+    <div class="dashboard-box">
+        <img src="~/img/src/produto.png" alt="Produto Image" class="img-fluid" />
+        <p>Total de produtos cadastrados:</p>
+        <p> @Model.TotalProdutosCadastrados</p>
+
+    </div>
+    <div class="dashboard-box">
+        <img src="~/img/src/estoque.png" alt="Estoque Image" class="img-fluid" />
+        <p>Total atual em estoque:</p>
+        <p> @Model.TotalEstoque</p>
+    </div>
+    <div class="dashboard-box">
+        <img src="~/img/src/entrada.png" alt="Entrada Image" class="img-fluid" />
+        <p>Total entradas:</p>
+        <p> @Model.TotalEntradas</p>
+    </div>
+    <div class="dashboard-box">
+        <img src="~/img/src/saida.png" alt="Saída Image" class="img-fluid" />
+        <p>Total saídas:</p>
+        <p> @Model.TotalSaidas</p>
+    </div>
+
+</div>
+
+<h3>Movimentações por Nota</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Número da Nota</th>
+            <th>Data</th>
+            <th>Quantidade</th>
+            <th>Tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var mov in Model.MovimentacoesPorNota!)
+        {
+            <tr>
+                <td>
+                    @if (mov.Tipo == "Entrada")
+                    {
+                        <a href="#" class="link-nota" data-notaid="@mov.NotaId">@mov.NumeroNota</a>
+                    }
+                    else
+                    {
+                        <a href="#" class="link-nota-saida" data-notaid="@mov.NotaId">@mov.NumeroNota</a>
+                    }
+                </td>
+                <td>@mov.DataNota.ToString("dd/MM/yyyy")</td>
+                <td>@mov.Quantidade</td>
+                <td>@mov.Tipo</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="grafico">
+    <canvas id="graficoMovPorNota"></canvas>
+    <canvas id="graficoCusto"></canvas>
+    <canvas id="graficoFatuaramento"></canvas>
+    <canvas id="graficoSaldo"></canvas>
+</div>
 
 
-        <h2>📊 Dashboard</h2>
-        <!-- Produtos com Estoque -->
-        <h3>📦 Produtos em Estoque</h3>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Produto</th>
-                    <th>Estoque Atual</th>
-                    <th>Mínimo</th>
-                    <th>Máximo</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.ProdutosEstoque)
-                {
-                    <tr class="@(item.EstoqueBaixo ? "table-danger" : "")">
-                        <td>@item.Nome</td>
-                        <td>@item.EstoqueAtual</td>
-                        <td>@item.EstoqueMinimo</td>
-                        <td>@item.EstoqueMaximo</td>
-                        <td>
-                            @if (item.EstoqueBaixo)
-                            {
-                                <span class="text-danger">Abaixo do mínimo</span>
-                            }
-                            else
-                            {
-                                <span class="text-success">OK</span>
-                            }
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-
-        <!-- Entradas por Produto -->
-        <h3>⬆️ Entradas por Produto</h3>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Número da Nota</th>
-                    <th>Data</th>
-                    <th>Total de Entradas</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var nota in Model.EntradasPorNota)
-                {
-                    <tr>
-                        <td>
-                            <a href="#" class="link-nota" data-notaid="@nota.NotaId">@nota.NumeroNota</a>
-                        </td>
-                        <td>@nota.DataNota.ToString("dd/MM/yyyy")</td>
-                        <td>@nota.TotalEntrada</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-
-
-        <!-- Saídas por Produto -->
-        <h3>⬇️ Saídas por Produto</h3>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Produto</th>
-                    <th>Total de Saídas</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.SaidasPorProduto)
-                {
-                    <tr>
-                        <td>@item.Nome</td>
-                        <td>@item.TotalSaida</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-
-        <div class="modal fade" id="modalNotaDetalhes" tabindex="-1" aria-labelledby="modalNotaLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content" id="conteudo-modal-imprimir">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalNotaLabel">Detalhes da Nota de Entrega</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                    </div>
-                    <div class="modal-body" id="modalNotaBody">
-                        <!-- Os detalhes da nota serão carregados via AJAX -->
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary" onclick="imprimirNota()">Imprimir</button>
-                    </div>
-                </div>
+<div class="modal fade" id="modalNotaEntregaDetalhe" tabindex="-1" aria-labelledby="modalNotaEntregaDetalheLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalNotaEntregaDetalheLabel">Detalhes da Nota de Entrega</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
             </div>
         </div>
-
-        @section Scripts {
-            <script>
-                $(document).on('click', '.link-nota', function (e) {
-                    e.preventDefault();
-                    var notaId = $(this).data('notaid');
-                    $('#modalNotaBody').html('<div class="text-center"><span class="spinner-border"></span></div>');
-                    $('#modalNotaDetalhes').modal('show');
-                    $.get('@Url.Action("DetalhesNotaEntrada", "Dashboard")', { id: notaId }, function (data) {
-                        $('#modalNotaBody').html(data);
-                    });
-                });
-
-                function imprimirNota() {
-                    var printContents = document.getElementById('conteudo-modal-imprimir').innerHTML;
-                    var originalContents = document.body.innerHTML;
-                    document.body.innerHTML = printContents;
-                    window.print();
-                    document.body.innerHTML = originalContents;
-                    location.reload();
-                }
-            </script>
-        }
+    </div>
 </div>
+
+
+<div class="modal fade" id="modalNotaSaidaDetalhe" tabindex="-1" aria-labelledby="modalNotaSaidaDetalheLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalNotaSaidaDetalheLabel">Detalhes da Nota de Saída</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+         // Gráfico Movimentação por Nota
+        var ctx = document.getElementById('graficoMovPorNota').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(notas)),
+                datasets: [
+                    {
+                        label: 'Entradas',
+                        data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(entradas)),
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                    },
+                    {
+                        label: 'Saídas',
+                        data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(saidas)),
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { stacked: true },
+                    y: { beginAtZero: true, stacked: true }
+                }
+            }
+        });
+
+
+    </script>
+}

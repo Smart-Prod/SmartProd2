@@ -8,16 +8,22 @@
         public List<EntradaNotaViewModel> EntradasPorNota { get; set; } = new();
         public List<SaidaNotaViewModel> SaidasPorNota { get; set; } = new();
         public List<MovimentacaoNotaViewModel>? MovimentacoesPorNota { get; set; }
+        public List<string> Notas { get; set; } = new List<string>();
+        public List<decimal> Custos { get; set; } = new List<decimal>();
+        public List<decimal> Faturamentos { get; set; } = new List<decimal>();
+        public List<decimal> Saldos { get; set; } = new List<decimal>();
 
-        
-            // ... já existentes
-            public decimal TotalProdutosCadastrados { get; set; }
-            public int TotalEstoque { get; set; }
-            public int TotalEntradas { get; set; }
-            public int TotalSaidas { get; set; }
-            public string? ProdutoMaisEstoque { get; set; }
-            public int QuantidadeMaisEstoque { get; set; }
-        
+        public decimal FaturamentoCurvaABC { get; set; }
+
+
+        // ... já existentes
+        public decimal TotalProdutosCadastrados { get; set; }
+        public int TotalEstoque { get; set; }
+        public int TotalEntradas { get; set; }
+        public int TotalSaidas { get; set; }
+        public string? ProdutoMaisEstoque { get; set; }
+        public int QuantidadeMaisEstoque { get; set; }
+
     }
 
     public class EstoqueProdutoViewModel
@@ -27,6 +33,7 @@
         public int EstoqueMinimo { get; set; }
         public int EstoqueMaximo { get; set; }
         public bool EstoqueBaixo => EstoqueAtual < EstoqueMinimo;
+        public decimal PrecoUnitario { get; set; }
     }
 
     public class EntradaProdutoViewModel
@@ -61,7 +68,7 @@
         // ... outros campos se desejar
     }
 
-    
+
 
     public class MovimentacaoNotaViewModel
     {
