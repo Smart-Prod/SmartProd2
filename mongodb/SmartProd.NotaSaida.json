@@ -1,0 +1,104 @@
+[{
+  "_id": {
+    "$binary": {
+      "base64": "9cOa7c5iQsS0h7bTSGVC5w==",
+      "subType": "04"
+    }
+  },
+  "NumeroNota": "1",
+  "DataSaida": {
+    "$date": "2025-06-06T15:21:23.022Z"
+  },
+  "Cliente": null,
+  "Destino": "junio",
+  "Itens": [
+    {
+      "IdProduto": "eee22402-c853-4d90-abf7-f25bc3238cd5",
+      "Produto": null,
+      "Quantidade": 1,
+      "PrecoUnitario": "3200000",
+      "IdUsuario": null,
+      "Usuario": null
+    }
+  ],
+  "IdUsuario": null,
+  "Usuario": null
+},
+{
+  "_id": {
+    "$binary": {
+      "base64": "f9eELeJ0Ta+36YMN+PA8XA==",
+      "subType": "04"
+    }
+  },
+  "NumeroNota": null,
+  "DataSaida": {
+    "$date": "2025-06-06T15:21:41.249Z"
+  },
+  "Cliente": null,
+  "Destino": null,
+  "Itens": [
+    {
+      "IdProduto": "eee22402-c853-4d90-abf7-f25bc3238cd5",
+      "Produto": null,
+      "Quantidade": 299,
+      "PrecoUnitario": "3200000",
+      "IdUsuario": null,
+      "Usuario": null
+    }
+  ],
+  "IdUsuario": null,
+  "Usuario": null
+},
+{
+  "_id": {
+    "$binary": {
+      "base64": "UurMrB17SXeUuIYX/QV+5w==",
+      "subType": "04"
+    }
+  },
+  "NumeroNota": null,
+  "DataSaida": {
+    "$date": "2025-06-06T15:21:51.974Z"
+  },
+  "Cliente": null,
+  "Destino": null,
+  "Itens": [
+    {
+      "IdProduto": "eee22402-c853-4d90-abf7-f25bc3238cd5",
+      "Produto": null,
+      "Quantidade": 200,
+      "PrecoUnitario": "3200000",
+      "IdUsuario": null,
+      "Usuario": null
+    }
+  ],
+  "IdUsuario": null,
+  "Usuario": null
+},
+{
+  "_id": {
+    "$binary": {
+      "base64": "W6E0iDRXQ2KzSdXCxRvMbg==",
+      "subType": "04"
+    }
+  },
+  "NumeroNota": "1",
+  "DataSaida": {
+    "$date": "2025-06-06T15:22:06.129Z"
+  },
+  "Cliente": null,
+  "Destino": "junio",
+  "Itens": [
+    {
+      "IdProduto": "eee22402-c853-4d90-abf7-f25bc3238cd5",
+      "Produto": null,
+      "Quantidade": 1,
+      "PrecoUnitario": "3200000",
+      "IdUsuario": null,
+      "Usuario": null
+    }
+  ],
+  "IdUsuario": null,
+  "Usuario": null
+}]

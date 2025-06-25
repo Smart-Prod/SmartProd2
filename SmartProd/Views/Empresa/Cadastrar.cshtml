@@ -13,13 +13,21 @@
         <div class="cadastro-header">
             <h1>Cadastro de Empresa</h1>
         </div>
-
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <div>@error.ErrorMessage</div>
+                }
+            </div>
+        }
         <form asp-action="Cadastrar" method="post" id="formEmpresa">
             <div class="cadastro-form-group">
                 <label asp-for="Cnpj"></label>
-                <input asp-for="Cnpj" id="Cnpj" />
+                <input asp-for="Cnpj" id="Cnpj" 
+                       oninput="apenasNumeros(event); buscarCnpjAuto()" autocomplete="off" maxlength="18" />
                 <span asp-validation-for="Cnpj"></span>
-                <button type="button" onclick="buscarCnpj()" class="cadastro-buscar-btn">Buscar CNPJ</button>
             </div>
 
             <div class="cadastro-form-group">

@@ -3,7 +3,7 @@
 <form asp-action="RegistrarNotaEntrega" method="post" id="formNotaEntrega">
     <div>
         <label>Número da Nota:</label>
-        <input asp-for="NumeroNota" class="form-control" />
+        <input asp-for="NumeroNota" class="form-control" type="text" maxlength="8" minlength="8" pattern="\d{8}" title="Digite exatamente 8 dígitos" required oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,8)" />
     </div>
     <div>
         <label>Fornecedor:</label>
@@ -26,10 +26,14 @@
                 <td>
                     <select name="Itens[0].IdProduto" class="form-control" style="width: 160px;">
                         <option value="">-- Selecione --</option>
-                        @foreach (var produto in ViewBag.Produtos)
+                        @if (ViewBag.Produtos != null)
                         {
-                            <option value="@produto.Id">@produto.Nome</option>
+                            @foreach (var produto in ViewBag.Produtos)
+                            {
+                                <option value="@produto.Id">@produto.Nome</option>
+                            }
                         }
+                        
                     </select>
                 </td>
                 <td>
@@ -43,7 +47,7 @@
                 </td>
                 <td>
                     <!-- Só mostrar o botão se houver mais de um item na lista (JS) -->
-                    <button type="button" class="btn btn-danger btn-remover-item" onclick="removerItemEntrada(this)" style="display: none;">Remover</button>
+                    <button type="button" class="btn btn-danger btn-remover-item" onclick="removerItemEntrada(this)" style="display: none;">X</button>
                 </td>
             </tr>
         </tbody>
@@ -83,7 +87,7 @@
     // Gera o HTML das opções dos produtos com segurança de encoding
     const produtosHtml = `@Html.Raw(
         string.Join("",
-            (ViewBag.Produtos as IEnumerable<dynamic>)
+            ((ViewBag.Produtos as IEnumerable<dynamic>) ?? Enumerable.Empty<dynamic>())
             .Select(p => $"<option value='{p.Id}'>{System.Net.WebUtility.HtmlEncode(p.Nome)}</option>")
         ))`;
     let indexEntrada = 1;
@@ -107,7 +111,7 @@
                 <input name="Itens[${indexEntrada}].ValorTotal" type="number" class="form-control" readonly style="width: 160px;"/>
             </td>
             <td>
-                <button type="button" class="btn btn-danger btn-remover-item" onclick="removerItemEntrada(this)">Remover</button>
+                <button type="button" class="btn btn-danger btn-remover-item" onclick="removerItemEntrada(this)">X</button>
             </td>
         `;
         tbody.appendChild(row);

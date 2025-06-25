@@ -13,7 +13,7 @@
         <form asp-action="RegistrarNotaSaida" method="post">
             <div>
                 <label>Número da Nota:</label>
-                <input asp-for="NumeroNota" class="form-control" />
+                <input asp-for="NumeroNota" class="form-control" type="text" maxlength="8" minlength="8" pattern="\d{8}" title="Digite exatamente 8 dígitos" required oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,8)" />
             </div>
             <div>
                 <label>Destino:</label>
@@ -36,9 +36,17 @@
                         <td>
                             <select name="Itens[0].IdProduto" class="form-control" style="width: 160px;" onchange="atualizarPrecoUnitario(this)">
                                 <option value="">-- Selecione --</option>
-                                @foreach (var produto in ViewBag.Produtos)
+                                @if (ViewBag.Produtos != null)
                                 {
-                                    <option value="@produto.Id" data-preco="@produto.Preco" data-estoque-atual="@produto.EstoqueAtual" data-estoque-minimo="@produto.EstoqueMinimo">@produto.Nome</option>
+                                    foreach (var produto in ViewBag.Produtos)
+                                    {
+                                        <option value="@produto.Id" data-preco="@produto.Preco" data-estoque-atual="@produto.EstoqueAtual" data-estoque-minimo="@produto.EstoqueMinimo">@produto.Nome</option>
+                                    }
+                                }else
+                                {
+                                    ModelState.AddModelError("", $"Estoque insuficiente para o produto {item.IdProduto}");
+                                    await PreencherProdutosViewBag(userId);
+                                    return View("Index", await _context.Estoque.Find(_ => true).ToListAsync());
                                 }
                             </select>
                         </td>
@@ -52,7 +60,7 @@
                             <input name="Itens[0].ValorTotal" type="number" class="form-control" readonly style="width: 160px;" />
                         </td>
                         <td>
-                            <button type="button" class="btn btn-danger btn-remover-item" onclick="removerItemSaida(this)" style="display: none;">Remover</button>
+                            <button type="button" class="btn btn-danger btn-remover-item" onclick="removerItemSaida(this)" style="display: none;">X</button>
                         </td>
                     </tr>
                 </tbody>
@@ -65,10 +73,6 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
@@ -78,7 +82,7 @@
     // Opções de produtos com data-preco para cada option
     const produtosSaidaHtml = `@Html.Raw(
     string.Join("",
-        (ViewBag.Produtos as IEnumerable<dynamic>)
+        ((ViewBag.Produtos as IEnumerable<dynamic>) ?? Enumerable.Empty<dynamic>())
         .Select(p => $"<option value='{p.Id}' data-preco='{p.Preco}' data-estoque-atual='{p.EstoqueAtual}' data-estoque-minimo='{p.EstoqueMinimo}'>{System.Net.WebUtility.HtmlEncode(p.Nome)}</option>")
     ))`;
     let indexSaida = 1;
@@ -102,7 +106,7 @@
                 <input name="Itens[${indexSaida}].ValorTotal" type="number" class="form-control" readonly style="width: 160px;" />
             </td>
             <td>
-                <button type="button" class="btn btn-danger btn-remover-item" onclick="removerItemSaida(this)">Remover</button>
+                <button type="button" class="btn btn-danger btn-remover-item" onclick="removerItemSaida(this)">X</button>
             </td>
         `;
         tbody.appendChild(row);
@@ -141,21 +145,25 @@
             }
         });
     }
-        function validarQuantidadeSaida(input) {
+
+    function validarQuantidadeSaida(input) {
         const row = input.closest('tr');
         const select = row.querySelector('select');
         const selectedOption = select.options[select.selectedIndex];
 
-        const estoqueAtual = parseInt(selectedOption.getAttribute('data-estoque-atual')) || 0;
-        const estoqueMinimo = parseInt(selectedOption.getAttribute('data-estoque-minimo')) || 0;
-        const maxPermitido = estoqueAtual - estoqueMinimo;
-
-        let quantidade = parseInt(input.value) || 0;
-        if (quantidade > maxPermitido) {
-            alert(`A quantidade máxima permitida é ${maxPermitido} (estoque atual: ${estoqueAtual}, mínimo: ${estoqueMinimo}).`);
-            input.value = maxPermitido > 0 ? maxPermitido : 0;
-            quantidade = parseInt(input.value) || 0;
+        if (!selectedOption || !selectedOption.value) {
+            input.value = '';
+            atualizarValorTotalSaida(input);
+            return;
         }
+
+        let quantidade = parseFloat(input.value) || 0;
+        if (quantidade < 0) {
+            input.value = 0;
+            quantidade = 0;
+        }
+        
+
         atualizarValorTotalSaida(input);
     }
 
@@ -167,6 +175,7 @@
         precoInput.value = parseFloat(preco).toFixed(2);
         atualizarValorTotalSaida(precoInput);
     }
+
 
     function atualizarValorTotalSaida(input) {
         const row = input.closest('tr');
@@ -181,5 +190,4 @@
         // Preenche o preço unitário inicial dos selects já existentes
         document.querySelectorAll('#itens-saida select').forEach(sel => atualizarPrecoUnitario(sel));
     });
-</script>
 </script>

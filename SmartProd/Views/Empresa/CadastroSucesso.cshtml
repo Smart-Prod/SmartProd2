@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Cadastro realizado com sucesso!";
+}
+
+<div class="alert alert-success" role="alert">
+    <h2>Cadastro realizado com sucesso!</h2>
+    <p>Sua empresa foi cadastrada com sucesso.</p>
+    <p>Você será redirecionado para a página de login em alguns segundos...</p>
+</div>
+
+<script>
+    setTimeout(function(){
+        window.location.href = '@Url.Action("Login", "Account")';
+    }, 5000); // 5 segundos
+</script>
+

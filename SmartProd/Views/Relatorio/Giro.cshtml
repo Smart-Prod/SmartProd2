@@ -1,12 +1,25 @@
-﻿@model IEnumerable<dynamic>
+﻿@model IEnumerable<SmartProd.Models.GiroEstoqueViewModel>
 @{
     ViewData["Title"] = "Giro de Estoque";
+    var giroMedio = Model.Any() ? Model.Average(x => (double)x.Giro) : 0.0;
+    var vendasTotais = Model.Any() ? Model.Sum(x => (int)x.Vendas) : 0;
 }
+
 <h2>Giro de Estoque</h2>
+<a asp-action="Index">Voltar</a>
+
+<form method="get" class="mb-3">
+    <label>De: <input type="date" name="dataInicial" value="@ViewBag.DataInicial" /></label>
+    <label>Até: <input type="date" name="dataFinal" value="@ViewBag.DataFinal" /></label>
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>Produto</th>
+            <th>Vendas</th>
+            <th>Estoque Médio</th>
             <th>Giro</th>
         </tr>
     </thead>
@@ -15,8 +28,54 @@
         {
             <tr>
                 <td>@item.Produto.Nome</td>
+                <td>@item.Vendas</td>
+                <td>@item.EstoqueMedio</td>
                 <td>@item.Giro.ToString("N2")</td>
             </tr>
         }
     </tbody>
 </table>
+
+@if (Model.Any())
+{
+    <canvas id="graficoGiro"></canvas>
+
+    <div class="mt-4 d-flex justify-content-around">
+        <div>
+            <h4>Giro Médio</h4>
+            <p class="display-6">@giroMedio.ToString("N1")</p>
+        </div>
+        <div>
+            <h4>Vendas Totais</h4>
+            <p class="display-6">@vendasTotais.ToString("N0")</p>
+        </div>
+    </div>
+
+    @section Scripts {
+    <script>
+        var produtos = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.Produto.Nome)));
+        var giros = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.Giro)));
+
+        var ctx = document.getElementById('graficoGiro').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: produtos,
+                datasets: [{
+                    label: 'Giro de Estoque',
+                    data: giros,
+                    backgroundColor: 'rgba(33, 150, 243, 0.7)'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    }
+}

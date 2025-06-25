@@ -3,6 +3,13 @@
     ViewData["Title"] = "Produtos Parados";
 }
 <h2>Produtos Parados (Obsoletos)</h2>
+<a asp-action="Index">Voltar</a>
+
+<form method="get" class="mb-3">
+    <label>De: <input type="date" name="dataInicial" value="@ViewBag.DataInicial" /></label>
+    <label>Até: <input type="date" name="dataFinal" value="@ViewBag.DataFinal" /></label>
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+</form>
 @if (Model.Count == 0)
 {
     <div class="alert alert-success">Nenhum produto parado encontrado no período.</div>
@@ -26,4 +33,23 @@ else
             }
         </tbody>
     </table>
+}
+
+<canvas id="graficoParados"></canvas>
+@section Scripts {
+    <script>
+        var nomes = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Select(x => x.Nome)));
+        var ctx = document.getElementById('graficoParados').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: nomes,
+                datasets: [{
+                    data: nomes.map(x => 1), // Cada produto é 1, só para mostrar proporção/quantidade
+                    backgroundColor: nomes.map((_,i) => `hsl(${i*40},70%,60%)`)
+                }]
+            },
+            options: { responsive: true }
+        });
+    </script>
 }

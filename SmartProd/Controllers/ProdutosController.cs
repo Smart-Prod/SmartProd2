@@ -140,16 +140,27 @@ namespace SmartProd.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteMultiple(List<Guid> selectedIds)
+        public async Task<IActionResult> DeleteMultiple([FromBody] DeleteMultipleDto model)
         {
+            var selectedIds = model.ids;
             if (selectedIds == null || !selectedIds.Any())
-                return RedirectToAction(nameof(Index));
+                return Json(new { success = false, message = "Nenhum produto selecionado." });
 
-            // Buscar produtos para deletar imagens associadas
             var filter = Builders<Produto>.Filter.In(p => p.Id, selectedIds);
             var produtos = await _context.Produto.Find(filter).ToListAsync();
 
-            // Deletar imagens (se existirem)
+            var produtosComEstoque = produtos.Where(p => p.EstoqueAtual != 0).ToList();
+            if (produtosComEstoque.Any())
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = "Existem produtos com estoque diferente de zero.",
+                    idsComEstoque = produtosComEstoque.Select(p => p.Id)
+                });
+            }
+
+            // Deletar imagens
             foreach (var produto in produtos)
             {
                 if (!string.IsNullOrEmpty(produto.Imagem))
@@ -162,11 +173,14 @@ namespace SmartProd.Controllers
                 }
             }
 
-            // Deletar os produtos
             await _context.Produto.DeleteManyAsync(filter);
+            // 🔥 Deletar o estoque relacionado a esses produtos
+            var filterEstoque = Builders<Estoque>.Filter.In(e => e.Produto!.Id, selectedIds);
+            await _context.Estoque.DeleteManyAsync(filterEstoque);
 
-            return RedirectToAction(nameof(Index));
+            return Json(new { success = true });
         }
+
 
     }
 }

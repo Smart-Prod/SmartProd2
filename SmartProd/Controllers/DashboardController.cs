@@ -21,9 +21,9 @@ namespace SmartProd.Controllers
         {
             var userId = _userManager.GetUserId(User);
 
-            var estoques = await _context.Estoque.Find(_ => true).ToListAsync();
-            var entradas = await _context.NotaEntrega.Find(_ => true).ToListAsync();
-            var saidas = await _context.NotaSaida.Find(_ => true).ToListAsync();
+            var estoques = await _context.Estoque.Find(e => e.IdUsuario == userId).ToListAsync();
+            var entradas = await _context.NotaEntrega.Find(e => e.IdUsuario == userId).ToListAsync();
+            var saidas = await _context.NotaSaida.Find(e => e.IdUsuario == userId).ToListAsync();
 
             var produtoIdsEstoque = estoques.Where(e => !string.IsNullOrEmpty(e.IdProduto)).Select(e => Guid.Parse(e.IdProduto!));
             var produtoIdsEntradas = entradas.SelectMany(n => n.Itens).Where(i => !string.IsNullOrEmpty(i.IdProduto)).Select(i => Guid.Parse(i.IdProduto!));
@@ -105,34 +105,85 @@ namespace SmartProd.Controllers
                     Nome = g.Key,
                     TotalSaida = g.Sum(x => x.Quantidade)
                 }).ToList();
+            var saidasPorNota = saidas
+                .Select(n => new SaidaNotaViewModel
+                {
+                    NotaId = n.Id.GetHashCode(),
+                    NumeroNota = n.NumeroNota,
+                    DataNota = n.DataSaida, // Supondo que NotaSaida tenha DataSaida
+                    TotalSaida = n.Itens.Sum(x => x.Quantidade)
+                }).ToList();
+            var movimentacoesPorNota = new List<MovimentacaoNotaViewModel>();
+
+            movimentacoesPorNota.AddRange(entradas.Select(n => new MovimentacaoNotaViewModel
+            {
+                Tipo = "Entrada",
+                NotaId = n.Id.GetHashCode(),
+                NumeroNota = n.NumeroNota!,
+                DataNota = n.DataEntrega,
+                Quantidade = n.Itens.Sum(x => x.Quantidade)
+            }));
+
+            movimentacoesPorNota.AddRange(saidas.Select(n => new MovimentacaoNotaViewModel
+            {
+                Tipo = "Saída",
+                NotaId = n.Id.GetHashCode(),
+                NumeroNota = n.NumeroNota!,
+                DataNota = n.DataSaida,
+                Quantidade = n.Itens.Sum(x => x.Quantidade)
+            }));
+
+            movimentacoesPorNota = movimentacoesPorNota.OrderByDescending(m => m.DataNota).ToList();
+
+            // Soma do valor de todos os produtos cadastrados
+            var totalProdutosCadastrados = produtos.Count;
+            
+
+            // Soma total de itens em estoque
+            var totalEstoque = estoques.Sum(e => e.EstoqueAtual);
+
+            // Quantidade de notas de entrada
+            var totalEntradas = entradas.Count;
+
+            // Quantidade de notas de saída
+            var totalSaidas = saidas.Count;
+
+            // Produto com mais estoque
+            var estoqueMaisAlto = estoques.OrderByDescending(e => e.EstoqueAtual).FirstOrDefault();
+            var produtoMaisEstoque = estoqueMaisAlto?.Produto?.Nome ?? "N/A";
+            var quantidadeMaisEstoque = estoqueMaisAlto?.EstoqueAtual ?? 0;
 
             var viewModel = new DashboardViewModel
             {
                 ProdutosEstoque = produtosEstoque,
                 EntradasPorProduto = entradasPorProduto,
                 SaidasPorProduto = saidasPorProduto,
-                EntradasPorNota = entradasPorNota
+                EntradasPorNota = entradasPorNota,
+                SaidasPorNota = saidasPorNota,
+                MovimentacoesPorNota = movimentacoesPorNota,
+                TotalProdutosCadastrados = totalProdutosCadastrados,                
+                TotalEstoque = totalEstoque,
+                TotalEntradas = totalEntradas,
+                TotalSaidas = totalSaidas,
+                ProdutoMaisEstoque = produtoMaisEstoque,
+                QuantidadeMaisEstoque = quantidadeMaisEstoque
             };
 
             return View(viewModel);
         }
 
-        // Para Nota de Entrada
-        public IActionResult DetalhesNotaEntrada(Guid id)
+        public async Task<IActionResult> DetalhesNotaEntrada(Guid id)
         {
-            var nota = _context.NotaEntrega.Find(n => n.Id == id);
-            if (nota == null)
-                return Content("Nota de entrada não encontrada.");
-            return PartialView("_DetalhesNotaEntrada", nota);
+            var notaEntrada = await _context.NotaEntrega.Find(e => e.Id == id).FirstOrDefaultAsync();
+            // Carregue os itens e produtos se necessário
+            return PartialView("_DetalhesNotaEntrada", notaEntrada);
         }
 
-        // Para Nota de Saída
-        public IActionResult DetalhesNotaSaida(Guid id)
+        public async Task<IActionResult> DetalhesNotaSaida(Guid id)
         {
-            var nota = _context.NotaSaida.Find(n => n.Id == id);
-            if (nota == null)
-                return Content("Nota de saída não encontrada.");
-            return PartialView("_DetalhesNotaSaida", nota);
+            var notaSaida = await _context.NotaSaida.Find(e => e.Id == id).FirstOrDefaultAsync();
+            // Carregue os itens e produtos se necessário
+            return PartialView("_DetalhesNotaSaida", notaSaida);
         }
     }
 }

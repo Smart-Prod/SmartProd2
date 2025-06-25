@@ -1,3 +1,4 @@
+@import 'dashboard.css';
 
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -43,7 +44,7 @@ body {
 .divheader {
     width: 100%;
     display: flex;
-    justify-content: space-between; /* Logo à esquerda, links à direita */
+    justify-content: space-between; /* Logo ï¿½ esquerda, links ï¿½ direita */
     align-items: center;
 }
 
@@ -56,7 +57,7 @@ body {
     .divheader > div {
         display: flex;
         align-items: center;
-        gap: 2rem; /* Espaçamento entre os dois <ul> */
+        gap: 2rem; /* Espaï¿½amento entre os dois <ul> */
     }
 
     .divheader ul {
@@ -391,10 +392,10 @@ body {
             text-decoration: underline;
         }
 
-/* ==== Estilização específica para o Dashboard ==== */
+/* ==== EstilizaÃ§Ã£o especÃ­fica para o Dashboard ==== */
 
 
-    /* Cabeçalhos compactos */
+    /* CabeÃ§alhos compactos */
     .dashboard-container h2,
     .dashboard-container h3 {
         margin: 0.5rem 0 1rem 0;
@@ -402,7 +403,7 @@ body {
         font-weight: 600;
     }
 
-    /* Tabelas com espaçamento reduzido */
+    /* Tabelas com espaÃ§amento reduzido */
     .dashboard-container table {
         margin-bottom: 1.5rem;
     }
@@ -620,7 +621,7 @@ body {
         margin-bottom: 40px;
     }
 
-/* Botões principais de ações (Entrega e Saída) */
+/* BotÃµes principais de aÃ§Ãµes (Entrega e SaÃ­da) */
 .btn-warning {
     background-color: #f57c00;
     border-color: #f57c00;
@@ -633,7 +634,7 @@ body {
         border-color: #ef6c00;
     }
 
-/* Botão de saída já usa o btn-danger do Bootstrap, apenas reforçamos o peso */
+/* BotÃ£o de saÃ­da jÃ¡ usa o btn-danger do Bootstrap, apenas reforÃ§amos o peso */
 .btn-danger {
     font-weight: bold;
 }
@@ -652,7 +653,7 @@ table thead th {
     border-bottom: 2px solid #dee2e6;
 }
 
-/* Linhas de alerta (estoque crítico) */
+/* Linhas de alerta (estoque crÃ­tico) */
 .table-danger {
     background-color: #ffebee !important;
     color: #c62828 !important;
@@ -664,7 +665,7 @@ table thead th {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
-/* Modal headers com cores específicas */
+/* Modal headers com cores especÃ­ficas */
 .modal-header.bg-warning {
     background-color: #f57c00 !important;
     color: #fff;
@@ -679,7 +680,7 @@ table thead th {
     font-weight: 600;
 }
 
-/* Alerta de produtos críticos */
+/* Alerta de produtos crÃ­ticos */
 .alert-danger {
     border-left: 6px solid #d32f2f;
     background-color: #fdecea;
@@ -687,7 +688,7 @@ table thead th {
     font-size: 16px;
 }
 
-/* Ícone opcional para alertas (se usar Bootstrap Icons) */
+/* Ãcone opcional para alertas (se usar Bootstrap Icons) */
 .alert i {
     font-size: 18px;
 }
@@ -753,9 +754,98 @@ table thead th {
             text-decoration: underline;
         }
 
-    .relatorio-conteudo p {
-        font-size: 0.95rem;
-        color: #555;
-        line-height: 1.4;
+.dashboard {
+    display: flex;
+    justify-content: center;
+    align-content:center;
+}
+.dashboard-box{
+    border:1px solid;
+    margin: 10px;
+    text-align: center;
+    width:200px;
+    justify-content:center;
+}
+
+.dashboard-box > img {
+    width: 100px;
+    height: 100px;
+}
+
+/* Imagem de preview no cadastro */
+#imagePreview {
+    display: block;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+}
+
+/* Ajusta espaï¿½amento dos campos */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Tï¿½tulo da pï¿½gina */
+h1, h4 {
+    text-align: center;
+    color: #333;
+}
+
+/* Estilizaï¿½ï¿½o do botï¿½o submit (usa classe existente se quiser) */
+input[type="submit"] {
+    background: #f58220;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+    input[type="submit"]:hover {
+        background: #e56c0b;
     }
+
+/* Link de voltar */
+a {
+    color: #f58220;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+/* Responsivo para tela menor */
+@media (max-width: 600px) {
+    .cadastro-container, .cadastro-container2 {
+        padding: 1rem;
+        width: 90%;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    #imagePreview {
+        width: 100px;
+        height: 100px;
+    }
+}
+.form-container-centralizado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    max-width: 600px;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    flex-direction: column;
 }

@@ -1,37 +1,66 @@
-﻿@model List<NotaEntrega>
-@{
-    ViewData["Title"] = "Relatório de Custo de Estoque";
-    decimal totalCusto = ViewBag.TotalCusto ?? 0;
-}
-<h2>Relatório de Custo de Estoque</h2>
-<p><strong>Total de Custo no Período:</strong> @totalCusto.ToString("C")</p>
-<table class="table">
-    <thead>
+﻿<h2>Relatório de Custo de Estoque</h2>
+<a asp-action="Index">Voltar</a>
+
+<form method="get" class="mb-3">
+    <label>De: <input type="date" name="dataInicial" value="@ViewBag.DataInicial" /></label>
+    <label>Até: <input type="date" name="dataFinal" value="@ViewBag.DataFinal" /></label>
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+</form>
+
+<table class="table table-bordered">
+    <thead class="table-dark">
         <tr>
-            <th>Nota</th>
-            <th>Data</th>
-            <th>Fornecedor</th>
-            <th>Itens</th>
+            <th>Produto</th>
+            <th>Custo Unitário</th>
+            <th>Custo Total</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var nota in Model)
+        @foreach (var item in @ViewBag.Agrupado)
         {
             <tr>
-                <td>@nota.NumeroNota</td>
-                <td>@nota.DataEntrega.ToShortDateString()</td>
-                <td>@nota.Fornecedor</td>
-                <td>
-                    <ul>
-                        @foreach (var item in nota.Itens)
-                        {
-                            <li>
-                                @item.Produto?.Nome - @item.Quantidade un. - @item.CustoUnitario.ToString("C") un. - @item.ValorTotal.ToString("C") total
-                            </li>
-                        }
-                    </ul>
-                </td>
+                <td>@item.Produto</td>
+                <td>@item.CustoUnitario.ToString("C")</td>
+                <td>@item.CustoTotal.ToString("C")</td>
             </tr>
         }
     </tbody>
 </table>
+
+<canvas id="graficoCusto" height="100"></canvas>
+
+<div class="row mt-4 text-center">
+    <div class="col">
+        <h4>Custo Médio</h4>
+        <p class="display-6">@ViewBag.CustoMedio.ToString("N2")</p>
+    </div>
+    <div class="col">
+        <h4>Custo Total</h4>
+        <p class="display-6">@ViewBag.CustoTotal.ToString("N2")</p>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var dados = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@ViewBag.Agrupado));
+
+        var ctx = document.getElementById('graficoCusto').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: dados.map(d => d.Produto),
+                datasets: [{
+                    label: 'Custo Total',
+                    data: dados.map(d => d.CustoTotal),
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+}

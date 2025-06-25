@@ -1,0 +1,80 @@
+[{
+  "_id": {
+    "$binary": {
+      "base64": "8kBzPk91SqqD0PX7pT77kA==",
+      "subType": "04"
+    }
+  },
+  "IdProduto": "eee22402-c853-4d90-abf7-f25bc3238cd5",
+  "Produto": null,
+  "EstoqueAtual": 0,
+  "Localizacao": "Depósito Principal",
+  "DataUltimaAtualizacao": {
+    "$date": "2025-06-06T15:21:51.982Z"
+  },
+  "IdUsuario": "9146ad54-fb3e-430a-a892-45b990d5cb9f"
+},
+{
+  "_id": {
+    "$binary": {
+      "base64": "Azt0xFLSTzSaszssg28JqA==",
+      "subType": "04"
+    }
+  },
+  "IdProduto": "03cf3d47-516a-4e20-adc2-47eee22eb671",
+  "Produto": null,
+  "EstoqueAtual": 480,
+  "Localizacao": "Depósito Principal",
+  "DataUltimaAtualizacao": {
+    "$date": "2025-06-06T14:33:25.467Z"
+  },
+  "IdUsuario": "9146ad54-fb3e-430a-a892-45b990d5cb9f"
+},
+{
+  "_id": {
+    "$binary": {
+      "base64": "+4W/QUtWT1OKrob7iW8Lxg==",
+      "subType": "04"
+    }
+  },
+  "IdProduto": "45ad3650-ef42-49b7-8cec-fa3c6a45e622",
+  "Produto": null,
+  "EstoqueAtual": 600,
+  "Localizacao": "Depósito Principal",
+  "DataUltimaAtualizacao": {
+    "$date": "2025-06-06T14:33:25.472Z"
+  },
+  "IdUsuario": "9146ad54-fb3e-430a-a892-45b990d5cb9f"
+},
+{
+  "_id": {
+    "$binary": {
+      "base64": "S7aw1Nw7ST+95UbEjNNGUA==",
+      "subType": "04"
+    }
+  },
+  "IdProduto": "c5df6f6f-5ba3-443f-9609-8aae7b6756a1",
+  "Produto": null,
+  "EstoqueAtual": 700,
+  "Localizacao": "Depósito Principal",
+  "DataUltimaAtualizacao": {
+    "$date": "2025-06-06T14:33:25.476Z"
+  },
+  "IdUsuario": "9146ad54-fb3e-430a-a892-45b990d5cb9f"
+},
+{
+  "_id": {
+    "$binary": {
+      "base64": "xm9SGQgfQZC4aHf78+bDJA==",
+      "subType": "04"
+    }
+  },
+  "IdProduto": "7574383f-8b9d-4a2d-a50b-4970a808c520",
+  "Produto": null,
+  "EstoqueAtual": 800,
+  "Localizacao": "Depósito Principal",
+  "DataUltimaAtualizacao": {
+    "$date": "2025-06-06T14:33:25.481Z"
+  },
+  "IdUsuario": "9146ad54-fb3e-430a-a892-45b990d5cb9f"
+}]

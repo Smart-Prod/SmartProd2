@@ -6,6 +6,18 @@
         public List<EntradaProdutoViewModel> EntradasPorProduto { get; set; } = new();
         public List<SaidaProdutoViewModel> SaidasPorProduto { get; set; } = new();
         public List<EntradaNotaViewModel> EntradasPorNota { get; set; } = new();
+        public List<SaidaNotaViewModel> SaidasPorNota { get; set; } = new();
+        public List<MovimentacaoNotaViewModel>? MovimentacoesPorNota { get; set; }
+
+        
+            // ... já existentes
+            public decimal TotalProdutosCadastrados { get; set; }
+            public int TotalEstoque { get; set; }
+            public int TotalEntradas { get; set; }
+            public int TotalSaidas { get; set; }
+            public string? ProdutoMaisEstoque { get; set; }
+            public int QuantidadeMaisEstoque { get; set; }
+        
     }
 
     public class EstoqueProdutoViewModel
@@ -38,5 +50,55 @@
         public string? NumeroNota { get; set; }
         public DateTime DataNota { get; set; }
         public int TotalEntrada { get; set; }
+    }
+
+    public class SaidaNotaViewModel
+    {
+        public int NotaId { get; set; }
+        public string? NumeroNota { get; set; }
+        public DateTime DataNota { get; set; }
+        public decimal TotalSaida { get; set; }
+        // ... outros campos se desejar
+    }
+
+    
+
+    public class MovimentacaoNotaViewModel
+    {
+        public int NotaId { get; set; }
+        public string? NumeroNota { get; set; }
+        public DateTime DataNota { get; set; }
+        public int Quantidade { get; set; } // Pode ser TotalEntrada ou TotalSaida
+        public string? Tipo { get; set; } // "Entrada" ou "Saída"
+    }
+
+    public class MovimentacaoViewModel
+    {
+        public string? Tipo { get; set; } // "Entrada" ou "Saída"
+        public string? NumeroNota { get; set; }
+        public DateTime Data { get; set; }
+        public string? FornecedorOuCliente { get; set; }
+        public List<MovimentacaoItemViewModel>? Itens { get; set; }
+    }
+
+    public class MovimentacaoItemViewModel
+    {
+        public string ProdutoNome { get; set; }
+        public decimal Quantidade { get; set; }
+        public decimal? EstoqueFinal { get; set; } // Adicione esta linha se precisar do EstoqueFinal
+    }
+
+    public class DashboardIndexViewModel
+    {
+        public NotaEntrega NotaEntrega { get; set; }
+        public NotaSaida NotaSaida { get; set; }
+        // Adicione outros campos que sua página precisar
+    }
+    public class GiroEstoqueViewModel
+    {
+        public Produto Produto { get; set; }
+        public int Vendas { get; set; }
+        public decimal EstoqueMedio { get; set; }
+        public decimal Giro { get; set; }
     }
 }

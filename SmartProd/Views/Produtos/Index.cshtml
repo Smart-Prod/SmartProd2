@@ -8,6 +8,14 @@
 <div class="produtos-container">
     <h1>Produtos</h1>
 
+<p>
+    <a asp-action="Create" class="btn btn-primary">Criar Novo</a>
+</p>
+<form id="deleteForm" asp-action="DeleteMultiple" method="post">
+    @Html.AntiForgeryToken()
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" disabled id="deleteSelectedBtn">
+        Excluir Selecionados
+    </button>
     <p>
         <a asp-action="Create" class="btn btn-primary">Criar Novo</a>
     </p>
@@ -17,56 +25,35 @@
             Excluir Selecionados
         </button>
 
-        @foreach (var categoriaGrupo in produtosPorCategoria)
-        {
-            <h2>@categoriaGrupo.Key</h2>
-            <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
-                @foreach (var item in categoriaGrupo)
-                {
-                    <div class="col">
-                        <div class="card h-100">
-                            @if (!string.IsNullOrEmpty(item.Imagem))
-                            {
-                                <img src="@("/" + item.Imagem)" alt="@item.Nome" class="img-fluid" />
-                            }
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none">@item.Nome</a>
-                                </h5>
-                                <p class="card-text">Categoria: @item.Categoria</p>
-                            </div>
-                            <div class="card-footer">
-                                <div class="form-check">
-                                    <input class="form-check-input delete-checkbox" type="checkbox" name="selectedIds" value="@item.Id" id="check_@item.Id">
-                                    <label class="form-check-label" for="check_@item.Id">Selecionar</label>
-                                </div>
+    @foreach (var categoriaGrupo in produtosPorCategoria)
+    {
+        <h2>@categoriaGrupo.Key</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4 mb-4">
+            @foreach (var item in categoriaGrupo)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        @if (!string.IsNullOrEmpty(item.Imagem))
+                        {
+                            <img src="@("/" + item.Imagem)" alt="@item.Nome" class="img-fluid" style="width:90px;height:90px;" />
+                            //<img src="@item.Imagem" class="card-img-top" alt="@item.Nome" />
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title"><a asp-action="Details" asp-route-id="@item.Id" class="text-decoration-none">@item.Nome</a></h5>
+                            <p class="card-text">Categoria: @item.Categoria</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="form-check">
+                                <input class="form-check-input delete-checkbox" type="checkbox" name="selectedIds" value="@item.Id" id="check_@item.Id">
+                                <label class="form-check-label" for="check_@item.Id">Selecionar</label>
                             </div>
                         </div>
                     </div>
-                }
-            </div>
-        }
-    </form>
-</div>
-
-<!-- Modal de Confirmação -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-warning">
-                <h5 class="modal-title" id="staticBackdropLabel">Confirmar Exclusão</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-            </div>
-            <div class="modal-body">
-                Tem certeza que deseja excluir os itens selecionados?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary" form="deleteForm">Confirmar</button>
-            </div>
+                </div>
+            }
         </div>
-    </div>
-</div>
+    }
+</form>
 
 @section Scripts {
     <script>
